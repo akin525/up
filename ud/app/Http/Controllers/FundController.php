@@ -30,6 +30,9 @@ class FundController
 
             return view('fund', compact('user', 'data2', 'fund', 'wallet'));
         }
+        return redirect("login")->withSuccess('You are not allowed to access');
+
+
     }
 
         public function tran($reference)
