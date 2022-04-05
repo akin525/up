@@ -23,7 +23,11 @@
             @csrf
 
             <fieldset>
+                <center>
+                <div class="card-body">
                 <x-jet-validation-errors class="mb-4" />
+                </div>
+                </center>
                 <div class="field">
                     <label class="label_field">Name</label>
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
