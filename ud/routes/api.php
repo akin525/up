@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\BuyController;
+use App\Http\Controllers\Api\ResellerdetailsController;
+use App\Http\Controllers\Api\BillController;
+use App\Http\Controllers\Api\FundController;
+use App\Http\Controllers\Api\VertualController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +19,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+    Route::get('dashboard', [ResellerdetailsController::class, 'details']);
+    Route::get('airtime', [BuyController::class, 'airtime']);
+    Route::get('buydata', [BuyController::class, 'buydata']);
+    Route::get('pre', [BuyController::class, 'pre']);
+    Route::post('bill', [BillController::class, 'bill']);
+    Route::get('fund', [FundController::class, 'fund']);
+    Route::get('tran/{reference}', [FundController::class, 'tran']);
+    Route::get('vertual', [VertualController::class, 'vertual']);
+
+//        Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//            return $request->user();
+//        });
+
+
