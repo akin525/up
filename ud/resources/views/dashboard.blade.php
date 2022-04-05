@@ -49,7 +49,7 @@
                             <li  class=" btn-info">
                                 @foreach($wallet as $wallet1)
                                 @if ($wallet1->account_number==1 && $wallet1->account_name==1)
-                                    <a href='' class='text-white'>create Virtual Account To Fund Your Wallet Automatically</a>
+                                    <a href='{{route('vertual')}}' class='text-white'>create Virtual Account To Fund Your Wallet Automatically</a>
                                 @else
                                     <h5 class='text-white'>{{$wallet1->account_name}}</h5>
                                     <h5 class='text-white'>Account No:{{$wallet1->account_number}}</h5>

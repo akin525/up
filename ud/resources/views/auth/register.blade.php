@@ -21,9 +21,9 @@
                         <h3 class="text-center text-purple">Primedata SIGN-UP</h3>
         <form method="POST" action="{{ route('register') }}">
             @csrf
-            <x-jet-validation-errors class="mb-4" />
 
             <fieldset>
+                <x-jet-validation-errors class="mb-4" />
                 <div class="field">
                     <label class="label_field">Name</label>
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />

@@ -15,6 +15,29 @@ use App\Models\deposit;
 
 class AuthController
 {
+    public function customLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)
+            ->where('password', $request->password)
+            ->first();
+
+        if(!isset($user)){
+            return redirect()->back()->withInput($request->only('email', 'remember'))
+                ->withErrors(['password' => 'Credentials does not match.']);
+        }
+
+        Auth::login($user);
+
+        return redirect()->intended('dashboard')
+            ->withSuccess('Signed in');
+
+
+    }
     public function dashboard(Request $request)
     {
         if (Auth::check()) {

@@ -9,10 +9,7 @@
                             <img width="110" src="{{asset("images/bn.jpeg")}}" alt="#" />
                         </div>
                     </div>
-        <x-slot name="logo">
-        </x-slot>
 
-        <x-jet-validation-errors class="mb-4" />
 
         @if (session('status'))
             <div class="mb-4 font-medium text-sm text-green-600">
@@ -24,9 +21,21 @@
             <br>
             <br>
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('log') }}">
             @csrf
             <fieldset>
+                @if ($errors->has('email'))<div class='alert alert-danger'>
+                    <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                    <i class='fa fa-ban-circle'></i>
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                </div>
+                @endif
+                @if ($errors->has('password'))<div class='alert alert-danger'>
+                    <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                    <i class='fa fa-ban-circle'></i>
+                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                </div>
+                @endif
                 <div class="field">
 
                     <label class="label_field">Email</label>
@@ -40,7 +49,7 @@
 <center>
             <div class="field">
                 <label class="label_field hidden">hidden label</label>
-                <label class="form-check-label"><input type="checkbox"id="remember_me" name="remember" class="form-check-input"> Remember Me</label>
+                <label class="form-check-label"><input type="checkbox" id="remember_me" name="remember" class="form-check-input"> Remember Me</label>
                 @if (Route::has('password.request'))
                 <a class="forgot" href="{{ route('password.request') }}">Forgotten Password?</a>
                 @endif

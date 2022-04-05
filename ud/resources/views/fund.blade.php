@@ -101,7 +101,7 @@
                 <div class="card-body">
                     <li  class=" btn-info">
                             @if ($wallet->account_number==1 && $wallet->account_name==1)
-                                <a href='' class='text-white'>create Virtual Account To Fund Your Wallet Automatically</a>
+                                <a href='{{route('vertual')}}' class='text-white'>create Virtual Account To Fund Your Wallet Automatically</a>
                             @else
                                 <h5 class='text-white'>{{$wallet->account_name}}</h5>
                                 <h5 class='text-white'>Account No:{{$wallet->account_number}}</h5>
