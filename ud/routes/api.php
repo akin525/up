@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::group(['middleware'=> 'apikey'], function () {
     Route::get('dashboard', [ResellerdetailsController::class, 'details']);
     Route::get('airtime', [BuyController::class, 'airtime']);
     Route::get('buydata', [BuyController::class, 'buydata']);
@@ -32,5 +32,5 @@ use Illuminate\Support\Facades\Route;
 //        Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //            return $request->user();
 //        });
-
+});
 
