@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class wallet extends Authenticatable
+class refer extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -19,15 +19,9 @@ class wallet extends Authenticatable
      */
     protected $fillable = [
         'username',
-        'balance',
-        'account_number',
-        'account_name',
+        'newuserid',
+        'amount',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
 
 }

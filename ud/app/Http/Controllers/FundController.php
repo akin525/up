@@ -1,9 +1,11 @@
 <?php
 
 namespace app\Http\Controllers;
+use App\Mail\Emailcharges;
 use App\Mail\Emailfund;
 use App\Mail\Emailotp;
 use App\Models\bo;
+use App\Models\charp;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -52,7 +54,7 @@ class FundController
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer sk_test_280c68e08f76233b476038f04d92896b4749eec3",
+                "Authorization: Bearer sk_live_6cadb117ddd6d2c323e92d7f6ebb6583767009fb",
                 "Cache-Control: no-cache",
             ),
         ));
@@ -84,8 +86,19 @@ class FundController
                 return redirect("dashboard")->withSuccess('Duplicate Transaction');
 
             } else {
+                $char = setting::first();
+$amount1=$amount - $char->charges;
 
-                $gt = $amount + $pt;
+
+                $gt = $amount1 + $pt;
+                $charp = charp::create([
+                    'username' => $user->username,
+                    'payment_ref' => $reference,
+                    'amount' => $char->charges,
+                    'iwallet' => $pt,
+                    'fwallet' => $gt,
+                ]);
+
                 $deposit = deposit::create([
                     'username' => $user->username,
                     'payment_ref' => $reference,
@@ -93,11 +106,22 @@ class FundController
                     'iwallet' => $pt,
                     'fwallet' => $gt,
                 ]);
+
+
+//
+                $admin= 'admin@primedata.com.ng';
+
+                $receiver= $user->email;
+                Mail::to($receiver)->send(new Emailcharges($charp ));
+                Mail::to($admin)->send(new Emailcharges($charp ));
+
                 $wallet->balance = $gt;
                 $wallet->save();
+                $admin= 'admin@primedata.com.ng';
 
               $receiver= $user->email;
                 Mail::to($receiver)->send(new Emailfund($deposit ));
+                Mail::to($admin)->send(new Emailfund($deposit ));
 
 
                 return redirect("dashboard")->withSuccess('You are not allowed to access');

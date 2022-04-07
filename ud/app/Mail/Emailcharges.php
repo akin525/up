@@ -7,18 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Emailfund extends Mailable
+class Emailcharges extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $deposit;
+    protected $charp;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($deposit)
+    public function __construct($charp)
     {
-        $this->deposit = $deposit;
+        $this->charp = $charp;
     }
 
     /**
@@ -28,7 +28,7 @@ class Emailfund extends Mailable
      */
     public function build()
     {
-        $deposit= $this->deposit;
-        return $this->markdown('email.fund',['deposit' => $deposit])->subject(   $deposit['username'].' |Account Funded |'.'Prime-'. $deposit['payment_ref']);
+        $charp= $this->charp;
+        return $this->markdown('email.charges',['charp' => $charp])->subject(   $charp['username'].' |Account Being Charge |'.'Prime-'. $charp['payment_ref']);
     }
 }

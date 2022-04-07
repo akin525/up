@@ -11,7 +11,7 @@
     <div class="card">
         <div class="card-body">
             <div class="w3-panel w3-yellow w3-round-xlarge">
-                <h4 class="w3-text-green"><b>Wallet : NGN {{$user->balance}} &nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="fund.php">Fund Wallet</a>
+                <h4 class="w3-text-green"><b>Wallet : NGN {{$wallet->balance}} &nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="fund.php">Fund Wallet</a>
                     </b></h4>  	</div>
         </div>
     </div>
@@ -28,7 +28,20 @@
                     <div class="w3-btn w3-padding w3-blue-grey w3-quarter">9MOBILE(Gift): EXCELLENT</div>
                 </li>
             </ul>
+            <br>
+            <style>
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+            </style>
+            <div class="card-body">
+                <div class="center">
+                    <img    src="{{asset('images/re.jpg')}}" alt="#" />
+                </div>
+            </div>
 
+            <br>
 
             <div class="card-body">
                 <!--            <div class="box w3-card-4">-->
@@ -94,7 +107,10 @@
                     <br>
                     <br>
 
-                </form></div>
+                </form>
+
+
+            </div>
 
 
         </div>

@@ -17,8 +17,12 @@
                     <select  name="id" class="text-success form-control" required="">
                         <option value="">---------</option>
                         @foreach($data as $datas)
+                            @if($user->apikey="")
                             <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}{{$datas->tamount}}
-                            </option>
+                                @else
+                                <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}{{$datas->ramount}}
+                                    @endif
+                                </option>
                         @endforeach
 
                     </select>
@@ -35,6 +39,20 @@
             </ul>
 
         </h4>
+        <br>
+        <style>
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        </style>
+        <div class="card-body">
+            <div class="center">
+                <img    src="{{asset('images/re.jpg')}}" alt="#" />
+            </div>
+        </div>
+
+        <br>
     </div>
 </div>
 </div>

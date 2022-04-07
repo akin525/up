@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\VertualController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -25,7 +26,14 @@ Route::get('/', function () {
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //    return view('dashboard');
 //})->name('dashboard');
+Route::get('run', [VertualController::class, 'run'])->name('run');
+Route::get('invoice', [AuthController::class, 'invoice'])->name('invoice');
+Route::get('charges', [AuthController::class, 'charges'])->name('charges');
 Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+Route::get('referal', [AuthController::class, 'refer'])->name('referal');
+Route::post('mp', [ResellerController::class, 'reseller'])->name('mp');
+Route::get('reseller', [ResellerController::class, 'sell'])->name('reseller');
+Route::get('upgrade', [ResellerController::class, 'apiaccess'])->name('upgrade');
 Route::post('log', [AuthController::class, 'customLogin'])->name('log');
 Route::get('airtime', [AuthController::class, 'airtime'])->name('airtime');
 Route::get('buydata', [AuthController::class, 'buydata'])->name('buydata');

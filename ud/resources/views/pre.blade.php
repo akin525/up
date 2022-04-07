@@ -143,8 +143,12 @@
 
                                             <form action="{{ route('bill') }}" method="post">
                                                 @csrf
+                                                @if($user->apikey="")
                                                 <input type="hidden" name="amount" value="{{$data1->tamount}}">
-                                                <input type="hidden" name="name" value="{{$data1->network}}..{{$data1->plan}}">
+                                                @else
+                                                    <input type="hidden" name="amount" value="{{$data1['ramount']}}">
+                                                @endif
+                                                    <input type="hidden" name="name" value="{{$data1->network}}..{{$data1->plan}}">
                                                 <input type="hidden" name="productid" value="{{$data1->id}}">
                                                 <input type="hidden" name="id" value="<?php echo rand(10000000, 999999999); ?>">
 

@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\Emailcharges;
+use App\Mail\Emailfund;
 use App\Models\bo;
+use App\Models\charp;
 use App\Models\data;
 use App\Models\deposit;
 use App\Models\setting;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +20,7 @@ class VertualController
     {
         if (Auth::check()) {
             $user = User::find($request->user()->id);
+            $wallet = wallet::where('username', $user->username)->first();
 
             $curl = curl_init();
 
@@ -30,9 +35,9 @@ class VertualController
                 CURLOPT_SSL_VERIFYHOST => 0,
                 CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('account_name' => $user->username, 'business_short_name' => 'EVERDATA', 'uniqueid' => $user->name, 'email' => $user->email, 'phone' => '08146328645', 'webhook_url' => 'https://mobile.prinedata.com.ng/run.php',),
+                CURLOPT_POSTFIELDS => array('account_name' => $user->username, 'business_short_name' => 'PRIMEDATA', 'uniqueid' => $user->name, 'email' => $user->email, 'phone' => '08146328645', 'webhook_url' => 'https://mobile.prinedata.com.ng/run',),
                 CURLOPT_HTTPHEADER => array(
-                    'Authorization: MCDKEY_903sfjfi0ad833mk8537dhc03kbs120r0h9a'
+                    'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
                 ),
             ));
 
@@ -47,13 +52,81 @@ class VertualController
             $number = $data["data"]["account_number"];
             $bank = $data["data"]["bank_name"];
 
-            $user->account_no = $number;
-            $user->account_name = $account;
-            $user->save();
+            $wallet->account_number = $number;
+            $wallet->account_name = $account;
+            $wallet->save();
 
             return redirect("dashboard")->withSuccess('You are not allowed to access');
 
 
         }
     }
+    public function run(Request $request)
+    {
+        if ($json = json_decode(file_get_contents("php://input"), true)) {
+            print_r($json['ref']);
+//    print_r($json['accountDetails']['accountName']);
+            $data = $json;
+
+        }
+//$paid=$data["paymentStatus"];
+        $refid=$data["ref"];
+        $amount=$data["amount"];
+        $no=$data["account_number"];
+//  echo $amount;
+// echo $bank;
+//echo $acct;
+
+            $wallet = wallet::where('account_number', $no)->first();
+        $pt=$wallet->balance;
+
+        if ($no == $wallet->account_number) {
+            $depo = deposit::where('payment_ref', $refid)->first();
+            $user = user::where('username', $wallet->username)->first();
+            if (isset($depo)) {
+                echo "payment refid the same";
+            }else {
+
+                $char = setting::first();
+                $amount1 = $amount - $char->charges;
+
+
+                $gt = $amount1 + $pt;
+                $reference=$refid;
+
+                $deposit = deposit::create([
+                    'username' => $wallet->username,
+                    'payment_ref' => $reference,
+                    'amount' => $amount,
+                    'iwallet' => $pt,
+                    'fwallet' => $gt,
+                ]);
+                $charp = charp::create([
+                    'username' => $wallet->username,
+                    'payment_ref' => $reference,
+                    'amount' => $char->charges,
+                    'iwallet' => $pt,
+                    'fwallet' => $gt,
+                ]);
+
+
+                $admin= 'admin@primedata.com.ng';
+
+                $receiver= $user->email;
+                Mail::to($receiver)->send(new Emailcharges($charp ));
+                Mail::to($admin)->send(new Emailcharges($charp ));
+
+                $wallet->balance = $gt;
+                $wallet->save();
+                $user = user::where('username', $wallet->username)->first();
+
+                $receiver = $user->email;
+                Mail::to($receiver)->send(new Emailfund($deposit));
+
+            }
+
+
+        }
+    }
+
 }

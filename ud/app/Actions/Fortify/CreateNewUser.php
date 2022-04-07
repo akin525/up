@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Mail\Emailotp;
+use App\Models\refer;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\wallet;
@@ -25,6 +26,7 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
@@ -36,13 +38,23 @@ class CreateNewUser implements CreatesNewUsers
 
         return DB::transaction(function () use ($input) {
 
+            $refe= refer::create([
+                'username' => $input['refer'],
+                'newuserid' => $input['username'],
+                'amount' =>100 ,
+            ]);
+
             $wallet= wallet::create([
                 'username' => $input['username'],
                 'balance' => 0,
             ]);
             $receiver=$input ['email'];
-
+            $admin= 'admin@primedata.com.ng';
             Mail::to($receiver)->send(new Emailotp($input));
+            Mail::to($admin)->send(new Emailotp($input));
+
+
+
 
             return tap(User::create([
                 'name' => $input['name'],

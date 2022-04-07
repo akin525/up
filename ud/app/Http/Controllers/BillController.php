@@ -5,6 +5,7 @@ use App\Mail\Emailtrans;
 use App\Models\bo;
 use App\Models\data;
 use App\Models\deposit;
+use App\Models\profit;
 use App\Models\setting;
 use App\Models\wallet;
 use Illuminate\Http\Request;
@@ -91,6 +92,7 @@ class BillController extends Controller
 
 //                        return $response;
                         if ($success==1) {
+
                             $bo = bo::create([
                                 'username' => $user->username,
                                 'plan' => $fg->plan,
@@ -101,12 +103,18 @@ class BillController extends Controller
                                 'refid' => $request->id,
                                 'discountamoun' => $tran1,
                             ]);
+
+
+
                             $name= $fg->plan;
                             $am= "NGN $request->amount  Airtime Purchase Was Successful To";
                             $ph= $request->number;
 
                             $receiver=$user->email;
+                            $admin= 'admin@primedata.com.ng';
+
                             Mail::to($receiver)->send(new Emailtrans($bo ));
+                            Mail::to($admin)->send(new Emailtrans($bo ));
 
                             return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
 
@@ -148,10 +156,15 @@ class BillController extends Controller
                         // echo $response;
 
 
+
+//return $response;
                         $data = json_decode($response, true);
+
                         $success = $data["result"];
-                        $msg2 = $data["msg"];
-                        if ($success==1){
+                        $msg2 = $data['msg'];
+                        $po =$request->amount  - $fg->amount;
+
+                        if ($success ==1){
                             $bo = bo::create([
                                 'username' => $user->username,
                                 'plan' => $fg->plan,
@@ -161,13 +174,23 @@ class BillController extends Controller
                                 'phone' => $request->number,
                                 'refid' => $request->id,
                             ]);
+
+                            $profit = profit::create([
+                                'username' => $user->username,
+                                'plan' => $fg->plan,
+                                'amount' => $po,
+                            ]);
+
                             $name= $fg->plan;
                             $am= "$fg->plan  was successful delivered to";
                             $ph= $request->number;
 
 
                             $receiver=$user->email;
+                            $admin= 'admin@primedata.com.ng';
+
                             Mail::to($receiver)->send(new Emailtrans($bo ));
+                            Mail::to($admin)->send(new Emailtrans($bo ));
                             return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
 
                         }elseif ($success==0){

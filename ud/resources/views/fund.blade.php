@@ -14,6 +14,20 @@
                 </div>
             </div>
         </div>
+        <br>
+        <style>
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        </style>
+        <div class="card-body">
+            <div class="center">
+                <img    src="{{asset('images/re.jpg')}}" alt="#" />
+            </div>
+        </div>
+
+        <br>
         <div class="card">
             <div class="card-body">
                 <br>
@@ -78,7 +92,7 @@
                             <input type="hidden"  id="email-address" value="{{$user->email}}">
                     </div>
                 </div>
-                <button class="btn btn-primary btn-block withdraw-btn" type="submit" onclick="payWithPaystack()"> Fund With Paystack</button>
+                <button class="btn btn-outline-info btn-block withdraw-btn" type="submit" onclick="payWithPaystack()"> Fund With Paystack</button>
                 <script src="https://js.paystack.co/v1/inline.js"> </script>
                 <br>
                 {{--                <a href="fun.php"><button  type="button" class=" btn-block withdraw-btn"  >Fund With Transfer</button></a>--}}
@@ -89,8 +103,8 @@
 
             </div>
         </div>
-    </div>
-</div>
+
+
 <div class="card">
     <div class="card-body">
         <div class='alert alert-info'>
@@ -127,18 +141,13 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Deposit Transaction</h5>
-        <div class="module-body table">
-            <!--        <table class="datatable-1 table table-bordered" >-->
-            <table id="data-table-buttons"   class="datatable-1 table table-bordered table-striped	 display" >
-                <!--                                            <table id="data-table-buttons" class="table table-striped table-bordered align-middle">-->
-
+        <div class="panel-body">
+            <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
                 <thead>
-                <tr>
                     <th>Date</th>
                     <th>Username</th>
                     <th>Amount Fund</th>
                     <th>Payment_Ref</th>
-                </tr>
                 </thead>
                 <tbody>
                 @foreach($fund as $po)
@@ -152,6 +161,7 @@
 
                 </tbody>
             </table>
+        </div>
         </div>
     </div>
 </div>
@@ -195,7 +205,7 @@
     function payWithPaystack(e) {
         e.preventDefault();
         let handler = PaystackPop.setup({
-            key: 'pk_test_17fd09d2f1b858a21859595153d9770573a7c996', // Replace with your public key
+            key: 'pk_live_735384abd090d0bacf543011c2094f5c60446956', // Replace with your public key
             email: document.getElementById("email-address").value,
             amount: document.getElementById("amount").value * 100,
             ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
@@ -214,4 +224,32 @@
         });
         handler.openIframe();
     }
+</script>
+<!-- html -->
+<table id="data-table-buttons" class="table table-striped table-bordered align-middle">
+    <thead>
+    <tr>
+        <th width="1%"></th>
+        <th width="1%" data-orderable="false"></th>
+        ...
+    </tr>
+    </thead>
+    <tbody>
+    ...
+    </tbody>
+</table>
+
+<!-- script -->
+<script>
+    $('#data-table-default').DataTable({
+        responsive: true,
+        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        buttons: [
+            { extend: 'copy', className: 'btn-sm' },
+            { extend: 'csv', className: 'btn-sm' },
+            { extend: 'excel', className: 'btn-sm' },
+            { extend: 'pdf', className: 'btn-sm' },
+            { extend: 'print', className: 'btn-sm' }
+        ],
+    });
 </script>

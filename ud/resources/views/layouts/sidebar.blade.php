@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <!-- basic -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Login</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>User Dashboard</title>
+    <meta name="keywords" content="Buy data in a few clicks to keep surfing the internet. You can buy whatever size of data plan for whichever network you desire. All plans are topped-up to your specified number in seconds.">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- site icon -->
+    <link rel="icon" href="https://mobile.primedata.com.ng/images/bn.jpeg" type="image/png" />
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <!-- Fonts -->
@@ -61,21 +70,39 @@
                     <li class="active">
                         <a href="{{ route('dashboard') }}"  ><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a>
                     </li>
+                    @if(Auth::user()->apikey ==NULL)
+                    <li>
+                        <a href="{{route('reseller')}}"><i class="fa fa-shopping-cart "></i> <span>Become Reseller</span></a>
+                    </li>
+                    @else
+                        <li>
+                            <a href="{{route('upgrade')}}"><i class="fa fa-book "></i> <span>Api</span></a>
+                        </li>
+                    @endif
+                    <li>
+                        <a href="{{route('referal')}}"><i class="fa fa-laptop "></i> <span>Referal System</span></a>
+                    </li>
                     <li class="active">
                         <a href="{{ route('profile.show') }}"  ><i class="fa fa-user yellow_color"></i> <span>My Account</span></a>
                     </li>
                     <li><a href="{{ route('fund') }}"><i class="fa fa-credit-card orange_color"></i> <span>Fund Wallet</span></a></li>
                     <li>
-                        <a href="{{route('airtime')}}"><i class="fa fa-phone purple_color"></i> <span>Buy Airtime</span></a>
+                        <a href="{{route('airtime')}}"><i class="fa fa-phone "></i> <span>Buy Airtime</span></a>
                     </li>
                     <li>
-                        <a href="{{route('buydata')}}"><i class="fa fa-laptop purple_color"></i> <span>Buy Data</span></a>
+                        <a href="#"><i class="fa fa-tv"></i> <span>Pay Tv</span></a>
                     </li>
                     <li>
-                        <a href="invoice.php"><i class="fa fa-sticky-note yellow_color"></i> <span>Bills Invoice</span></a>
+                        <a href="{{route('buydata')}}"><i class="fa fa-laptop "></i> <span>Buy Data</span></a>
                     </li>
                     <li>
-                        <a href="charges.php"><i class="fa fa-sticky-note yellow_color"></i> <span>Charges</span></a>
+                        <a href="#"><i class="fa fa-power-off"></i> <span>Pay Electricity</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('invoice')}}"><i class="fa fa-sticky-note yellow_color"></i> <span>Bills Invoice</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('charges')}}"><i class="fa fa-sticky-note"></i> <span>Charges</span></a>
                     </li>
                 </ul>
             </div>

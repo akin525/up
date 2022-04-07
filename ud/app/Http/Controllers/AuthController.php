@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\charp;
 use App\Models\Messages;
+use App\Models\refer;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +45,13 @@ class AuthController
         if (Auth::check()) {
             $user = User::find($request->user()->id);
             $me = Messages::where('status', 1)->first();
+            $refer = refer::where('username', $request->user()->username)->get();
+            $totalrefer = 0;
+            foreach ($refer as $de){
+                $totalrefer += $de->amount;
+
+            }
+            $count = refer::where('username',$request->user()->username)->count();
 
             $wallet = wallet::where('username', $user->username)->get();
             $deposite = deposit::where('username', $request->user()->username)->get();
@@ -57,7 +66,23 @@ class AuthController
                 $bill += $bill1->amount;
 
             }
-            return  view('dashboard', compact('user', 'wallet', 'totaldeposite', 'me',  'bil2', 'bill'));
+            return  view('dashboard', compact('user', 'wallet', 'totaldeposite', 'me',  'bil2', 'bill', 'totalrefer', 'count'));
+        }
+    }
+    public function refer(Request $request)
+    {
+        if (Auth::check()) {
+            $user = User::find($request->user()->id);
+            $refer = refer::where('username', $user->username)->first();
+
+            $refers = refer::where('username', $request->user()->username)->get();
+            $totalrefer = 0;
+            foreach ($refers as $depo){
+                $totalrefer+= $depo->amount;
+
+            }
+
+            return  view('referal', compact('user', 'refers', 'refer', 'totalrefer'));
         }
     }
     public function buydata(Request  $request)
@@ -92,8 +117,34 @@ class AuthController
         if(Auth::check()){
             $user = User::find($request->user()->id);
             $data = data::where('plan_id',"airtime" )->get();
+            $wallet = wallet::where('username', $user->username)->first();
 
-            return view('airtime', compact('user', 'data'));
+            return view('airtime', compact('user', 'data', 'wallet'));
+        }
+
+        return redirect("login")->withSuccess('You are not allowed to access');
+    }
+
+    public function invoice(Request  $request)
+    {
+        if(Auth::check()){
+            $user = User::find($request->user()->id);
+            $bill = bo::where('username', $request->user()->username)->get();
+
+
+            return view('invoice', compact('user', 'bill'));
+        }
+
+        return redirect("login")->withSuccess('You are not allowed to access');
+    }
+    public function charges(Request  $request)
+    {
+        if(Auth::check()){
+            $user = User::find($request->user()->id);
+            $bill = charp::where('username', $request->user()->username)->get();
+
+
+            return view('charges', compact('user', 'bill'));
         }
 
         return redirect("login")->withSuccess('You are not allowed to access');

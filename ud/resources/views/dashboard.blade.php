@@ -39,6 +39,75 @@
 
         <br>
 
+        <style>
+            .tooltip {
+                position: relative;
+                display: inline-block;
+            }
+
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 140px;
+                background-color: #555;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px;
+                position: absolute;
+                z-index: 1;
+                bottom: 150%;
+                left: 50%;
+                margin-left: -75px;
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            .tooltip .tooltiptext::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #555 transparent transparent transparent;
+            }
+
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+                opacity: 1;
+            }
+
+        </style>
+        <div class="card">
+            <div class="card-body">
+                <h6>Your Referal Link</h6>
+                <!-- The text field -->
+                <input id="myInput" type="text" class="form-control" value="https://mobile.primedata.com.ng/register?refer={{$user->username}}" >
+
+                <!-- The button used to copy the text -->
+                <button class="btn-info" onclick="myFunction()">Copy Referal Link</button>
+            </div>
+        </div>
+
+
+        <script>
+            function myFunction() {
+                /* Get the text field */
+                var copyText = document.getElementById("myInput");
+
+                /* Select the text field */
+                copyText.select();
+                copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+                /* Copy the text inside the text field */
+                navigator.clipboard.writeText(copyText.value);
+
+                /* Alert the copied text */
+                alert( copyText.value);
+            }
+        </script>
+        <br>
         <div class="card">
             <div class="card-body">
                 <div class='alert alert-info'>
@@ -130,7 +199,7 @@
                 </div>
                 <div class="counter_no">
                     <div>
-                        <h5 class="total_no text-center">₦ {{"$wallet1->balance"}}.00</h5>
+                        <h5 class="total_no text-center">₦{{number_format(intval($wallet1->balance *1),2)}}</h5>
                         <h6 class="head_couter">Wallet Balance</h6>
                     </div>
                 </div>
@@ -145,7 +214,7 @@
                 </div>
                 <div class="counter_no">
                     <div>
-                        <h5 class="total_no text-center">₦{{$totaldeposite}}.00</h5>
+                        <h5 class="total_no text-center">₦{{number_format(intval($totaldeposite *1), 2)}}</h5>
                         <h6 class="head_couter">Total Deposit</h6>
                     </div>
 
@@ -175,13 +244,46 @@
                 </div>
                 <div class="counter_no">
                     <div>
-                        <h5 class="total_no text-center">₦{{$bill}}.00</h5>
+                        <h5 class="total_no text-center">₦{{number_format(intval($bill *1),2)}}</h5>
                         <h6 class="head_couter">Total Bills</h6>
                     </div>
                 </div>
             </div>
         </div>
 
+    </div>
+
+    <div class="row column1">
+        <div class="col-md-7 col-lg-6">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-users yellow_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">{{$count}}</h5>
+                        <h6 class="head_couter">Number Of Referal</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 col-lg-6">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money blue1_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{number_format(intval($totalrefer *1),2)}}</h5>
+                        <h6 class="head_couter">Referal Bonus</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="content">
