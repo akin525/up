@@ -25,7 +25,7 @@ class BillController
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'errors' => Helpers::error_processor($validator)
+                'errors' => $this->error_processor($validator)
             ], 403);
         }
         $apikey = $request->header('apikey');
@@ -70,7 +70,7 @@ class BillController
 
                 foreach ($bt as $fg) {
 
-                    if ($fg->plan == "Airtime") {
+                    if ($fg->plan == "airtime") {
 
                         $resellerURL = 'https://app.mcd.5starcompany.com.ng/api/reseller/';
                         $curl = curl_init();
@@ -217,14 +217,22 @@ class BillController
                     }
                 }
             }
+        }else {
+            return response()->json([
+                'message' => "User not found",
+            ], 200);
+
         }
-        return response()->json([
-            'message' => "User not found",
-        ], 200);
-
-
     }
 
+    public function error_processor($validator)
+    {
+        $err_keeper = [];
+        foreach ($validator->errors()->getMessages() as $index => $error) {
+            array_push($err_keeper, ['code' => $index, 'message' => $error[0]]);
+        }
+        return $err_keeper;
+    }
 }
 
 
