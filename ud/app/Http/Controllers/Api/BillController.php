@@ -10,28 +10,31 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\CentralLogics\Helpers;
+use Mockery\Exception;
 
 class BillController
 {
 
     public function bill(Request $request)
     {
-//        $validator = Validator::make($request->all(), [
-//            'productid' => 'required',
-//        ]);
-//        if ($validator->fails()) {
-//            return response()->json([
-//                'errors' => Helpers::error_processor($validator)
-//            ], 403);
-//        }
+        $validator = Validator::make($request->all(), [
+            'productid' => 'required',
+            'amount' => 'required',
+            'number' => 'required',
+            'id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => Helpers::error_processor($validator)
+            ], 403);
+        }
         $apikey = $request->header('apikey');
         $user = User::where('apikey',$apikey)->first();
         if ($user) {
             $wallet = wallet::where('username', $user->username)->first();
 
-
             if ($wallet->balance < $request->amount) {
-                $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
+                $mg = "You Cant Make Purchase Above " . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
 
                 return response()->json([
                     'message' => $mg,
@@ -58,8 +61,6 @@ class BillController
 
             } else {
                 $bt = data::where("id", $request->productid)->get();
-                $wallet = wallet::where('username', $user->username)->first();
-
 
                 $gt = $wallet->balance - $request->amount;
 
@@ -117,7 +118,11 @@ class BillController
                             $ph= $request->number;
 
                             $receiver=$user->email;
-                            Mail::to($receiver)->send(new Emailtrans($bo ));
+//                            try {
+//                                Mail::to($receiver)->send(new Emailtrans($bo ));
+//                            }catch (Exception $e){
+//
+//                            }
                             return response()->json([
                                 'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
                                 'user' => $user
@@ -182,7 +187,11 @@ class BillController
 
 
                             $receiver=$user->email;
-                            Mail::to($receiver)->send(new Emailtrans($bo ));
+//                            try {
+//                                Mail::to($receiver)->send(new Emailtrans($bo ));
+//                            }catch (Exception $e){
+//
+//                            }
                             return response()->json([
                                 'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
                                 'user' => $user
@@ -209,7 +218,9 @@ class BillController
                 }
             }
         }
-
+        return response()->json([
+            'message' => "User not found",
+        ], 200);
 
 
     }
