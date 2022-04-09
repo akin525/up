@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Api;
+use App\Http\Controllers\Controller;
 use App\Mail\Emailfund;
 use App\Mail\Emailtrans;
 use App\Models\bo;
@@ -9,23 +10,26 @@ use App\Models\setting;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-class BillController extends Controller
+use Illuminate\Support\Facades\Validator;
+use App\CentralLogics\Helpers;
+
+class BillController
 {
 
     public function bill(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'productid' => 'required',
         ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => Helpers::error_processor($validator)], 403);
+        }
         $apikey = $request->header('apikey');
         $user = User::where('apikey',$apikey)->first();
         if ($user) {
             $wallet = wallet::where('username', $user->username)->first();
-
-
 
 
             if ($wallet->balance < $request->amount) {

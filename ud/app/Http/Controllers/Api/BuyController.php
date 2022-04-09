@@ -10,7 +10,8 @@ use App\Models\wallet;
 use App\Models\bo;
 use App\Models\data;
 use App\Models\deposit;
-
+use Illuminate\Support\Facades\Validator;
+use App\CentralLogics\Helpers;
 
 
 class BuyController
@@ -36,9 +37,12 @@ class BuyController
 
 
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'id' => 'required',
         ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => Helpers::error_processor($validator)], 403);
+        }
         $apikey = $request->header('apikey');
         $user = User::where('apikey',$apikey)->first();
         if ($user) {
