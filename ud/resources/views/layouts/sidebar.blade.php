@@ -58,8 +58,8 @@
                     </div>
                     <form method="POST" action="{{ route('logout') }}" x-data>
                         @csrf
-
-                        <a href="{{ route('logout') }}"><button type="submit" class="btn btn-primary">logout</button></a>
+                        <br>
+                        <a href="{{ route('logout') }}"><button type="submit" class="btn btn-success">logout</button></a>
                     </form>
                 </div>
 
@@ -68,36 +68,48 @@
                 <h4>General</h4>
                 <ul class="list-unstyled components">
                     <li class="active">
-                        <a href="{{ route('dashboard') }}"  ><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a>
+                        <a href="{{ route('dashboard') }}"  ><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
                     </li>
                     @if(Auth::user()->apikey ==NULL)
-                    <li>
-                        <a href="{{route('reseller')}}"><i class="fa fa-shopping-cart "></i> <span>Become Reseller</span></a>
-                    </li>
+                        <li>
+                            <a href="{{route('reseller')}}"><i class="fa fa-shopping-cart "></i> <span>Become Reseller</span></a>
+                        </li>
                     @else
                         <li>
                             <a href="{{route('upgrade')}}"><i class="fa fa-book "></i> <span>Api</span></a>
                         </li>
                     @endif
+
+
+                    <li><a href="{{ route('fund') }}"><i class="fa fa-credit-card orange_color"></i> <span>Fund Wallet</span></a></li>
+
+                    <li>
+                        <a href="{{route('buydata')}}"><i class="fa fa-laptop "></i> <span>Buy Data</span></a>
+                    </li>
+
+
+
+                    <li>
+                        <a href="{{route('airtime')}}"><i class="fa fa-phone "></i> <span>Buy Airtime</span></a>
+                    </li>
+
                     <li>
                         <a href="{{route('referal')}}"><i class="fa fa-laptop "></i> <span>Referal System</span></a>
                     </li>
                     <li class="active">
-                        <a href="{{ route('profile.show') }}"  ><i class="fa fa-user yellow_color"></i> <span>My Account</span></a>
+                        <a href="{{ route('profile.show') }}"  ><i class="fa fa-user white_color"></i> <span>My Account</span></a>
                     </li>
-                    <li><a href="{{ route('fund') }}"><i class="fa fa-credit-card orange_color"></i> <span>Fund Wallet</span></a></li>
-                    <li>
-                        <a href="{{route('airtime')}}"><i class="fa fa-phone "></i> <span>Buy Airtime</span></a>
-                    </li>
+
+
                     <li>
                         <a href="#"><i class="fa fa-tv"></i> <span>Pay Tv</span></a>
                     </li>
-                    <li>
-                        <a href="{{route('buydata')}}"><i class="fa fa-laptop "></i> <span>Buy Data</span></a>
-                    </li>
+
+
                     <li>
                         <a href="#"><i class="fa fa-power-off"></i> <span>Pay Electricity</span></a>
                     </li>
+
                     <li>
                         <a href="{{route('invoice')}}"><i class="fa fa-sticky-note yellow_color"></i> <span>Bills Invoice</span></a>
                     </li>
@@ -116,29 +128,29 @@
                         <div class="logo_section">
                             <a href="{{ route('dashboard') }}"><img class="img-responsive" src="{{asset("images/bn.jpeg")}}" alt="#" /></a>
                         </div>
-{{--                        <div class="right_topbar">--}}
-{{--                            <div class="icon_info">--}}
-{{--                                <!--                                <ul>-->--}}
-{{--                                <!--                                    <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a>-->--}}
-{{--                                <!--                                  -->--}}
-{{--                                <!--                                    </li>-->--}}
-{{--                                <!---->--}}
-{{--                                <!--                                    <li><a href="#"><i class="fa fa-question-circle"></i></a></li>-->--}}
-{{--                                <!--                                    <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>-->--}}
-{{--                                <!--                                </ul>-->--}}
-{{--                                <ul class="user_profile_dd">--}}
-{{--                                    <li>--}}
-{{--                                        <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{asset("images/layout_img/user_img.jpg")}}" alt="#" /><span class="name_user" > {{ Auth::user()->name }}</span></a>--}}
-{{--                                        <div class="dropdown-menu">--}}
-{{--                                            <a class="dropdown-item" href="{{ route('profile.show') }}">My Profile</a>--}}
-{{--                                            <a class="dropdown-item" href="profile.php">Settings</a>--}}
-{{--                                            <!--                                            <a class="dropdown-item" href="help.html">Help</a>-->--}}
-{{--                                            <a class="dropdown-item" href=""><span>Log Out</span> <i class="fa fa-sign-out"></i></a>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="right_topbar">--}}
+                        {{--                            <div class="icon_info">--}}
+                        {{--                                <!--                                <ul>-->--}}
+                        {{--                                <!--                                    <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a>-->--}}
+                        {{--                                <!--                                  -->--}}
+                        {{--                                <!--                                    </li>-->--}}
+                        {{--                                <!---->--}}
+                        {{--                                <!--                                    <li><a href="#"><i class="fa fa-question-circle"></i></a></li>-->--}}
+                        {{--                                <!--                                    <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>-->--}}
+                        {{--                                <!--                                </ul>-->--}}
+                        {{--                                <ul class="user_profile_dd">--}}
+                        {{--                                    <li>--}}
+                        {{--                                        <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{asset("images/layout_img/user_img.jpg")}}" alt="#" /><span class="name_user" > {{ Auth::user()->name }}</span></a>--}}
+                        {{--                                        <div class="dropdown-menu">--}}
+                        {{--                                            <a class="dropdown-item" href="{{ route('profile.show') }}">My Profile</a>--}}
+                        {{--                                            <a class="dropdown-item" href="profile.php">Settings</a>--}}
+                        {{--                                            <!--                                            <a class="dropdown-item" href="help.html">Help</a>-->--}}
+                        {{--                                            <a class="dropdown-item" href=""><span>Log Out</span> <i class="fa fa-sign-out"></i></a>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
                     </div>
                 </nav>
             </div>

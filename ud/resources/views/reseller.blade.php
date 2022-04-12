@@ -21,13 +21,13 @@
             <div class="card-body">
                 <br>
                 <br>
-                    <div class='alert alert-success'>
-                        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                        <i class='fa fa-ban-circle'></i><strong>Notification: </br></strong><b class='align-content-center'>Note That ₦1,000 Will be charge to upgrade your account to reseller</b></div>
+                <div class='alert alert-success'>
+                    <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                    <i class='fa fa-ban-circle'></i><strong>Notification: </br></strong><b class='align-content-center'>Note That ₦1,000 Will be charged to upgrade your account to reseller</b></div>
 
-                    <div class='alert alert-success'>
-                        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                        <i class='fa fa-ban-circle'></i><strong>Notification: </br></strong><b class='align-content-center'>Note That there is also request for a website after upgraded ur account</b></div>
+                <div class='alert alert-success'>
+                    <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                    <i class='fa fa-ban-circle'></i><strong>Notification: </br></strong><b class='align-content-center'>Note that You can request for a website after you upgrade. You will have access to cheaper prices of products too! </b></div>
             </div>
         </div>
         <br>
@@ -55,7 +55,7 @@
                             <!--                                <span>Wallet Balance</span>-->
                             <h3>NGN {{$wallet->balance}}</h3>
                             <div class="d-flex justify-content-between my-4">
-{{--                                Reselle Amount: NGN1,000--}}
+                                {{--                                Reselle Amount: NGN1,000--}}
                             </div>
                             <div class="wallet-progress-chart">
                             </div>

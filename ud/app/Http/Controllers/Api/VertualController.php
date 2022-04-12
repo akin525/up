@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 use App\Mail\Emailcharges;
 use App\Mail\Emailfund;
 use App\Models\bo;
 use App\Models\charp;
-use App\Models\data;
+use App\Models\web;
 use App\Models\deposit;
 use App\Models\setting;
 use App\Models\wallet;
-use App\Models\web;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Session;
@@ -19,9 +18,9 @@ class VertualController
 {
     public function vertual(Request $request)
     {
-        if (Auth::check()) {
-            $user = User::find($request->user()->id);
-            $wallet = wallet::where('username', $user->username)->first();
+        $apikey = $request->header('apikey');
+        $user = User::where('apikey',$apikey)->first();
+        if ($user) {
 
             $curl = curl_init();
 
@@ -36,9 +35,9 @@ class VertualController
                 CURLOPT_SSL_VERIFYHOST => 0,
                 CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('account_name' => $user->username, 'business_short_name' => 'PRIMEDATA', 'uniqueid' => $user->name, 'email' => $user->email, 'phone' => '08146328645', 'webhook_url' => 'https://mobile.primedata.com.ng/api/run',),
+                CURLOPT_POSTFIELDS => array('account_name' => $user->username, 'business_short_name' => 'EVERDATA', 'uniqueid' => $user->name, 'email' => $user->email, 'phone' => '08146328645', 'webhook_url' => 'https://mobile.prinedata.com.ng/run.php',),
                 CURLOPT_HTTPHEADER => array(
-                    'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
+                    'Authorization: MCDKEY_903sfjfi0ad833mk8537dhc03kbs120r0h9a'
                 ),
             ));
 
@@ -53,39 +52,45 @@ class VertualController
             $number = $data["data"]["account_number"];
             $bank = $data["data"]["bank_name"];
 
-            $wallet->account_number = $number;
-            $wallet->account_name = $account;
-            $wallet->save();
+            $user->account_no = $number;
+            $user->account_name = $account;
+            $user->save();
 
-            return redirect("dashboard")->withSuccess('You are not allowed to access');
+            return response()->json([
+                'message' => 'You are not allowed to access',
+            ], 200);
 
 
         }
     }
+
     public function run(Request $request)
     {
         $web = web::create([
             'webbook' => $request
         ]);
 
-        //     if ($json = json_decode(file_get_contents("php://input"), true)) {
-        //         print_r($json['ref']);
-        // print_r($json['accountDetails']['accountName']);
-        //         $data = $json;
+        if ($json = json_decode(file_get_contents("php://input"), true)) {
+            print_r($json['ref']);
+//    print_r($json['accountDetails']['accountName']);
+            $data = $json;
 
-        //     }
-        $data = json_decode($request, true);
+        }
+// return  $data;
+//   $data = json_decode($request, true);
 
 //$paid=$data["paymentStatus"];
         $refid=$data["ref"];
         $amount=$data["amount"];
         $no=$data["account_number"];
+
+        // return $request->all();
 //  echo $amount;
 // echo $bank;
 //echo $acct;
 
         $wallet = wallet::where('account_number', $no)->first();
-        $pt=$wallet->balance;
+        $pt=$wallet['balance'];
 
         if ($no == $wallet->account_number) {
             $depo = deposit::where('payment_ref', $refid)->first();
@@ -135,5 +140,4 @@ class VertualController
 
         }
     }
-
 }

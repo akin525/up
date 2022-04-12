@@ -2,7 +2,7 @@
 
 <!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Express Mail</title></head><body>
 <table style='width: 100%;'>
-   <thead style='text-align: center;'><tr><td style='border:none;' colspan='2'>
+    <thead style='text-align: center;'><tr><td style='border:none;' colspan='2'>
             <table class='es-wrapper' width='100%' cellspacing='0' cellpadding='0' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;background-color:#FAFAFA'>
                 <tr>
                     <td valign='top' style='padding:0;Margin:0'>
@@ -49,7 +49,7 @@
                                     </table></td>
                             </tr>
                         </table>
-                       <table class='es-content' cellspacing='0' cellpadding='0' align='center' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%'>
+                        <table class='es-content' cellspacing='0' cellpadding='0' align='center' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%'>
                             <tr>
                                 <td style='padding:0;Margin:0;background-image:url(https://rszomp.stripocdn.email/content/guids/CABINET_c2a5428bd0934f3fbd34e54cb3601b70/images/32801632220122584.jpg);background-repeat:no-repeat;background-position:left top' background='https://mobile.primedata.com.ng/images/bn.jpeg' align='center'>
                                     <table class='es-content-body' cellspacing='0' cellpadding='0' bgcolor='#ffffff' align='center' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px'>
@@ -61,7 +61,7 @@
                                                             <table width='100%' cellspacing='0' cellpadding='0' role='presentation' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px'>
                                                                 <tr>
                                                                     <td class='es-m-p0r es-m-p0l' align='center' style='Margin:0;padding-top:5px;padding-bottom:5px;padding-left:40px;padding-right:40px'><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Dear
-                                                                        {{ $charp['username'] }},<br></p></td>
+                                                                            {{ $charp['username'] }},<br></p></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align='center' style='padding:0;Margin:0;padding-top:10px;padding-bottom:10px'><span class='es-button-border' style='border-style:solid;border-color:#f12d71;background:#e12f6d;border-width:0px;display:inline-block;border-radius:5px;width:auto'><a href='' class='es-button' target='_blank' style='mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;border-style:solid;border-color:#e12f6d;border-width:10px 30px 10px 30px;display:inline-block;background:#187b07;border-radius:5px;font-family:arial, helvetica neue, helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:24px;width:auto;text-align:center'>{{$charp['username']}}</a></span></td>
@@ -70,7 +70,7 @@
                                                     </tr>
                                                 </table></td>
                                         </tr>
-                                         <tr>
+                                        <tr>
                                             <td style='Margin:0;padding-bottom:10px;padding-top:20px;padding-left:20px;padding-right:20px;background-image:url(https://rszomp.stripocdn.email/content/guids/CABINET_c2a5428bd0934f3fbd34e54cb3601b70/images/32801632220122584.jpg);background-repeat:no-repeat;background-position:left top' background='https://mobile.primedata.com.ng/images/bn.jpeg' align='left'>
                                                 <!--[if mso]><table style='width:560px' cellpadding='0' cellspacing='0'><tr><td style='width:280px' valign='top'><![endif]-->
                                                 <table class='es-left' cellspacing='0' cellpadding='0' align='left' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left'>
@@ -78,7 +78,7 @@
                                                         <td class='es-m-p0r es-m-p20b' align='center' style='padding:0;Margin:0;width:280px'>
                                                             <table width='100%' cellspacing='0' cellpadding='0' role='presentation' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px'>
                                                                 <tr>
-                                                                    <td align='left' style='padding:0;Margin:0'><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Customer: <strong>{{ Auth::user()->name }}</strong></p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Reference Number:&nbsp;<strong>Prime-{{$charp['payment_ref']}}</strong><br></p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Invoice date:&nbsp;<strong>{{date('d-m-y')}}</strong><br></p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Payment method: <strong>Admin_Charges</strong><br></p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Currency: <strong>NGN</strong><br></p></td>
+                                                                    <td align='left' style='padding:0;Margin:0'><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Customer: <strong>{{$charp['username'] }}</strong></p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Reference Number:&nbsp;<strong>Prime-{{$charp['payment_ref']}}</strong><br></p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Invoice date:&nbsp;<strong>{{date('d-m-y')}}</strong><br></p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Payment method: <strong>Admin_Charges</strong><br></p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Currency: <strong>NGN</strong><br></p></td>
                                                                 </tr>
                                                             </table></td>
                                                     </tr>
@@ -90,7 +90,7 @@
                                                             <table width='100%' cellspacing='0' cellpadding='0' role='presentation' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px'>
                                                                 <tr>
                                                                     <td class='es-m-txt-l' align='left' style='padding:0;Margin:0'><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Amount Charge: <strong>NGN
-                                                                        {{$charp['amount']}}</strong></p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Email address:
+                                                                                {{$charp['amount']}}</strong></p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'>Email address:
                                                                         </p><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px'><strong>Account Being Charge BY <br>Admin <br></strong></p></td>
                                                                 </tr>
                                                             </table></td>
@@ -98,7 +98,7 @@
                                                 </table>
                                                 <!--[if mso]></td></tr></table><![endif]--></td>
                                         </tr>
-                                         <tr>
+                                        <tr>
                                             <td align='left' style='Margin:0;padding-bottom:10px;padding-top:15px;padding-left:20px;padding-right:20px'>
                                                 <table width='100%' cellspacing='0' cellpadding='0' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px'>
                                                     <tr>
@@ -135,7 +135,7 @@
                                                                             </tr>
                                                                         </table></td>
                                                                 </tr>
-                                                                 <tr>
+                                                                <tr>
                                                                     <td align='center' style='padding:0;Margin:0;padding-bottom:35px'><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:18px;color:#333333;font-size:12px'> If you have any questions/issues, please contact us at&nbsp;<a href='mailto:info@5starcompany.com.ng' target='_blank' style='-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#333333;font-size:12px'></a>primedata18@gmail.com<br>Thanks for choosing us</p></td>
                                                                 </tr>
                                                                 <tr>
@@ -157,3 +157,7 @@
                         </table></td>
                 </tr>
             </table>
+        </td>
+    </tr>
+    </thead>
+</table>

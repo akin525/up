@@ -144,11 +144,11 @@
                                             <form action="{{ route('bill') }}" method="post">
                                                 @csrf
                                                 @if($user->apikey="")
-                                                <input type="hidden" name="amount" value="{{$data1->tamount}}">
+                                                    <input type="hidden" name="amount" value="{{$data1->tamount}}">
                                                 @else
                                                     <input type="hidden" name="amount" value="{{$data1['ramount']}}">
                                                 @endif
-                                                    <input type="hidden" name="name" value="{{$data1->network}}..{{$data1->plan}}">
+                                                <input type="hidden" name="name" value="{{$data1->network}}..{{$data1->plan}}">
                                                 <input type="hidden" name="productid" value="{{$data1->id}}">
                                                 <input type="hidden" name="id" value="<?php echo rand(10000000, 999999999); ?>">
 
@@ -228,24 +228,24 @@
         </div>
     </div>
 </div>
-        <!--        <div class="col-sm-4 ">-->
-        <!--            <br>-->
-        <!--            <center> <h4>Codes for Data Balance: </h4></center>-->
-        <!--            <ul class="list-group">-->
-        <!--                <li class="list-group-item list-group-item-secondary">MTN [SME]     *461*4#  </li>-->
-        <!--                <li class="list-group-item list-group-item-primary">MTN [Gifting]     *131*4# or *460*260#  </li>-->
-        <!--                <li class="list-group-item list-group-item-dark"> 9mobile [Gifting]   *228# </li>-->
-        <!--                <li class="list-group-item list-group-item-action"> Airtel   *140# </li>-->
-        <!--                <li class="list-group-item list-group-item-success"> Glo  *127*0#. </li>-->
-        <!--            </ul>-->
-        <!--            <br>-->
-        <!--            <center> <h6>Codes for Airtime Balance: </h6></center>-->
-        <!--            <ul class="list-group">-->
-        <!--                <li class="list-group-item list-group-item-primary">MTN Airtime VTU    <span id="RightT"> *556#  </span></li>-->
-        <!---->
-        <!--                <li class="list-group-item list-group-item-success"> 9mobile Airtime VTU   *232# </li>-->
-        <!--                <li class="list-group-item list-group-item-info"> Airtel Airtime VTU   *123# </li>-->
-        <!--                <li class="list-group-item list-group-item-dark"> Glo Airtime VTU #124#. </li>-->
-        <!--            </ul>-->
-        <!--        </div>-->
-        <!--    </div>-->
+<!--        <div class="col-sm-4 ">-->
+<!--            <br>-->
+<!--            <center> <h4>Codes for Data Balance: </h4></center>-->
+<!--            <ul class="list-group">-->
+<!--                <li class="list-group-item list-group-item-secondary">MTN [SME]     *461*4#  </li>-->
+<!--                <li class="list-group-item list-group-item-primary">MTN [Gifting]     *131*4# or *460*260#  </li>-->
+<!--                <li class="list-group-item list-group-item-dark"> 9mobile [Gifting]   *228# </li>-->
+<!--                <li class="list-group-item list-group-item-action"> Airtel   *140# </li>-->
+<!--                <li class="list-group-item list-group-item-success"> Glo  *127*0#. </li>-->
+<!--            </ul>-->
+<!--            <br>-->
+<!--            <center> <h6>Codes for Airtime Balance: </h6></center>-->
+<!--            <ul class="list-group">-->
+<!--                <li class="list-group-item list-group-item-primary">MTN Airtime VTU    <span id="RightT"> *556#  </span></li>-->
+<!---->
+<!--                <li class="list-group-item list-group-item-success"> 9mobile Airtime VTU   *232# </li>-->
+<!--                <li class="list-group-item list-group-item-info"> Airtel Airtime VTU   *123# </li>-->
+<!--                <li class="list-group-item list-group-item-dark"> Glo Airtime VTU #124#. </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->

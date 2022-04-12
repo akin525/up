@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class web extends Model
 {
- use \Laravel\Sanctum\HasApiTokens, HasFactory, \Illuminate\Notifications\Notifiable;
+    use \Laravel\Sanctum\HasApiTokens, HasFactory, \Illuminate\Notifications\Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -15,8 +15,8 @@ class web extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-    'webnook',
-];
+        'webbook',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.

@@ -1,55 +1,69 @@
 <?php
-namespace App\Http\Controllers;
-use App\Mail\Emailfund;
+namespace App\Http\Controllers\Api;
+
 use App\Mail\Emailtrans;
 use App\Models\bo;
 use App\Models\data;
-use App\Models\deposit;
-use App\Models\profit;
-use App\Models\setting;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Session;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-class BillController extends Controller
+use Illuminate\Support\Facades\Validator;
+use App\CentralLogics\Helpers;
+use Mockery\Exception;
+
+class BillController
 {
 
     public function bill(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'productid' => 'required',
+            'amount' => 'required',
+            'number' => 'required',
+            'id' => 'required',
         ]);
-        if (Auth::check()) {
-            $user = User::find($request->user()->id);
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $this->error_processor($validator)
+            ], 403);
+        }
+        $apikey = $request->header('apikey');
+        $user = User::where('apikey',$apikey)->first();
+        if ($user) {
             $wallet = wallet::where('username', $user->username)->first();
 
-
-
-
             if ($wallet->balance < $request->amount) {
-                $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
+                $mg = "You Cant Make Purchase Above " . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
 
-                return view('bill', compact('user', 'mg'));
+                return response()->json([
+                    'message' => $mg,
+                    'user' => $user,
+                    'success' => 0
+                ], 200);
 
             }
             if ($request->amount < 0) {
 
                 $mg = "error transaction";
-                return view('bill', compact('user', 'mg'));
+                return response()->json([
+                    'message' => $mg,
+                    'user' => $user,
+                    'success' => 0
+                ], 200);
 
             }
             $bo = bo::where('refid', $request->id)->first();
             if (isset($bo)) {
                 $mg = "duplicate transaction";
-                return view('bill', compact('user', 'mg'));
+                return response()->json([
+                    'message' => $mg,
+                    'user' => $user,
+                    'success' => 0
+                ], 200);
 
             } else {
-                $user = User::find($request->user()->id);
                 $bt = data::where("id", $request->productid)->get();
-                $wallet = wallet::where('username', $user->username)->first();
-
 
                 $gt = $wallet->balance - $request->amount;
 
@@ -92,7 +106,6 @@ class BillController extends Controller
 
 //                        return $response;
                         if ($success==1) {
-
                             $bo = bo::create([
                                 'username' => $user->username,
                                 'plan' => $fg->plan,
@@ -103,22 +116,21 @@ class BillController extends Controller
                                 'refid' => $request->id,
                                 'discountamoun' => $tran1,
                             ]);
-
-
-
                             $name= $fg->plan;
                             $am= "NGN $request->amount  Airtime Purchase Was Successful To";
                             $ph= $request->number;
 
                             $receiver=$user->email;
-                            $admin= 'admin@primedata.com.ng';
-                            $admin1= 'primedata18@gmail.com';
-
-                            Mail::to($receiver)->send(new Emailtrans($bo ));
-                            Mail::to($admin)->send(new Emailtrans($bo ));
-                            Mail::to($admin1)->send(new Emailtrans($bo ));
-
-                            return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+//                            try {
+//                                Mail::to($receiver)->send(new Emailtrans($bo ));
+//                            }catch (Exception $e){
+//
+//                            }
+                            return response()->json([
+                                'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
+                                'user' => $user,
+                                // 'success' => 0
+                            ], 200);
 
                         }elseif ($success==0){
                             $zo=$user->balance+$request->amount;
@@ -128,8 +140,10 @@ class BillController extends Controller
                             $name= $fg->plan;
                             $am= "NGN $request->amount Was Refunded To Your Wallet";
                             $ph=", Transaction fail";
-
-                            return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+                            return response()->json([
+                                'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
+                                'user' => $user
+                            ], 200);
 
                         }
 
@@ -158,15 +172,10 @@ class BillController extends Controller
                         // echo $response;
 
 
-
-//return $response;
                         $data = json_decode($response, true);
-
                         $success = $data["result"];
-                        $msg2 = $data['msg'];
-                        $po =$request->amount  - $fg->amount;
-
-                        if ($success ==1){
+                        $msg2 = $data["msg"];
+                        if ($success==1){
                             $bo = bo::create([
                                 'username' => $user->username,
                                 'plan' => $fg->plan,
@@ -176,26 +185,21 @@ class BillController extends Controller
                                 'phone' => $request->number,
                                 'refid' => $request->id,
                             ]);
-
-                            $profit = profit::create([
-                                'username' => $user->username,
-                                'plan' => $fg->plan,
-                                'amount' => $po,
-                            ]);
-
                             $name= $fg->plan;
                             $am= "$fg->plan  was successful delivered to";
                             $ph= $request->number;
 
 
                             $receiver=$user->email;
-                            $admin= 'admin@primedata.com.ng';
-                            $admin1= 'primedata18@gmail.com';
-
-                            Mail::to($receiver)->send(new Emailtrans($bo ));
-                            Mail::to($admin)->send(new Emailtrans($bo ));
-                            Mail::to($admin1)->send(new Emailtrans($bo ));
-                            return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+//                            try {
+//                                Mail::to($receiver)->send(new Emailtrans($bo ));
+//                            }catch (Exception $e){
+//
+//                            }
+                            return response()->json([
+                                'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
+                                'user' => $user
+                            ], 200);
 
                         }elseif ($success==0){
                             $zo=$user->balance+$request->amount;
@@ -205,8 +209,10 @@ class BillController extends Controller
                             $name= $fg->plan;
                             $am= "NGN $request->amount Was Refunded To Your Wallet";
                             $ph=", Transaction fail";
-
-                            return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+                            return response()->json([
+                                'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
+                                'user' => $user
+                            ], 200);
 
 
                         }
@@ -215,12 +221,22 @@ class BillController extends Controller
                     }
                 }
             }
+        }else {
+            return response()->json([
+                'message' => "User not found",
+            ], 200);
+
         }
-
-
-
     }
 
+    public function error_processor($validator)
+    {
+        $err_keeper = [];
+        foreach ($validator->errors()->getMessages() as $index => $error) {
+            array_push($err_keeper, ['code' => $index, 'message' => $error[0]]);
+        }
+        return $err_keeper;
+    }
 }
 
 

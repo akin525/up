@@ -35,7 +35,7 @@ class VertualController
                 CURLOPT_SSL_VERIFYHOST => 0,
                 CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('account_name' => $user->username, 'business_short_name' => 'PRIMEDATA', 'uniqueid' => $user->name, 'email' => $user->email, 'phone' => '08146328645', 'webhook_url' => 'https://mobile.prinedata.com.ng/run',),
+                CURLOPT_POSTFIELDS => array('account_name' => $user->username, 'business_short_name' => 'PRIMEDATA', 'uniqueid' => $user->name, 'email' => $user->email, 'phone' => '08146328645', 'webhook_url' => 'https://mobile.primedata.com.ng/api/run',),
                 CURLOPT_HTTPHEADER => array(
                     'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
                 ),
@@ -63,12 +63,12 @@ class VertualController
     }
     public function run(Request $request)
     {
-//        if ($json = json_decode(file_get_contents("php://input"), true)) {
-//            print_r($json['ref']);
-////    print_r($json['accountDetails']['accountName']);
-//            $data = $json;
-//
-//        }
+        //     if ($json = json_decode(file_get_contents("php://input"), true)) {
+        //         print_r($json['ref']);
+        // print_r($json['accountDetails']['accountName']);
+        //         $data = $json;
+
+        //     }
 //$paid=$data["paymentStatus"];
         $refid=$request["ref"];
         $amount=$request["amount"];
@@ -77,7 +77,7 @@ class VertualController
 // echo $bank;
 //echo $acct;
 
-            $wallet = wallet::where('account_number', $no)->first();
+        $wallet = wallet::where('account_number', $no)->first();
         $pt=$wallet->balance;
 
         if ($no == $wallet->account_number) {

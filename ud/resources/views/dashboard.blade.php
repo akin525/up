@@ -11,7 +11,7 @@
         <div class="row column_title">
             <div class="col-md-12">
                 <div class="page_title">
-                    <h2>Dashboard</h2>
+                    <h2>My Dashboard</h2>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
         </div>
         <div class='alert alert-info'>
             <button type='button' class='close' data-dismiss='alert'>&times;</button>
-            <i class='fa fa-ban-circle'></i><strong>Notification: </br></strong><b>{{$me->message}}</b>
+            <i class='fa fa-ban-circle'></i><h6>Notification: </br><b>{{$me->message}}</b></h6>
         </div>
         <br>
         <style>
@@ -117,13 +117,13 @@
                         <div class="card-body">
                             <li  class=" btn-info">
                                 @foreach($wallet as $wallet1)
-                                @if ($wallet1->account_number==1 && $wallet1->account_name==1)
-                                    <a href='{{route('vertual')}}' class='text-white'>create Virtual Account To Fund Your Wallet Automatically</a>
-                                @else
-                                    <h5 class='text-white'>{{$wallet1->account_name}}</h5>
-                                    <h5 class='text-white'>Account No:{{$wallet1->account_number}}</h5>
-                                    <h5 class='text-white'>WEMA-BANK</h5>
-                                @endif
+                                    @if ($wallet1->account_number==1 && $wallet1->account_name==1)
+                                        <a href='{{route('vertual')}}' class='text-white'>Click this section to get your permament Virtual Bank Account (Transfer money to the account no to get your PrimeData Wallet funded instantly!)</a>
+                                    @else
+                                        <h6 class='text-white'>{{$wallet1->account_name}}</h6>
+                                        <h5 class='text-white'>Account No:{{$wallet1->account_number}}</h5>
+                                        <h6 class='text-white'>WEMA-BANK</h6>
+                                    @endif
                                 @endforeach
 
                             </li>
@@ -133,24 +133,24 @@
             </div>
         </div>
         <br>
-{{--                    <div class="white_shd full">--}}
-{{--                        <div class="full graph_head">--}}
-{{--                            <div class="heading1 margin_0">--}}
-{{--                                <h2>Payment Charts</h2>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="full graph_revenue">--}}
-{{--                            <div class="row">--}}
-{{--                                <div class="col-md-12">--}}
-{{--                                    <div class="content">--}}
-{{--                                        <div class="area_chart">--}}
-{{--                                            <canvas height="80" id="canv"></canvas>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+        {{--                    <div class="white_shd full">--}}
+        {{--                        <div class="full graph_head">--}}
+        {{--                            <div class="heading1 margin_0">--}}
+        {{--                                <h2>Payment Charts</h2>--}}
+        {{--                            </div>--}}
+        {{--                        </div>--}}
+        {{--                        <div class="full graph_revenue">--}}
+        {{--                            <div class="row">--}}
+        {{--                                <div class="col-md-12">--}}
+        {{--                                    <div class="content">--}}
+        {{--                                        <div class="area_chart">--}}
+        {{--                                            <canvas height="80" id="canv"></canvas>--}}
+        {{--                                        </div>--}}
+        {{--                                    </div>--}}
+        {{--                                </div>--}}
+        {{--                            </div>--}}
+        {{--                        </div>--}}
+        {{--                    </div>--}}
 
 
         <script>
