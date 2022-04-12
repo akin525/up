@@ -12,11 +12,8 @@
                         <div class="card-body">
                             <h3>Transactions</h3>
 
-                            <div class="module-body table">
-                                {{--                                   <table class="datatable-1 table table-bordered" id="data-table-buttons" >--}}
-                                {{--                                            <table id="data-table-buttons"   class="datatable-1 table table-bordered table-striped	 display" >--}}
+                            <div class="table-responsive">
                                 <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
-
                                     <thead>
                                     <tr>
                                         <th>Date</th>

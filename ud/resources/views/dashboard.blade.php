@@ -132,61 +132,9 @@
                 </div>
             </div>
         </div>
-        <br>
-        {{--                    <div class="white_shd full">--}}
-        {{--                        <div class="full graph_head">--}}
-        {{--                            <div class="heading1 margin_0">--}}
-        {{--                                <h2>Payment Charts</h2>--}}
-        {{--                            </div>--}}
-        {{--                        </div>--}}
-        {{--                        <div class="full graph_revenue">--}}
-        {{--                            <div class="row">--}}
-        {{--                                <div class="col-md-12">--}}
-        {{--                                    <div class="content">--}}
-        {{--                                        <div class="area_chart">--}}
-        {{--                                            <canvas height="80" id="canv"></canvas>--}}
-        {{--                                        </div>--}}
-        {{--                                    </div>--}}
-        {{--                                </div>--}}
-        {{--                            </div>--}}
-        {{--                        </div>--}}
-        {{--                    </div>--}}
 
+    <!-- end graph -->
 
-        <script>
-            $('.dropdown-toggle').dropdown()
-        </script>
-        <script>
-            $(function () {
-                "use strict";
-                // Bar chart
-                new Chart(document.getElementById("canv"), {
-                    type: 'bar',
-                    data: {
-                        labels: ["Wallet balance", "Total Paid", "Total Bills"],
-                        datasets: [
-                            {
-                                label: "Population (millions)",
-                                backgroundColor: ["#03a9f4", "#e861ff","#08ccce"],
-                                data: [9000, 9888, 8888]
-                            }
-                        ]
-                    },
-                    options: {
-                        legend: { display: false },
-                        title: {
-                            display: true,
-                            text: 'My Wallet/Payment Chart'
-                        }
-                    }
-                });
-
-
-                // line second
-            });
-        </script>
-    </div>
-    <br>
     <!-- end graph -->
     <br>
     <div class="row column1">
@@ -292,20 +240,19 @@
                 <h3>
                     <!--                            My Invoice</h3>-->
             </div>
+            <link href="{{asset('asset/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+            <link href="{{asset('asset/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
+            <link href="{{asset('asset/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" />
+
             <div class="content">
                 <div class="module">
                     <div class="module-head">
                         <div class="card">
                             <div class="card-body">
                                 <h3>Transactions</h3>
-
-                                <div class="module-body table">
-                                    {{--                                   <table class="datatable-1 table table-bordered" id="data-table-buttons" >--}}
-                                    {{--                                            <table id="data-table-buttons"   class="datatable-1 table table-bordered table-striped	 display" >--}}
+                                <div class="table-responsive">
                                     <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
-
                                         <thead>
-                                        <tr>
                                             <th>Date</th>
                                             <th>Username</th>
                                             <th>Plan</th>
@@ -313,7 +260,7 @@
                                             <th>Phone No</th>
                                             <th>Payment_Ref</th>
                                             <!--                                                    <th>Action</th>-->
-                                        </tr>
+
                                         </thead>
                                         <tbody>
                                         @foreach($bil2 as $re)
@@ -337,19 +284,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -403,4 +337,59 @@
 <script src="{{asset('asset/%40highlightjs/cdn-assets/highlight.min.js')}}" type="f1e2722e35a43ad4c1e3a0c8-text/javascript"></script>
 <script src="{{asset('asset/js/demo/render.highlight.js')}}" type="f1e2722e35a43ad4c1e3a0c8-text/javascript"></script>
 <script src="{{asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js')}}" data-cf-settings="f1e2722e35a43ad4c1e3a0c8-|49" defer=""></script><script defer src="../../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"6a910724bd190718","version":"2021.10.0","r":1,"token":"4db8c6ef997743fda032d4f73cfeff63","si":100}'></script>
+
+<script>
+    const paymentForm = document.getElementById('paymentForm');
+    paymentForm.addEventListener("submit", payWithPaystack, false);
+    function payWithPaystack(e) {
+        e.preventDefault();
+        let handler = PaystackPop.setup({
+            key: 'pk_live_735384abd090d0bacf543011c2094f5c60446956', // Replace with your public key
+            email: document.getElementById("email-address").value,
+            amount: document.getElementById("amount").value * 100,
+            ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+// label: "Optional string that replaces customer email"
+            onClose: function(){
+                alert('Window closed.');
+            },
+            callback: function(response){
+                let message = 'Payment complete! Reference: ' + response.reference;
+                // alert(message);
+
+
+                window.location = '{{ route('tran', '/') }}/'+response.reference;
+
+            }
+        });
+        handler.openIframe();
+    }
+</script>
+<!-- html -->
+<table id="data-table-buttons" class="table table-striped table-bordered align-middle">
+    <thead>
+    <tr>
+        <th width="1%"></th>
+        <th width="1%" data-orderable="false"></th>
+        ...
+    </tr>
+    </thead>
+    <tbody>
+    ...
+    </tbody>
+</table>
+
+<!-- script -->
+<script>
+    $('#data-table-default').DataTable({
+        responsive: true,
+        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        buttons: [
+            { extend: 'copy', className: 'btn-sm' },
+            { extend: 'csv', className: 'btn-sm' },
+            { extend: 'excel', className: 'btn-sm' },
+            { extend: 'pdf', className: 'btn-sm' },
+            { extend: 'print', className: 'btn-sm' }
+        ],
+    });
+</script>
 

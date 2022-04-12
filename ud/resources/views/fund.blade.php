@@ -141,7 +141,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Deposit Transaction</h5>
-                <div class="panel-body">
+                <div class="table-responsive">
                     <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
                         <thead>
                         <th>Date</th>
