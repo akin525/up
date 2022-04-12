@@ -63,16 +63,16 @@ class VertualController
     }
     public function run(Request $request)
     {
-        if ($json = json_decode(file_get_contents("php://input"), true)) {
-            print_r($json['ref']);
-//    print_r($json['accountDetails']['accountName']);
-            $data = $json;
-
-        }
+//        if ($json = json_decode(file_get_contents("php://input"), true)) {
+//            print_r($json['ref']);
+////    print_r($json['accountDetails']['accountName']);
+//            $data = $json;
+//
+//        }
 //$paid=$data["paymentStatus"];
-        $refid=$data["ref"];
-        $amount=$data["amount"];
-        $no=$data["account_number"];
+        $refid=$request["ref"];
+        $amount=$request["amount"];
+        $no=$request["account_number"];
 //  echo $amount;
 // echo $bank;
 //echo $acct;

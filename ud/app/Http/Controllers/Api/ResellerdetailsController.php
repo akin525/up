@@ -35,6 +35,7 @@ class ResellerdetailsController
 
             }
             return response()->json([
+                'success' => 1,
                 'message' => 'Data Fetch Successfully',
                 'user' => $user, 'wallet' =>$wallet, 'totaldeposite' => $totaldeposite,
                 'me' => $me, 'bil2' => $bil2, 'bill' => $bill
