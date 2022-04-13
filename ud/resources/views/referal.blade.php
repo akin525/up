@@ -77,7 +77,7 @@
                 <input id="myInput" type="text" class="form-control" value="https://mobile.primedata.com.ng/signup.php?refer={{$user->username}}" >
 
                 <!-- The button used to copy the text -->
-                <button class="btn-info" onclick="myFunction()">Copy Referal Link</button>
+                <button class="btn-danger" onclick="myFunction()">Copy Referal Link</button>
             </div>
         </div>
 
