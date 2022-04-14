@@ -165,11 +165,12 @@ foreach ($plan as $pla) {
                     $wallet->balance = $gt;
                     $wallet->save();
 
+                    $resellerURL = 'https://app.mcd.5starcompany.com.ng/api/reseller/';
 
                     $curl = curl_init();
 
                     curl_setopt_array($curl, array(
-                        CURLOPT_URL => 'https://test.mcd.5starcompany.com.ng/api/reseller/pay',
+                        CURLOPT_URL => $resellerURL.'pay',
                         CURLOPT_RETURNTRANSFER => true,
                         CURLOPT_ENCODING => '',
                         CURLOPT_MAXREDIRS => 10,
@@ -179,7 +180,7 @@ foreach ($plan as $pla) {
                         CURLOPT_CUSTOMREQUEST => 'POST',
                         CURLOPT_POSTFIELDS => array('service' => 'tv', 'coded' => $tv->cat_id, 'phone' => $request->number),
                         CURLOPT_HTTPHEADER => array(
-                            'Authorization: MCDKEY_903sfjfi0ad833mk8537dhc03kbs120r0h9a'
+                            'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
                         )
                     ));
 
