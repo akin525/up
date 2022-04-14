@@ -47,11 +47,10 @@ foreach ($plan as $pla) {
     $name = $pla['name'];
     $amount = $pla['amount'];
     $code = $pla['code'];
-return $response;
+//return $response;
     $bo = data::create([
         'plan_id' => $id,
         'plan' => 'tv',
-
         'network' => $name,
         'amount' => $amount,
         'tamount' => $amount,
