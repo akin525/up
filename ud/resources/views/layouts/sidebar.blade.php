@@ -102,7 +102,7 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-tv"></i> <span>Pay Tv</span></a>
+                        <a href="{{route('tv')}}"><i class="fa fa-tv"></i> <span>Pay Tv</span></a>
                     </li>
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlltvController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\VertualController;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,11 @@ Route::get('/', function () {
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //    return view('dashboard');
 //})->name('dashboard');
-Route::get('run', [VertualController::class, 'run'])->name('run');
+Route::get('tv', [AlltvController::class, 'tv'])->name('tv');
+Route::post('tvp', [AlltvController::class, 'paytv'])->name('tvp');
+Route::get('paytv', [AlltvController::class, 'paytv'])->name('paytv');
+Route::post('verifytv', [AlltvController::class, 'verifytv'])->name('verifytv');
+Route::get('listtv', [AlltvController::class, 'listtv'])->name('listv');
 Route::get('invoice', [AuthController::class, 'invoice'])->name('invoice');
 Route::get('charges', [AuthController::class, 'charges'])->name('charges');
 Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
