@@ -2,6 +2,7 @@
 
 use app\Http\Controllers\Api\AlltvController;
 use App\Http\Controllers\Api\BuyController;
+use app\Http\Controllers\Api\EkectController;
 use App\Http\Controllers\Api\ResellerdetailsController;
 use App\Http\Controllers\Api\BillController;
 use App\Http\Controllers\Api\FundController;
@@ -35,6 +36,10 @@ Route::group(['middleware'=> 'apikey'], function () {
     Route::get('paytv', [AlltvController::class, 'paytv']);
     Route::post('verifytv', [AlltvController::class, 'verifytv']);
     Route::get('listtv', [AlltvController::class, 'listtv']);
+    Route::get('listelect', [EkectController::class, 'listelect']);
+    Route::get('elect', [EkectController::class, 'electric']);
+    Route::post('velect', [EkectController::class, 'verifyelect']);
+    Route::post('payelect', [EkectController::class, 'payelect']);
 
 
 //        Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
