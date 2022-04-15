@@ -93,7 +93,7 @@ class EkectController
             $response = curl_exec($curl);
 
             curl_close($curl);
-            echo $response;
+//            echo $response;
             $data = json_decode($response, true);
             $success= $data["success"];
             $name=$data["data"];
@@ -116,13 +116,13 @@ class EkectController
             $wallet = wallet::where('username', $user->username)->first();
 
 
-            if ($wallet->balance < $request->tamount) {
-                $mg = "You Cant Make Purchase Above" . "NGN" . $request->tamount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
+            if ($wallet->balance < $request->amount) {
+                $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
 
                 return view('bill', compact('user', 'mg'));
 
             }
-            if ($request->tamount < 0) {
+            if ($request->amount < 0) {
 
                 $mg = "error transaction";
                 return view('bill', compact('user', 'mg'));
