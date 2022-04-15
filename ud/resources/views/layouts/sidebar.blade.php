@@ -110,7 +110,7 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-power-off"></i> <span>Pay Electricity</span></a>
+                        <a href="{{route('elect')}}"><i class="fa fa-power-off"></i> <span>Pay Electricity</span></a>
                     </li>
 
                     <li>

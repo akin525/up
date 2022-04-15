@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlltvController;
+use App\Http\Controllers\EkectController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\VertualController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,10 @@ Route::post('tvp', [AlltvController::class, 'paytv'])->name('tvp');
 Route::get('paytv', [AlltvController::class, 'paytv'])->name('paytv');
 Route::post('verifytv', [AlltvController::class, 'verifytv'])->name('verifytv');
 Route::get('listtv', [AlltvController::class, 'listtv'])->name('listv');
+Route::get('listelect', [EkectController::class, 'listelect'])->name('listelect');
+Route::get('elect', [EkectController::class, 'electric'])->name('elect');
+Route::post('velect', [EkectController::class, 'verifyelect'])->name('velect');
+Route::post('payelect', [EkectController::class, 'payelect'])->name('payelect');
 Route::get('invoice', [AuthController::class, 'invoice'])->name('invoice');
 Route::get('charges', [AuthController::class, 'charges'])->name('charges');
 Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
