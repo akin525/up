@@ -1,6 +1,6 @@
 <?php
 
-use app\Http\Controllers\Api\AlltvController;
+use App\Http\Controllers\Api\AlltvController;
 use App\Http\Controllers\Api\BuyController;
 use app\Http\Controllers\Api\EkectController;
 use App\Http\Controllers\Api\ResellerdetailsController;
