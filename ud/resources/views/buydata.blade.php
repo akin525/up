@@ -18,7 +18,7 @@
                         <option value="">MTN | GLO | 9Mobile | Airtel</option>
                         @foreach($data as $datas)
                             @if($user->apikey="")
-                                <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}{{$datas->tamount}}
+                                <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}||NGN{{$datas->tamount}}
                             @else
                                 <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}{{$datas->ramount}}
                                     @endif

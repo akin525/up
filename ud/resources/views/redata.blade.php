@@ -17,7 +17,7 @@
                     <select  name="id" class="text-success form-control" required="">
                         <option value="">MTN | GLO | 9Mobile | Airtel</option>
                         @foreach($data as $datas)
-                                <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}{{$datas->ramount}}
+                                <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}||NGN{{$datas->ramount}}
                                 </option>
                                 @endforeach
 
