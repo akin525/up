@@ -138,12 +138,17 @@
                                                 <label for="network" class="text-primary requiredField">
                                                     Amount<span class="asteriskField">*</span>
                                                 </label>
+                                                @if(Auth::user()->apikey ==NULL)
                                                 <input type="text" class="form-control text-primary" value="NGN{{$data1->tamount}}" readonly/>
-                                            @endif
+                                                @else
+                                                    <input type="text" class="form-control text-primary" value="NGN{{$data1->ramount}}" readonly/>
+                                                @endif
+
+                                                @endif
 
                                             <form action="{{ route('bill') }}" method="post">
                                                 @csrf
-                                                @if($user->apikey="")
+                                                @if(Auth::user()->apikey ==NULL)
                                                     <input type="hidden" name="amount" value="{{$data1->tamount}}">
                                                 @else
                                                     <input type="hidden" name="amount" value="{{$data1['ramount']}}">
@@ -167,8 +172,7 @@
                                                     </div>
                                                     <button type="submit" class="btn btn-rounded btn-outline-info"> Continue </button>
 
-                                                @else
-                                                    <input type="hidden" name="amount" value="{{$data1->tamount}}">
+
                                                 @endif
 
                                             <!--                                            --><?php //if ($product_type=="tv") { ?>

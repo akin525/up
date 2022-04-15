@@ -96,6 +96,17 @@ class AuthController
 
         return redirect("login")->withSuccess('You are not allowed to access');
     }
+    public function redata(Request  $request)
+    {
+        if(Auth::check()){
+            $user = User::find($request->user()->id);
+            $data = data::where('status',1 )->get();
+
+            return view('redata', compact('user', 'data'));
+        }
+
+        return redirect("login")->withSuccess('You are not allowed to access');
+    }
     public function pre(Request $request)
 
 

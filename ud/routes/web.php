@@ -42,6 +42,7 @@ Route::get('upgrade', [ResellerController::class, 'apiaccess'])->name('upgrade')
 Route::post('log', [AuthController::class, 'customLogin'])->name('log');
 Route::get('airtime', [AuthController::class, 'airtime'])->name('airtime');
 Route::get('buydata', [AuthController::class, 'buydata'])->name('buydata');
+Route::get('redata', [AuthController::class, 'redata'])->name('redata');
 Route::post('pre', [AuthController::class, 'pre'])->name('pre');
 Route::post('bill', [BillController::class, 'bill'])->name('bill');
 Route::get('fund', [FundController::class, 'fund'])->name('fund');

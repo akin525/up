@@ -82,12 +82,15 @@
 
 
                     <li><a href="{{ route('fund') }}"><i class="fa fa-credit-card orange_color"></i> <span>Fund Wallet</span></a></li>
-
+                    @if(Auth::user()->apikey ==NULL)
                     <li>
                         <a href="{{route('buydata')}}"><i class="fa fa-laptop "></i> <span>Buy Data</span></a>
                     </li>
-
-
+                    @else
+                        <li>
+                            <a href="{{route('redata')}}"><i class="fa fa-laptop "></i> <span>Reseller Data</span></a>
+                        </li>
+                    @endif
 
                     <li>
                         <a href="{{route('airtime')}}"><i class="fa fa-phone "></i> <span>Buy Airtime</span></a>
