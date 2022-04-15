@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\BillController;
 
 class AlltvController
 {
-    public function listtv(Request $request)
+    public function listtv()
     {
 
         $tv = data::where('plan','tv')->get();
