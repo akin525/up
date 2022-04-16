@@ -188,12 +188,12 @@ class AlltvController
                     $response = curl_exec($curl);
 
                     curl_close($curl);
-//                    echo $response;
-                    $data = json_decode($response, true);
+                   return $response;
+                    $data  = json_decode($response, true);
                     $success = $data["success"];
                     $tran1 = $data["discountAmount"];
 
-                        return $response;
+//                        return $response;
                     if ($success == 1) {
 
                         $bo = bo::create([
