@@ -163,7 +163,7 @@ class EkectController
                 $response = curl_exec($curl);
 
                 curl_close($curl);
-//                echo $response;
+                return $response;
 
                 $data = json_decode($response, true);
                 $success = $data["success"];
