@@ -40,7 +40,7 @@ class AlltvController
             ], 403);
         }
 //        return $request;
-        $ve=data::where('id', $request->productid)->first();
+        $ve=data::where('plan_id', $request->productid)->first();
 //        return $request;
 
 //return $ve;
