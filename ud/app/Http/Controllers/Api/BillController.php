@@ -1,12 +1,10 @@
 <?php
 namespace App\Http\Controllers\Api;
 
-use App\Mail\Emailtrans;
 use App\Models\bo;
 use App\Models\data;
 use App\Models\wallet;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\CentralLogics\Helpers;
@@ -120,12 +118,6 @@ class BillController
                             $am= "NGN $request->amount  Airtime Purchase Was Successful To";
                             $ph= $request->number;
 
-                            $receiver=$user->email;
-//                            try {
-//                                Mail::to($receiver)->send(new Emailtrans($bo ));
-//                            }catch (Exception $e){
-//
-//                            }
                             return response()->json([
                                 'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
                                 'user' => $user,
@@ -190,12 +182,6 @@ class BillController
                             $ph= $request->number;
 
 
-                            $receiver=$user->email;
-//                            try {
-//                                Mail::to($receiver)->send(new Emailtrans($bo ));
-//                            }catch (Exception $e){
-//
-//                            }
                             return response()->json([
                                 'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
                                 'user' => $user

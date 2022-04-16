@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BillController;
-use App\Mail\Emailtrans;
 use App\Models\bo;
 use App\Models\data;
 use App\Models\Messages;
@@ -12,7 +11,6 @@ use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class AlltvController
@@ -189,6 +187,7 @@ class AlltvController
 
                     curl_close($curl);
 //                   return $response;
+
                     $data  = json_decode($response, true);
                     $success = $data["success"];
                     $tran1 = $data["discountAmount"];
@@ -212,11 +211,6 @@ class AlltvController
                         $am = $tv->network."was Successful to";
                         $ph = $request->number;
 
-                        $receiver = $user->email;
-                        $admin = 'admin@primedata.com.ng';
-
-//                        Mail::to($receiver)->send(new Emailtrans($bo));
-//                        Mail::to($admin)->send(new Emailtrans($bo));
 
                         return response()->json([
                             'user'=>$user, 'name'=>$name, 'am'=>$am, 'ph'=>$ph, 'success'=>$success

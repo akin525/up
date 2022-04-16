@@ -2,13 +2,11 @@
 
 namespace app\Http\Controllers\Api;
 
-use App\Mail\Emailtrans;
 use App\Models\bo;
 use App\Models\data;
 use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Api\BillController;
 
@@ -86,9 +84,7 @@ class EkectController
             }else{
                 $log= "Unable to Identify meter Number";
             }
-            return response()->json([
-                'message' => "fecthed", 'data'=>$response
-            ], 200);
+            return $response;
 
 
         }
@@ -189,38 +185,14 @@ class EkectController
                         'token' => $tran2,
                     ]);
 
-
-                    $name = $tv->plan;
-                    $am = $tv->network."was Successful to";
-                    $ph = $request->number."| Token:".$tran2;
-
-                    $receiver = $user->email;
-                    $admin = 'admin@primedata.com.ng';
-                    $admin1 = 'primedata18@gmail.com';
-
-                    Mail::to($receiver)->send(new Emailtrans($bo));
-                    Mail::to($admin)->send(new Emailtrans($bo));
-                    Mail::to($admin1)->send(new Emailtrans($bo));
-
-                    return response()->json([
-                        'user'=>$user, 'name'=>$name, 'am'=>$am, 'ph'=>$ph, 'success'=>$success
-                    ], 200);
-
-
                 }elseif ($success==0){
                     $zo=$user->balance+$tv->tamount;
                     $user->balance = $zo;
                     $user->save();
 
-                    $name= $tv->network;
-                    $am= "NGN $request->amount Was Refunded To Your Wallet";
-                    $ph=", Transaction fail";
-
-                    return response()->json([
-                        'user'=>$user, 'name'=>$name, 'am'=>$am, 'ph'=>$ph, 'success'=>$success
-                    ], 200);
-
                 }
+
+                return $response;
             }
         }
         return response()->json([
