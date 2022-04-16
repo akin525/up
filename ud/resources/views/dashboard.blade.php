@@ -259,6 +259,7 @@
                                             <th>Amount</th>
                                             <th>Phone No</th>
                                             <th>Payment_Ref</th>
+                                            <th>Token </th>
                                             <!--                                                    <th>Action</th>-->
 
                                         </thead>
@@ -271,6 +272,7 @@
                                                 <td>{{$re->amount}}</td>
                                                 <td>{{$re->phone}}</td>
                                                 <td>{{$re->refid}}</td>
+                                                <td>{{$re->token}}</td>
                                             </tr>
                                         @endforeach
                                         </tbody>
