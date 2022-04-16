@@ -89,9 +89,21 @@ class AuthController
     {
         if(Auth::check()){
             $user = User::find($request->user()->id);
-            $data = data::where('status',1 )->get();
+            $data = data::where(['status'=> 1 ])->where('plan', '!=', 'tv')->get();
+
 
             return view('buydata', compact('user', 'data'));
+        }
+
+        return redirect("login")->withSuccess('You are not allowed to access');
+    }
+    public function redata(Request  $request)
+    {
+        if(Auth::check()){
+            $user = User::find($request->user()->id);
+            $data = data::where(['status'=> 1 ])->where('plan', '!=', 'tv')->get();
+
+            return view('redata', compact('user', 'data'));
         }
 
         return redirect("login")->withSuccess('You are not allowed to access');
