@@ -118,6 +118,7 @@ class AlltvController
 
         public function paytv(Request $request)
         {
+            return $request;
             $apikey = $request->header('apikey');
             $user = User::where('apikey',$apikey)->first();
             if ($user) {
