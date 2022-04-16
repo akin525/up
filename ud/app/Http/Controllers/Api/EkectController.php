@@ -167,11 +167,12 @@ class EkectController
 
                 $data = json_decode($response, true);
                 $success = $data["success"];
-                $tran1 = $data["discountAmount"];
-                $tran2 = $data["token"];
+
 
 //                        return $response;
                 if ($success == 1) {
+                    $tran1 = $data["discountAmount"];
+                    $tran2 = $data["token"];
 
                     $bo = bo::create([
                         'username' => $user->username,
