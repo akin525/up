@@ -121,7 +121,7 @@ class AlltvController
             $apikey = $request->header('apikey');
             $user = User::where('apikey',$apikey)->first();
             if ($user) {
-                $tv = data::where('id', $request->id)->first();
+                $tv = data::where('cat_id', $request->coded)->first();
 
                 $wallet = wallet::where('username', $user->username)->first();
 
