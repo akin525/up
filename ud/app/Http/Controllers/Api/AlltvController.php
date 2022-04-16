@@ -193,7 +193,7 @@ class AlltvController
                     $success = $data["success"];
                     $tran1 = $data["discountAmount"];
 
-//                        return $response;
+                        return $response;
                     if ($success == 1) {
 
                         $bo = bo::create([
