@@ -77,7 +77,7 @@ class EkectController
             $response = curl_exec($curl);
 
             curl_close($curl);
-            return $response;
+//            return $response;
             $data = json_decode($response, true);
             $success= $data["success"];
             $name=$data["data"];
@@ -87,7 +87,7 @@ class EkectController
                 $log= "Unable to Identify meter Number";
             }
             return response()->json([
-                'message' => "fecthed", 'log'=>$log, 'request'=>$request, 'name'=>$name
+                'message' => "fecthed", 'data'=>$response
             ], 200);
 
 
