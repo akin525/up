@@ -229,7 +229,7 @@ class BillController
         }
     }
 
-    public function error_processor($validator)
+    public static function error_processor($validator)
     {
         $err_keeper = [];
         foreach ($validator->errors()->getMessages() as $index => $error) {

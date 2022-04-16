@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\BillController;
 use App\Mail\Emailtrans;
 use App\Models\bo;
 use App\Models\data;
@@ -13,7 +14,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Api\BillController;
 
 class AlltvController
 {
@@ -101,6 +101,7 @@ class AlltvController
 //    }
     public function tv(Request $request)
     {
+
         $apikey = $request->header('apikey');
         $user = User::where('apikey',$apikey)->first();
         if ($user) {
@@ -118,6 +119,15 @@ class AlltvController
 
         public function paytv(Request $request)
         {
+            $validator = Validator::make($request->all(), [
+                'coded' => 'required',
+                'refid' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'errors' => BillController::error_processor($validator)
+                ], 403);
+            }
             $apikey = $request->header('apikey');
             $user = User::where('apikey',$apikey)->first();
             if ($user) {

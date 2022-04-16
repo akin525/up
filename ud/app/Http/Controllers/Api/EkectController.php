@@ -8,9 +8,9 @@ use App\Models\data;
 use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Api\BillController;
 
 class EkectController
 {
@@ -44,7 +44,7 @@ class EkectController
     public function verifyelect(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'productid' => 'required',
+            'cat_id' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -54,7 +54,7 @@ class EkectController
         $apikey = $request->header('apikey');
         $user = User::where('apikey',$apikey)->first();
         if ($user) {
-            $tv = data::where('id', $request->id)->first();
+            $tv = data::where('cat_id', $request->cat_id)->first();
 
 
             $curl = curl_init();
@@ -98,10 +98,19 @@ class EkectController
     }
     public function payelect(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'cat_id' => 'required',
+            'refid' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => BillController::error_processor($validator)
+            ], 403);
+        }
         $apikey = $request->header('apikey');
         $user = User::where('apikey',$apikey)->first();
         if ($user) {
-            $tv = data::where('id', $request->id)->first();
+            $tv = data::where('cat_id', $request->cat_id)->first();
 
             $wallet = wallet::where('username', $user->username)->first();
 
