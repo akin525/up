@@ -118,11 +118,11 @@ class AlltvController
 
         public function paytv(Request $request)
         {
-            return $request;
             $apikey = $request->header('apikey');
             $user = User::where('apikey',$apikey)->first();
             if ($user) {
                 $tv = data::where('cat_id', $request->coded)->first();
+                return $tv;
 
                 $wallet = wallet::where('username', $user->username)->first();
 
