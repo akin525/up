@@ -215,8 +215,8 @@ class AlltvController
                         $receiver = $user->email;
                         $admin = 'admin@primedata.com.ng';
 
-                        Mail::to($receiver)->send(new Emailtrans($bo));
-                        Mail::to($admin)->send(new Emailtrans($bo));
+//                        Mail::to($receiver)->send(new Emailtrans($bo));
+//                        Mail::to($admin)->send(new Emailtrans($bo));
 
                         return response()->json([
                             'user'=>$user, 'name'=>$name, 'am'=>$am, 'ph'=>$ph, 'success'=>$success
