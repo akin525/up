@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\DataserverController;
 use App\Models\bo;
 use App\Models\data;
+use App\Models\server;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -70,7 +72,7 @@ class BillController
                 $wallet->save();
 
                 foreach ($bt as $fg) {
-
+                    $daterserver = new DataserverController();
                     if ($fg->plan == "airtime") {
 
                         $resellerURL = 'https://app.mcd.5starcompany.com.ng/api/reseller/';
@@ -140,27 +142,15 @@ class BillController
                         }
 
                     } else {
-                        $curl = curl_init();
-
-                        curl_setopt_array($curl, array(
-                            CURLOPT_URL => 'https://honourworld.ng/datatopup',
-                            CURLOPT_RETURNTRANSFER => true,
-                            CURLOPT_ENCODING => '',
-                            CURLOPT_MAXREDIRS => 10,
-                            CURLOPT_TIMEOUT => 0,
-                            CURLOPT_FOLLOWLOCATION => true,
-                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                            CURLOPT_SSL_VERIFYHOST => 0,
-                            CURLOPT_SSL_VERIFYPEER => 0,
-                            CURLOPT_CUSTOMREQUEST => 'POST',
-                            CURLOPT_POSTFIELDS => array('action' => 'data-topup', 'category_id' => $fg->cat_id, 'plan_id' => $fg->plan_id, 'contact_opt' => '2', 'phone_num' => $request->number),
-                            CURLOPT_HTTPHEADER => array(
-                                'Cookie: PHPSESSID=be3030e3b1a0cb40c0b2c5903d05fdf6; lang=en-US; nplh=4915.13266a73e5010cb60ede277741fdb032; nplrmm=1'
-                            ),
-                        ));
-                        $response = curl_exec($curl);
-
-                        curl_close($curl);
+                        $object = json_decode($fg);
+                        $object->number = $request->number;
+                        $json = json_encode($object);
+                        $mcd = server::where('status', "1")->first();
+                        if ($mcd->name == "honorworld") {
+                            $response = $daterserver->honourwordbill($json);
+                        }else if ($mcd->name == "mcd") {
+                            $response = $daterserver->mcdbill($json);
+                        }
                         // echo $response;
 
 
