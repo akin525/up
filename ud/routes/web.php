@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlltvController;
+use App\Http\Controllers\AirtimeController;
 use App\Http\Controllers\EkectController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\VertualController;
@@ -45,6 +46,7 @@ Route::post('mp', [ResellerController::class, 'reseller'])->name('mp');
 Route::get('reseller', [ResellerController::class, 'sell'])->name('reseller');
 Route::get('upgrade', [ResellerController::class, 'apiaccess'])->name('upgrade');
 Route::post('log', [AuthController::class, 'customLogin'])->name('log');
+Route::post('buyairtime', [AirtimeController::class, 'airtime'])->name('buyairtime');
 Route::get('airtime', [AuthController::class, 'airtime'])->name('airtime');
 Route::get('buydata', [AuthController::class, 'buydata'])->name('buydata');
 Route::get('redata', [AuthController::class, 'redata'])->name('redata');

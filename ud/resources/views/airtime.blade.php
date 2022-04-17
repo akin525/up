@@ -15,7 +15,7 @@
 
     <!--            <div class="box w3-card-4">-->
 
-    <form action="{{ route('pre') }}" method="post">
+    <form action="{{ route('buyairtime') }}" method="post">
         @csrf
         <div class="row">
             <div class="col-sm-8">
@@ -49,6 +49,22 @@
                                     <option value="{{$datas->id}}">{{$datas->network}} </option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div id="div_id_network" class="form-group">
+                        <label for="network" class=" requiredField">
+                            Enter Amount<span class="asteriskField">*</span>
+                        </label>
+                        <div class="">
+                            <input type="number" name="amount" min="100" max="4000" class="text-success form-control" required>
+                        </div>
+                    </div>
+                    <div id="div_id_network" class="form-group">
+                        <label for="network" class=" requiredField">
+                            Enter Phone Number<span class="asteriskField">*</span>
+                        </label>
+                        <div class="">
+                            <input type="number" name="number" minlength="11" class="text-success form-control" required>
                         </div>
                     </div>
                     <button type="submit" class=" btn" style="color: white;background-color: #ff0066" id="btnsubmit"> Purchase Now</button>
