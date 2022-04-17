@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 class DataserverController extends Controller
 {
 
-    public function honourwordbill(Request $request)
+    public function honourwordbill($request)
     {
 
 
@@ -48,13 +48,14 @@ class DataserverController extends Controller
 
             }
 
-    public function mcdbill(Request $request)
+    public function mcdbill( $request)
     {
 
-                $curl = curl_init();
+        $resellerURL = 'https://app.mcd.5starcompany.com.ng/api/reseller/';
+        $curl = curl_init();
 
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://test.mcd.5starcompany.com.ng/api/reseller/pay',
+                     curl_setopt_array($curl, array(
+                      CURLOPT_URL => $resellerURL.'pay',
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => '',
                     CURLOPT_MAXREDIRS => 10,
@@ -62,13 +63,17 @@ class DataserverController extends Controller
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => array('service' => 'data','coded' => $$request->code,'phone' => $request->number),
-                ));
+                    CURLOPT_POSTFIELDS => array('service' => 'data','coded' => $request->code,'phone' => $request->number),
 
-                $response = curl_exec($curl);
+                         CURLOPT_HTTPHEADER => array(
+                             'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
+                         )));
+
+
+        $response = curl_exec($curl);
 
                 curl_close($curl);
-                echo $response;
+//                echo $response;
 
 
                 return $response;

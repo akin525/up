@@ -155,8 +155,11 @@ class BillController
 
 
                         $data = json_decode($response, true);
-                        $success = $data["result"];
-                        $msg2 = $data["msg"];
+                        if (isset($data['result'])){
+                            $success=$data['result'];
+                        }else{
+                            $success=$data["success"];
+                        }
                         if ($success==1){
                             $bo = bo::create([
                                 'username' => $user->username,
