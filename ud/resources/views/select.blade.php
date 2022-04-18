@@ -5,22 +5,20 @@
     <div class="card-body">
         <div class="module-head">
             <center><h3>
-                    Buy Data</h3></center>
+                    Select Network</h3></center>
         </div>
         <center>
             <div class="btn-controls">
-                <form action="{{ route('pre') }}" method="post">
+                <form action="{{ route('buydata') }}" method="POST">
                     @csrf
                     <label for="network" class=" requiredField">
-                        Select Network from the Rectangular Box<span class="asteriskField">*</span>
+                        Network<span class="asteriskField">*</span>
                     </label>
                     <select  name="id" class="text-success form-control" required="">
-{{--                        <option value="">MTN | GLO | 9Mobile | Airtel</option>--}}
-                        @foreach($data as $datas)
-                                <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}||NGN{{$datas->tamount}}...@if($datas->server=1) Server-2 @elseif($datas->server=0) Server-1 @endif
-
-                                </option>
-                                @endforeach
+                        <option value="MTN">MTN</option>
+                        <option value="GLO">GLO</option>
+                        <option value="9MOBILE">9MOBILE</option>
+                        <option value="AIRTEL">AIRTEL</option>
 
                     </select>
 

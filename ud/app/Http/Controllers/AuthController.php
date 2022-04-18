@@ -85,11 +85,33 @@ class AuthController
             return  view('referal', compact('user', 'refers', 'refer', 'totalrefer'));
         }
     }
+    public function select(Request  $request)
+    {
+        if(Auth::check()){
+            $user = User::find($request->user()->id);
+
+
+            return view('select', compact('user'));
+        }
+
+        return redirect("login")->withSuccess('You are not allowed to access');
+    }
+    public function select1(Request  $request)
+    {
+        if(Auth::check()){
+            $user = User::find($request->user()->id);
+
+
+            return view('select', compact('user'));
+        }
+
+        return redirect("login")->withSuccess('You are not allowed to access');
+    }
     public function buydata(Request  $request)
     {
         if(Auth::check()){
             $user = User::find($request->user()->id);
-            $data = data::where(['status'=> 1 ])->where('plan', '!=', 'tv')->where('plan_id', '!=', 'electricity')->get();
+            $data = data::where(['status'=> 1 ])->where('network', $request->id)->get();
 
 
             return view('buydata', compact('user', 'data'));
@@ -101,7 +123,8 @@ class AuthController
     {
         if(Auth::check()){
             $user = User::find($request->user()->id);
-            $data = data::where(['status'=> 1 ])->where('plan', '!=', 'tv')->get();
+            $data = data::where(['status'=> 1 ])->where('network', $request->id)->get();
+
 
             return view('redata', compact('user', 'data'));
         }

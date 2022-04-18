@@ -15,9 +15,9 @@
                         Select Network from the Rectangular Box<span class="asteriskField">*</span>
                     </label>
                     <select  name="id" class="text-success form-control" required="">
-                        <option value="">MTN | GLO | 9Mobile | Airtel</option>
+{{--                        <option value="">MTN | GLO | 9Mobile | Airtel</option>--}}
                         @foreach($data as $datas)
-                                <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}||NGN{{$datas->ramount}}
+                                <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}||NGN{{$datas->ramount}}  ...@if($datas->server=1) Server-2 @elseif($datas->server=0) Server-1 @endif
                                 </option>
                                 @endforeach
 
