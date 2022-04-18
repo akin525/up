@@ -67,16 +67,12 @@ class BillController extends Controller
                 $mcd = server::where('status', "1")->first();
 
                     if ($mcd->name == "honorworld") {
-                        return "Honorwold";
                         $response = $daterserver->honourwordbill($object);
                     }else if ($mcd->name == "mcd") {
-                        return "Mcd people";
                         $response = $daterserver->mcdbill($object);
                     }
 
-//                    return;
-
-                        // echo $response;
+                          return $response;
 
 //return $response;
                         $data = json_decode($response, true);
