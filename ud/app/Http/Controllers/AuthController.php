@@ -89,7 +89,7 @@ class AuthController
     {
         if(Auth::check()){
             $user = User::find($request->user()->id);
-            $data = data::where(['status'=> 1 ])->where('plan', '!=', 'tv')->where('plan', '!=', 'elect')->get();
+            $data = data::where(['status'=> 1 ])->where('plan', '!=', 'tv')->where('plan_id', '!=', 'electricity')->get();
 
 
             return view('buydata', compact('user', 'data'));
