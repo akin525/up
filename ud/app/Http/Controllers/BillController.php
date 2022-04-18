@@ -72,7 +72,6 @@ class BillController extends Controller
                         $response = $daterserver->mcdbill($object);
                     }
 
-                          return $response;
 
 //return $response;
                         $data = json_decode($response, true);
@@ -80,6 +79,7 @@ class BillController extends Controller
                   if (isset($data['result'])){
                       $success=$data['result'];
                   }else{
+                      return $response;
                       $success=$data["success"];
                   }
 //                    echo $success;
