@@ -65,10 +65,12 @@ class BillController extends Controller
 
                 $daterserver = new DataserverController();
                 $mcd = server::where('status', "1")->first();
-                return $mcd;
+
                     if ($mcd->name == "honorworld") {
+                        return "Honorwold";
                         $response = $daterserver->honourwordbill($object);
                     }else if ($mcd->name == "mcd") {
+                        return "Mcd people";
                         $response = $daterserver->mcdbill($object);
                     }
 
