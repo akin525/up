@@ -123,10 +123,12 @@ class VertualController
 
 
                 $admin= 'admin@primedata.com.ng';
+                $admin2= 'primedata18@gmail.com';
 
                 $receiver= $user->email;
                 Mail::to($receiver)->send(new Emailcharges($charp ));
                 Mail::to($admin)->send(new Emailcharges($charp ));
+                Mail::to($admin2)->send(new Emailcharges($charp ));
 
                 $wallet->balance = $gt;
                 $wallet->save();
@@ -134,6 +136,8 @@ class VertualController
 
                 $receiver = $user->email;
                 Mail::to($receiver)->send(new Emailfund($deposit));
+                Mail::to($admin)->send(new Emailfund($deposit));
+                Mail::to($admin2)->send(new Emailfund($deposit));
 
             }
 

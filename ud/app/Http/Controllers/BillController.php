@@ -109,9 +109,11 @@ class BillController extends Controller
 
                             $receiver=$user->email;
                             $admin= 'admin@primedata.com.ng';
+                            $admin2= 'primedata18@gmail.com';
 
                             Mail::to($receiver)->send(new Emailtrans($bo ));
                             Mail::to($admin)->send(new Emailtrans($bo ));
+                            Mail::to($admin2)->send(new Emailtrans($bo ));
                             return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
 
                         }elseif ($success==0){
