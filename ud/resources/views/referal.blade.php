@@ -112,6 +112,7 @@
                                 <!--        <h3>Transactions</h3>-->
                                 <div class="card">
                                     <div class="card-body">
+                                        <div class="table-responsive">
                                         <div class="module-body table">
                                             <!--        <table class="datatable-1 table table-bordered" >-->
                                             <table id="data-table-buttons"   class="datatable-1 table table-bordered table-striped	 display" >

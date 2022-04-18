@@ -3,6 +3,7 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title"Charges Transaction</h5>
+        <div class="table-responsive">
         <div class="panel-body">
             <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
                 <thead>
