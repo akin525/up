@@ -145,6 +145,7 @@ class BillController
                         $object = json_decode($fg);
                         $object->number = $request->number;
                         $json = json_encode($object);
+
                         $mcd = server::where('status', "1")->first();
                         if ($mcd->name == "honorworld") {
                             $response = $daterserver->honourwordbill($json);
