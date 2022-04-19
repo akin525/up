@@ -19,6 +19,12 @@ class AuthController
 {
     public function customLogin(Request $request)
     {
+        if (Auth::check()){
+            return redirect()->intended('dashboard')
+                ->withSuccess('Signed in');
+
+        }
+
         $request->validate([
             'email' => 'required',
             'password' => 'required',
