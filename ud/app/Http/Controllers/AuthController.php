@@ -68,6 +68,8 @@ class AuthController
             }
             return  view('dashboard', compact('user', 'wallet', 'totaldeposite', 'me',  'bil2', 'bill', 'totalrefer', 'count'));
         }
+        return redirect("login")->withSuccess('You are not allowed to access');
+
     }
     public function refer(Request $request)
     {
@@ -84,6 +86,8 @@ class AuthController
 
             return  view('referal', compact('user', 'refers', 'refer', 'totalrefer'));
         }
+        return redirect("login")->withSuccess('You are not allowed to access');
+
     }
     public function select(Request  $request)
     {
