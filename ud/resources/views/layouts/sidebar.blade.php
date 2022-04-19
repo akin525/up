@@ -161,7 +161,7 @@
 
 
 
-            <script >
+            <script type="text/javascript">
                 (function() {
                     var options = {
                         whatsapp: "+2348103153004", // WhatsApp number
