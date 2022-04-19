@@ -19,7 +19,7 @@ class AuthController
 {
     public function customLogin(Request $request)
     {
-        if (Auth::check()){
+        if (Auth()->user()){
             return redirect()->intended('dashboard')
                 ->withSuccess('Signed in');
 
