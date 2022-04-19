@@ -92,7 +92,7 @@ class AirtimeController
                         'server_res' => $response,
                         'result' => $success,
                         'phone' => $request->number,
-                        'refid' => $request->id,
+                        'refid' => $request->refid,
                         'discountamoun' => $tran1,
                     ]);
 

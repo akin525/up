@@ -22,7 +22,7 @@ public function list(Request $request)
         CURLOPT_SSL_VERIFYHOST => 0,
         CURLOPT_SSL_VERIFYPEER => 0,
         CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => array('service' => 'data','coded' => 'm'),
+        CURLOPT_POSTFIELDS => array('service' => 'data','coded' => 'g'),
         CURLOPT_HTTPHEADER => array(
             'Authorization: MCDKEY_903sfjfi0ad833mk8537dhc03kbs120r0h9a'
         ),
