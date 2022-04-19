@@ -67,6 +67,7 @@
                             <input type="number" name="number" minlength="11" class="text-success form-control" required>
                         </div>
                     </div>
+                    <input type="hidden" name="id" value="<?php echo rand(10000000, 999999999); ?>">
                     <button type="submit" class=" btn" style="color: white;background-color: #ff0066" id="btnsubmit"> Purchase Now</button>
                 </div>
             </div>

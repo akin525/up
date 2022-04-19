@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlltvController;
 use App\Http\Controllers\AirtimeController;
 use App\Http\Controllers\EkectController;
+use App\Http\Controllers\listdata;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\VertualController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,7 @@ Route::get('select1', [AuthController::class, 'select1'])->name('select1');
 Route::post('tvp', [AlltvController::class, 'paytv'])->name('tvp');
 Route::get('paytv', [AlltvController::class, 'paytv'])->name('paytv');
 Route::post('verifytv', [AlltvController::class, 'verifytv'])->name('verifytv');
+Route::get('listdata', [listdata::class, 'list'])->name('listdata');
 Route::get('listtv', [AlltvController::class, 'listtv'])->name('listv');
 Route::get('listelect', [EkectController::class, 'listelect'])->name('listelect');
 Route::get('elect', [EkectController::class, 'electric'])->name('elect');
