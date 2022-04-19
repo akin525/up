@@ -17,10 +17,21 @@ use App\Models\deposit;
 
 class AuthController
 {
+
+    public function cus(Request $request)
+    {
+        if (Auth()->user()) {
+            return redirect(route('dashboard'))
+                ->withSuccess('Signed in');
+
+        }else{
+            return redirect(route('log'));
+        }
+    }
     public function customLogin(Request $request)
     {
         if (Auth()->user()){
-            return redirect()->intended('dashboard')
+            return redirect(route('dashboard'))
                 ->withSuccess('Signed in');
 
         }

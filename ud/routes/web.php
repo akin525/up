@@ -24,7 +24,13 @@ use App\Http\Controllers\BillController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    if (Auth()->user()) {
+        return redirect(route('dashboard'))
+            ->withSuccess('Signed in');
+
+    }else {
+        return view('auth.login');
+    }
 });
 
 //Route::get('select', function () {
