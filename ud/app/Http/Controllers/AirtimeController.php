@@ -35,7 +35,7 @@ class AirtimeController
                 return view('bill', compact('user', 'mg'));
 
             }
-            $bo = bo::where('refid', $request->id)->first();
+            $bo = bo::where('refid', $request->refid)->first();
             if (isset($bo)) {
                 $mg = "duplicate transaction";
                 return view('bill', compact('user', 'mg'));
