@@ -24,7 +24,7 @@ use App\Http\Controllers\BillController;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('auth.login');
 });
 
 //Route::get('select', function () {
