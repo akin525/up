@@ -16,7 +16,7 @@
             </div>
         </div>
 <div class="alert alert-info">
-    <i class="fa fa-bell"></i><b>Account Status:</b><h6 class="align-content-center text-center"><b>@if(Auth::user()->apikey="")
+    <i class="fa fa-bell"></i><b>Account Status:</b><h6 class="align-content-center text-center"><b>@if(Auth::user()->apikey ==NULL)
         *Member* <button type="button" class="btn btn-success" onclick="window.location.href='https://mobile.primedata.com.ng/reseller';">Click to upgrade</button> @else*Reseller*
         @endif</b></h6>
 </div>
