@@ -15,10 +15,10 @@
                 </div>
             </div>
         </div>
-<div class="alert alert-light">
-    <i class="fa fa-newspaper"></i><b>Account Status:</b><h6><b>@if(Auth::user()->apikey="")
-        *Member* <button type="button" class="btn btn-success" onclick="window.location.href='https://mobile.primedata.com.ng/reseller';">Click to upgrade</button> @else*Reseller*</b></h6>
-</div>
+{{--<div class="alert alert-light">--}}
+{{--    <i class="fa fa-newspaper"></i><b>Account Status:</b><h6><b>@if(Auth::user()->apikey="")--}}
+{{--        *Member* <button type="button" class="btn btn-success" onclick="window.location.href='https://mobile.primedata.com.ng/reseller';">Click to upgrade</button> @else*Reseller*</b></h6>--}}
+{{--</div>--}}
 
         <div class='alert alert-info'>
             <button type='button' class='close' data-dismiss='alert'>&times;</button>
