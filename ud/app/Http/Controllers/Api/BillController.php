@@ -148,9 +148,9 @@ class BillController
 
                         $mcd = server::where('status', "1")->first();
                         if ($mcd->name == "honorworld") {
-                            $response = $daterserver->honourwordbill($json);
+                            $response = $daterserver->honourwordbill($object);
                         }else if ($mcd->name == "mcd") {
-                            $response = $daterserver->mcdbill($json);
+                            $response = $daterserver->mcdbill($object);
                         }
                         // echo $response;
 
