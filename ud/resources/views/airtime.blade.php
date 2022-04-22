@@ -1,10 +1,5 @@
 @include('layouts.sidebar')
 
-<link rel="stylesheet" href="{{asset("Buy Data _ MobileNig_files/w3(1).css")}}">
-
-<link rel="stylesheet" href="{{asset("Buy Data _ MobileNig_files/w3(2).css")}}">
-<link rel="stylesheet" href="{{asset("Buy Data _ MobileNig_files/font-awesome.min.css")}}">
-<link href="{{asset("Buy Data _ MobileNig_files/icon")}}" rel="stylesheet">
 
 <div style="padding:90px 15px 20px 15px">
     <!--    <h4 class="align-content-center text-center">Data Subscription</h4>-->
