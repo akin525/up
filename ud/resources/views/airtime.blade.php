@@ -1,10 +1,5 @@
 @include('layouts.sidebar')
 
-<link rel="stylesheet" href="{{asset("Buy Data _ MobileNig_files/w3(1).css")}}">
-
-<link rel="stylesheet" href="{{asset("Buy Data _ MobileNig_files/w3(2).css")}}">
-<link rel="stylesheet" href="{{asset("Buy Data _ MobileNig_files/font-awesome.min.css")}}">
-<link href="{{asset("Buy Data _ MobileNig_files/icon")}}" rel="stylesheet">
 
 <div style="padding:90px 15px 20px 15px">
     <!--    <h4 class="align-content-center text-center">Data Subscription</h4>-->
@@ -15,7 +10,7 @@
 
     <!--            <div class="box w3-card-4">-->
 
-    <form action="{{ route('pre') }}" method="post">
+    <form action="{{ route('buyairtime') }}" method="post">
         @csrf
         <div class="row">
             <div class="col-sm-8">
@@ -51,6 +46,23 @@
                             </select>
                         </div>
                     </div>
+                    <div id="div_id_network" class="form-group">
+                        <label for="network" class=" requiredField">
+                            Enter Amount<span class="asteriskField">*</span>
+                        </label>
+                        <div class="">
+                            <input type="number" name="amount" min="100" max="4000" class="text-success form-control" required>
+                        </div>
+                    </div>
+                    <div id="div_id_network" class="form-group">
+                        <label for="network" class=" requiredField">
+                            Enter Phone Number<span class="asteriskField">*</span>
+                        </label>
+                        <div class="">
+                            <input type="number" name="number" minlength="11" class="text-success form-control" required>
+                        </div>
+                    </div>
+                    <input type="hidden" name="refid" value="<?php echo rand(10000000, 999999999); ?>">
                     <button type="submit" class=" btn" style="color: white;background-color: #ff0066" id="btnsubmit"> Purchase Now</button>
                 </div>
             </div>

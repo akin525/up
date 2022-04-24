@@ -1,31 +1,82 @@
 @include('layouts.sidebar')
+<div class="content">
+    <div class="module">
+        <div class="module-head">
+            <h3>
+                <!--                            My Invoice</h3>-->
+        </div>
+        <div class="content">
+            <div class="module">
+                <div class="module-head">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Transactions</h3>
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Charges Transaction</h5>
-        <div class="table-responsive">
-        <div class="panel-body">
-            <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
-                <thead>
-                <th>Date</th>
-                <th>Username</th>
-                <th>Amount Charge</th>
-                <th>Payment_Ref</th>
-                </thead>
-                <tbody>
-                @foreach($bill as $po)
-                    <tr>
-                        <td>{{$po->date}}</td>
-                        <td>{{$po->username}}</td>
-                        <td>{{$po->amount}}</td>
-                        <td>{{$po->payment_ref}}</td>
-                    </tr>
-                @endforeach
+                            <div class="table-responsive">
+                                <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
+                                    <thead>
+                                    <tr>
 
-                </tbody>
-            </table>
+                                        <th>Product</th>
+                                        <th>Plan</th>
+                                        <th>plancode</th>
+                                        <th>Amount</th>
+
+                                        <!--                                                    <th>Action</th>-->
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($product as $re)
+                                        <tr>
+                                            <td>{{$re['type']}}</td>
+                                            <td>{{$re['name']}}</td>
+                                            <td>{{$re['code']}}</td>
+                                            <td>{{$re['amount']}}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -61,57 +112,3 @@
 <script src="{{asset('asset/js/demo/render.highlight.js')}}" type="f1e2722e35a43ad4c1e3a0c8-text/javascript"></script>
 <script src="{{asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js')}}" data-cf-settings="f1e2722e35a43ad4c1e3a0c8-|49" defer=""></script><script defer src="../../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"6a910724bd190718","version":"2021.10.0","r":1,"token":"4db8c6ef997743fda032d4f73cfeff63","si":100}'></script>
 
-<script>
-    const paymentForm = document.getElementById('paymentForm');
-    paymentForm.addEventListener("submit", payWithPaystack, false);
-    function payWithPaystack(e) {
-        e.preventDefault();
-        let handler = PaystackPop.setup({
-            key: 'pk_test_17fd09d2f1b858a21859595153d9770573a7c996', // Replace with your public key
-            email: document.getElementById("email-address").value,
-            amount: document.getElementById("amount").value * 100,
-            ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-// label: "Optional string that replaces customer email"
-            onClose: function(){
-                alert('Window closed.');
-            },
-            callback: function(response){
-                let message = 'Payment complete! Reference: ' + response.reference;
-                // alert(message);
-
-
-                window.location = '{{ route('tran', '/') }}/'+response.reference;
-
-            }
-        });
-        handler.openIframe();
-    }
-</script>
-<!-- html -->
-<table id="data-table-buttons" class="table table-striped table-bordered align-middle">
-    <thead>
-    <tr>
-        <th width="1%"></th>
-        <th width="1%" data-orderable="false"></th>
-        ...
-    </tr>
-    </thead>
-    <tbody>
-    ...
-    </tbody>
-</table>
-
-<!-- script -->
-<script>
-    $('#data-table-default').DataTable({
-        responsive: true,
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
-        buttons: [
-            { extend: 'copy', className: 'btn-sm' },
-            { extend: 'csv', className: 'btn-sm' },
-            { extend: 'excel', className: 'btn-sm' },
-            { extend: 'pdf', className: 'btn-sm' },
-            { extend: 'print', className: 'btn-sm' }
-        ],
-    });
-</script>

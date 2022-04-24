@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
-use App\Mail\Emailtrans;
+use App\Http\Controllers\Api\BillController;
 use App\Models\bo;
 use App\Models\data;
 use App\Models\Messages;
@@ -11,13 +11,11 @@ use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Api\BillController;
 
 class AlltvController
 {
-    public function listtv(Request $request)
+    public function listtv()
     {
 
         $tv = data::where('plan','tv')->get();
@@ -40,7 +38,7 @@ class AlltvController
             ], 403);
         }
 //        return $request;
-        $ve=data::where('id', $request->id)->first();
+        $ve=data::where('plan_id', $request->productid)->first();
 //        return $request;
 
 //return $ve;
@@ -101,6 +99,7 @@ class AlltvController
 //    }
     public function tv(Request $request)
     {
+
         $apikey = $request->header('apikey');
         $user = User::where('apikey',$apikey)->first();
         if ($user) {
@@ -118,10 +117,20 @@ class AlltvController
 
         public function paytv(Request $request)
         {
+            $validator = Validator::make($request->all(), [
+                'coded' => 'required',
+                'refid' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'errors' => BillController::error_processor($validator)
+                ], 403);
+            }
             $apikey = $request->header('apikey');
             $user = User::where('apikey',$apikey)->first();
             if ($user) {
-                $tv = data::where('id', $request->id)->first();
+                $tv = data::where('cat_id', $request->coded)->first();
+//                return $tv;
 
                 $wallet = wallet::where('username', $user->username)->first();
 
@@ -177,8 +186,9 @@ class AlltvController
                     $response = curl_exec($curl);
 
                     curl_close($curl);
-//                    echo $response;
-                    $data = json_decode($response, true);
+//                   return $response;
+
+                    $data  = json_decode($response, true);
                     $success = $data["success"];
                     $tran1 = $data["discountAmount"];
 
@@ -201,11 +211,6 @@ class AlltvController
                         $am = $tv->network."was Successful to";
                         $ph = $request->number;
 
-                        $receiver = $user->email;
-                        $admin = 'admin@primedata.com.ng';
-
-                        Mail::to($receiver)->send(new Emailtrans($bo));
-                        Mail::to($admin)->send(new Emailtrans($bo));
 
                         return response()->json([
                             'user'=>$user, 'name'=>$name, 'am'=>$am, 'ph'=>$ph, 'success'=>$success

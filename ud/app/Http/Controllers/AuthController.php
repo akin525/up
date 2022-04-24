@@ -17,8 +17,25 @@ use App\Models\deposit;
 
 class AuthController
 {
+
+    public function cus(Request $request)
+    {
+        if (Auth()->user()) {
+            return redirect(route('dashboard'))
+                ->withSuccess('Signed in');
+
+        }else{
+            return redirect(route('log'));
+        }
+    }
     public function customLogin(Request $request)
     {
+        if (Auth()->user()){
+            return redirect(route('dashboard'))
+                ->withSuccess('Signed in');
+
+        }
+
         $request->validate([
             'email' => 'required',
             'password' => 'required',
@@ -68,6 +85,8 @@ class AuthController
             }
             return  view('dashboard', compact('user', 'wallet', 'totaldeposite', 'me',  'bil2', 'bill', 'totalrefer', 'count'));
         }
+        return redirect("login")->withSuccess('You are not allowed to access');
+
     }
     public function refer(Request $request)
     {
@@ -84,12 +103,36 @@ class AuthController
 
             return  view('referal', compact('user', 'refers', 'refer', 'totalrefer'));
         }
+        return redirect("login")->withSuccess('You are not allowed to access');
+
+    }
+    public function select(Request  $request)
+    {
+        if(Auth::check()){
+            $user = User::find($request->user()->id);
+
+
+            return view('select', compact('user'));
+        }
+
+        return redirect("login")->withSuccess('You are not allowed to access');
+    }
+    public function select1(Request  $request)
+    {
+        if(Auth::check()){
+            $user = User::find($request->user()->id);
+
+
+            return view('select', compact('user'));
+        }
+
+        return redirect("login")->withSuccess('You are not allowed to access');
     }
     public function buydata(Request  $request)
     {
         if(Auth::check()){
             $user = User::find($request->user()->id);
-            $data = data::where(['status'=> 1 ])->where('plan', '!=', 'tv')->get();
+            $data = data::where(['status'=> 1 ])->where('network', $request->id)->get();
 
 
             return view('buydata', compact('user', 'data'));
@@ -101,7 +144,8 @@ class AuthController
     {
         if(Auth::check()){
             $user = User::find($request->user()->id);
-            $data = data::where(['status'=> 1 ])->where('plan', '!=', 'tv')->get();
+            $data = data::where(['status'=> 1 ])->where('network', $request->id)->get();
+
 
             return view('redata', compact('user', 'data'));
         }

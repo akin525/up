@@ -84,11 +84,11 @@
                     <li><a href="{{ route('fund') }}"><i class="fa fa-credit-card orange_color"></i> <span>Fund Wallet</span></a></li>
                     @if(Auth::user()->apikey ==NULL)
                     <li>
-                        <a href="{{route('buydata')}}"><i class="fa fa-laptop "></i> <span>Buy Data</span></a>
+                        <a href="{{route('select')}}"><i class="fa fa-laptop "></i> <span>Buy Data</span></a>
                     </li>
                     @else
                         <li>
-                            <a href="{{route('redata')}}"><i class="fa fa-laptop "></i> <span>Reseller Data</span></a>
+                            <a href="{{route('select1')}}"><i class="fa fa-laptop "></i> <span>Reseller Data</span></a>
                         </li>
                     @endif
 
@@ -161,7 +161,27 @@
 
 
 
-
+            <script type="text/javascript">
+                (function() {
+                    var options = {
+                        whatsapp: "+2348103153004", // WhatsApp number
+                        call_to_action: "Message us", // Call to action
+                        position: "left", // Position may be 'right' or 'left'
+                    };
+                    var proto = document.location.protocol,
+                        host = "whatshelp.io",
+                        url = proto + "//static." + host;
+                    var s = document.createElement('script');
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = url + '/widget-send-button/js/init.js';
+                    s.onload = function() {
+                        WhWidgetSendButton.init(host, proto, options);
+                    };
+                    var x = document.getElementsByTagName('script')[0];
+                    x.parentNode.insertBefore(s, x);
+                })();
+            </script>
 
 
 
@@ -197,4 +217,5 @@
 
 
             <!-- script -->
+
 

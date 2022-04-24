@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers\Api;
 
-use App\Mail\Emailtrans;
+use App\Http\Controllers\DataserverController;
 use App\Models\bo;
 use App\Models\data;
+use App\Models\server;
 use App\Models\wallet;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\CentralLogics\Helpers;
@@ -72,7 +72,7 @@ class BillController
                 $wallet->save();
 
                 foreach ($bt as $fg) {
-
+                    $daterserver = new DataserverController();
                     if ($fg->plan == "airtime") {
 
                         $resellerURL = 'https://app.mcd.5starcompany.com.ng/api/reseller/';
@@ -120,12 +120,6 @@ class BillController
                             $am= "NGN $request->amount  Airtime Purchase Was Successful To";
                             $ph= $request->number;
 
-                            $receiver=$user->email;
-//                            try {
-//                                Mail::to($receiver)->send(new Emailtrans($bo ));
-//                            }catch (Exception $e){
-//
-//                            }
                             return response()->json([
                                 'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
                                 'user' => $user,
@@ -148,33 +142,25 @@ class BillController
                         }
 
                     } else {
-                        $curl = curl_init();
+                        $object = json_decode($fg);
+                        $object->number = $request->number;
+                        $json = json_encode($object);
 
-                        curl_setopt_array($curl, array(
-                            CURLOPT_URL => 'https://honourworld.ng/datatopup',
-                            CURLOPT_RETURNTRANSFER => true,
-                            CURLOPT_ENCODING => '',
-                            CURLOPT_MAXREDIRS => 10,
-                            CURLOPT_TIMEOUT => 0,
-                            CURLOPT_FOLLOWLOCATION => true,
-                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                            CURLOPT_SSL_VERIFYHOST => 0,
-                            CURLOPT_SSL_VERIFYPEER => 0,
-                            CURLOPT_CUSTOMREQUEST => 'POST',
-                            CURLOPT_POSTFIELDS => array('action' => 'data-topup', 'category_id' => $fg->cat_id, 'plan_id' => $fg->plan_id, 'contact_opt' => '2', 'phone_num' => $request->number),
-                            CURLOPT_HTTPHEADER => array(
-                                'Cookie: PHPSESSID=be3030e3b1a0cb40c0b2c5903d05fdf6; lang=en-US; nplh=4915.13266a73e5010cb60ede277741fdb032; nplrmm=1'
-                            ),
-                        ));
-                        $response = curl_exec($curl);
-
-                        curl_close($curl);
+                        $mcd = server::where('status', "1")->first();
+                        if ($mcd->name == "honorworld") {
+                            $response = $daterserver->honourwordbill($object);
+                        }else if ($mcd->name == "mcd") {
+                            $response = $daterserver->mcdbill($object);
+                        }
                         // echo $response;
 
 
                         $data = json_decode($response, true);
-                        $success = $data["result"];
-                        $msg2 = $data["msg"];
+                        if (isset($data['result'])){
+                            $success=$data['result'];
+                        }else{
+                            $success=$data["success"];
+                        }
                         if ($success==1){
                             $bo = bo::create([
                                 'username' => $user->username,
@@ -190,12 +176,6 @@ class BillController
                             $ph= $request->number;
 
 
-                            $receiver=$user->email;
-//                            try {
-//                                Mail::to($receiver)->send(new Emailtrans($bo ));
-//                            }catch (Exception $e){
-//
-//                            }
                             return response()->json([
                                 'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
                                 'user' => $user
@@ -229,7 +209,7 @@ class BillController
         }
     }
 
-    public function error_processor($validator)
+    public static function error_processor($validator)
     {
         $err_keeper = [];
         foreach ($validator->errors()->getMessages() as $index => $error) {
