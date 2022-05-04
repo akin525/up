@@ -7,7 +7,7 @@
                 <div class="page-header">
                     <div class="row">
                         <div class="col">
-                            <h3 class="page-title">Electricity</h3>
+                            <h4 class="page-title">Electricity Bills</h4>
                             <ul class="breadcrumb">
                                 {{--                                <li class=""><a href="{{route('dashboard')}}">Dashboard</a></li>--}}
                                 {{--                                <li class="breadcrumb-item active">Profile</li>--}}
@@ -30,7 +30,7 @@
                                         @csrf
                                         <div  class="form-group">
                                             <label  class="requiredField">
-                                                Select Tv
+                                                Select  Electricity Company
                                                 <span class="asteriskField">*</span>
                                             </label>
                                             <select name="id" class="text-success form-control" required>
