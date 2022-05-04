@@ -97,7 +97,7 @@ class FundController
                 $gt = $amount + $pt;
                 $deposit = deposit::create([
                     'username' => $user->username,
-                    'payment_ref' => $reference,
+                    'payment_ref' =>"Api". $reference,
                     'amount' => $amount,
                     'iwallet' => $pt,
                     'fwallet' => $gt,

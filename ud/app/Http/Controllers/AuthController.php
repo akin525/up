@@ -123,7 +123,7 @@ class AuthController
             $user = User::find($request->user()->id);
 
 
-            return view('select', compact('user'));
+            return view('select1', compact('user'));
         }
 
         return redirect("login")->withSuccess('You are not allowed to access');
@@ -146,7 +146,7 @@ class AuthController
             $user = User::find($request->user()->id);
             $data = data::where(['status'=> 1 ])->where('network', $request->id)->get();
 
-
+//return $data;
             return view('redata', compact('user', 'data'));
         }
 

@@ -113,7 +113,7 @@ class BillController
                                 'server_res' => $response,
                                 'result' => $success,
                                 'phone' => $request->number,
-                                'refid' => $request->id,
+                                'refid' => "Api".$request->id,
                                 'discountamoun' => $tran1,
                             ]);
                             $name= $fg->plan;
@@ -168,8 +168,8 @@ class BillController
                                 'amount' => $request->amount,
                                 'server_res' => $response,
                                 'result' => $success,
-                                'phone' => $request->number,
-                                'refid' => $request->id,
+                                'phone' =>$request->number,
+                                'refid' => "Api".$request->id,
                             ]);
                             $name= $fg->plan;
                             $am= "$fg->plan  was successful delivered to";

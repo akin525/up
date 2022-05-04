@@ -108,14 +108,14 @@ class VertualController
 
                 $deposit = deposit::create([
                     'username' => $wallet->username,
-                    'payment_ref' => $reference,
+                    'payment_ref' =>"Api". $reference,
                     'amount' => $amount,
                     'iwallet' => $pt,
                     'fwallet' => $gt,
                 ]);
                 $charp = charp::create([
                     'username' => $wallet->username,
-                    'payment_ref' => $reference,
+                    'payment_ref' =>"Api". $reference,
                     'amount' => $char->charges,
                     'iwallet' => $pt,
                     'fwallet' => $gt,

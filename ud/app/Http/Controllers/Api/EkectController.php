@@ -181,7 +181,7 @@ class EkectController
                         'server_res' => $response,
                         'result' => $success,
                         'phone' => $request->number,
-                        'refid' => $request->refid,
+                        'refid' =>"Api". $request->refid,
                         'discountamoun' => $tran1,
                         'token' => $tran2,
                     ]);
