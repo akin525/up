@@ -28,7 +28,7 @@
         </div>
         <div class='alert alert-info'>
             <button type='button' class='close' data-dismiss='alert'>&times;</button>
-            <i class='fa fa-ban-circle'></i><h6>Important Notification: </br><b>{{$me->message}}</b></h6>
+            <i class='fa fa-ban-circle'></i><h5>Important Notification: </br><b>{{$me->message}}</b></h5>
         </div>
         <br>
         <style>
