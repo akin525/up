@@ -49,6 +49,7 @@
                                 <center>
                                     <div class="field">
                                         <label class="label_field hidden">hidden label</label>
+
                                         <label class="form-check-label"><input type="checkbox" id="remember_me" name="remember" class="form-check-input"> Remember Me</label>
                                         @if (Route::has('password.request'))
                                             <a class="forgot" href="{{ route('password.request') }}">Forgotten Password?</a>

@@ -7,7 +7,7 @@
                 <div class="page-header">
                     <div class="row">
                         <div class="col">
-                            <h3 class="page-title">Tv</h3>
+                            <h4 class="page-title">TV Subscription</h4>
                             <ul class="breadcrumb">
 {{--                                <li class=""><a href="{{route('dashboard')}}">Dashboard</a></li>--}}
                                 {{--                                <li class="breadcrumb-item active">Profile</li>--}}
