@@ -120,6 +120,9 @@ class VertualController
                     'iwallet' => $pt,
                     'fwallet' => $gt,
                 ]);
+                $wallet->balance = $gt;
+                $wallet->save();
+                $user = user::where('username', $wallet->username)->first();
 
 
                 $admin= 'admin@primedata.com.ng';
@@ -130,9 +133,6 @@ class VertualController
                 Mail::to($admin)->send(new Emailcharges($charp ));
                 Mail::to($admin2)->send(new Emailcharges($charp ));
 
-                $wallet->balance = $gt;
-                $wallet->save();
-                $user = user::where('username', $wallet->username)->first();
 
                 $receiver = $user->email;
                 Mail::to($receiver)->send(new Emailfund($deposit));
