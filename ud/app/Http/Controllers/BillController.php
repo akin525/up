@@ -117,9 +117,9 @@ class BillController extends Controller
                             return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
 
                         }elseif ($success==0){
-                            $zo=$user->balance+$request->amount;
-                            $user->balance = $zo;
-                            $user->save();
+                            $zo=$wallet->balance+$request->amount;
+                            $wallet->balance = $zo;
+                            $wallet->save();
 
                             $name= $bt->plan;
                             $am= "NGN $request->amount Was Refunded To Your Wallet";
