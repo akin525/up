@@ -12,9 +12,11 @@
 
                     <div class="login_form">
                         <center><h5 class="text-wh text-red">Primedata Get New Password</h5></center>
+                        <center>
+                            <a href="{{route('login')}}" class="btn btn-success">Login</a>
+                        </center>
                         <br>
                         <br>
-
 
         <form method="POST" action="{{ route('passw') }}">
             @csrf
