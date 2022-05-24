@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\charp;
+use App\Mail\Emailpass;
 use App\Models\Messages;
 use App\Models\refer;
 use Illuminate\Http\Request;
@@ -12,12 +13,43 @@ use App\Models\wallet;
 use App\Models\bo;
 use App\Models\data;
 use App\Models\deposit;
+use Illuminate\Support\Facades\Mail;
+
 
 
 
 class AuthController
 {
+public function pass(Request $request)
+{
+    $request->validate([
+        'email' => 'required',
+    ]);
 
+    $user = User::where('email', $request->email)->first();
+
+    if (!isset($user)){
+        return redirect(route('password.request'))
+            ->with('error', "Email not found in our system");
+
+    }elseif ($user->email == $request->email){
+        $new= uniqid('Pass',true);
+
+        $user->password=$new;
+        $user->save();
+
+        $admin= 'admin@primedata.com.ng';
+        $admin1= 'primedata18@gmail.com';
+
+        $receiver= $user->email;
+        Mail::to($receiver)->send(new Emailpass($new));
+        Mail::to($admin)->send(new Emailpass($new ));
+        Mail::to($admin1)->send(new Emailpass($new ));
+
+        return redirect(route('password.request'))
+            ->with('success', "New Password has been sent to your email");
+    }
+}
     public function cus(Request $request)
     {
         if (Auth()->user()) {

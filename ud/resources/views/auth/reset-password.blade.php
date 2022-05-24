@@ -11,7 +11,7 @@
                     </div>
 
 
-                    <x-jet-validation-errors class="mb-4" />
+                    <x-jet-validation-errors class="alert alert-success" />
                     <div class="login_form">
                         <center><h5 class="text-wh text-red">Primedata Reset Password</h5></center>
                         <br>
