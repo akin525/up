@@ -12,9 +12,9 @@
 
                     <div class="login_form">
                         <center><h5 class="text-wh text-red">Primedata Get New Password</h5></center>
-                        <center>
+                        <centerw>
                             <a href="{{route('login')}}" class="btn btn-success">Login</a>
-                        </center>
+                        </centerw>
                         <br>
                         <br>
 
