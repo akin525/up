@@ -91,7 +91,7 @@ public function pass(Request $request)
     }
     public function dashboard(Request $request)
     {
-        if (Auth::check()) {
+
             $user = User::find($request->user()->id);
             $me = Messages::where('status', 1)->first();
             $refer = refer::where('username', $request->user()->username)->get();
@@ -116,13 +116,11 @@ public function pass(Request $request)
 
             }
             return  view('dashboard', compact('user', 'wallet', 'totaldeposite', 'me',  'bil2', 'bill', 'totalrefer', 'count'));
-        }
-        return redirect("login")->withSuccess('You are not allowed to access');
 
     }
     public function refer(Request $request)
     {
-        if (Auth::check()) {
+
             $user = User::find($request->user()->id);
             $refer = refer::where('username', $user->username)->first();
 
@@ -134,44 +132,33 @@ public function pass(Request $request)
             }
 
             return  view('referal', compact('user', 'refers', 'refer', 'totalrefer'));
-        }
-        return redirect("login")->withSuccess('You are not allowed to access');
 
     }
     public function select(Request  $request)
     {
-        if(Auth::check()){
+
             $user = User::find($request->user()->id);
 
 
             return view('select', compact('user'));
-        }
-
-        return redirect("login")->withSuccess('You are not allowed to access');
-    }
+       }
     public function select1(Request  $request)
     {
-        if(Auth::check()){
+
             $user = User::find($request->user()->id);
 
 
             return view('select1', compact('user'));
-        }
-
-        return redirect("login")->withSuccess('You are not allowed to access');
-    }
+         }
     public function buydata(Request  $request)
     {
-        if(Auth::check()){
+
             $user = User::find($request->user()->id);
             $data = data::where(['status'=> 1 ])->where('network', $request->id)->get();
 
 
             return view('buydata', compact('user', 'data'));
-        }
-
-        return redirect("login")->withSuccess('You are not allowed to access');
-    }
+       }
     public function redata(Request  $request)
     {
         if(Auth::check()){

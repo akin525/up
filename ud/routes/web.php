@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\AlltvController;
 use App\Http\Controllers\AirtimeController;
 use App\Http\Controllers\EkectController;
@@ -32,6 +33,7 @@ Route::get('/', function () {
         return view('auth.login');
     }
 });
+Route::post('log', [AuthController::class, 'customLogin'])->name('log');
 
 //Route::get('select', function () {
 //    return view('select');
@@ -39,6 +41,7 @@ Route::get('/', function () {
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //    return view('dashboard');
 //})->name('dashboard');
+Route::middleware(['auth'])->group(function () {
 Route::post('passw', [AuthController::class, 'pass'])->name('passw');
 Route::get('tv', [AlltvController::class, 'tv'])->name('tv');
 Route::get('select', [AuthController::class, 'select'])->name('select');
@@ -59,7 +62,6 @@ Route::get('referal', [AuthController::class, 'refer'])->name('referal');
 Route::post('mp', [ResellerController::class, 'reseller'])->name('mp');
 Route::get('reseller', [ResellerController::class, 'sell'])->name('reseller');
 Route::get('upgrade', [ResellerController::class, 'apiaccess'])->name('upgrade');
-Route::post('log', [AuthController::class, 'customLogin'])->name('log');
 Route::post('buyairtime', [AirtimeController::class, 'airtime'])->name('buyairtime');
 Route::get('airtime', [AuthController::class, 'airtime'])->name('airtime');
 Route::post('buydata', [AuthController::class, 'buydata'])->name('buydata');
@@ -69,3 +71,16 @@ Route::post('bill', [BillController::class, 'bill'])->name('bill');
 Route::get('fund', [FundController::class, 'fund'])->name('fund');
 Route::get('tran/{reference}', [FundController::class, 'tran'])->name('tran');
 Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
+});
+
+Route::view('admin', 'admin.login');
+
+Route::post('cuslog', [LoginController::class, 'login'])->name('cuslog');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+
+
+
+});
+

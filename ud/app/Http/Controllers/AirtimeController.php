@@ -18,7 +18,7 @@ class AirtimeController
         $request->validate([
             'id' => 'required',
         ]);
-        if (Auth::check()) {
+
             $user = User::find($request->user()->id);
             $wallet = wallet::where('username', $user->username)->first();
 
@@ -123,7 +123,6 @@ class AirtimeController
                     return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
 
                 }
-            }
         }
     }
 }

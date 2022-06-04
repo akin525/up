@@ -1,5 +1,9 @@
 <x-guest-layout>
     <body class="inner_page login">
+    <div id="loading-wrapper">
+        <div class="spinner-border"></div>
+        PRIMEDATA......
+    </div>
     <div class="full_container">
         <div class="container">
             <div class="center verticle_center full_height">
@@ -54,7 +58,7 @@
                                         @if (Route::has('password.request'))
                                             <a class="forgot" href="{{ route('password.request') }}">Forgotten Password?</a>
                                         @endif
-                                        <button type="submit" class="btn btn-send w3-round-large">Sign-in</button>
+                                        <button type="submit" class="btn btn-primary">Sign-in</button>
                                     </div>
                                 </center>
                                 <div class="field margin_0">
@@ -69,4 +73,10 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('hp/jquery.min.js')}}"></script>
+    <script src="{{asset('hp/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('hp/modernizr.js')}}"></script>
+    <script src="{{asset('hp/moment.js')}}"></script>
+    <script src="{{asset('hp/main.js')}}"></script>
+
 </x-guest-layout>

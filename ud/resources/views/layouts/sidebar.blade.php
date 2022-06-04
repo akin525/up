@@ -34,9 +34,16 @@
     <link rel="stylesheet" href="{{asset('css/perfect-scrollbar.css')}}" />
     <!-- custom css -->
     <link rel="stylesheet" href="{{asset('css/custom.css')}}" />
+
+    <link rel="stylesheet" href="{{asset('hp/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('hp/main.css')}}" />
 </head>
 
 <body class="dashboard dashboard_1">
+<div id="loading-wrapper">
+    <div class="spinner-border"></div>
+    PRIMEDATA......
+</div>
 <div class="full_container">
     <div class="inner_container">
         <!-- Sidebar  -->
@@ -215,7 +222,11 @@
             <script src="{{asset('js/custom.js')}}"></script>
             <script src="{{asset('js/chart_custom_style1.js')}}"></script>
 
+            <script src="{{asset('hp/jquery.min.js')}}"></script>
+            <script src="{{asset('hp/bootstrap.bundle.min.js')}}"></script>
+            <script src="{{asset('hp/modernizr.js')}}"></script>
+            <script src="{{asset('hp/moment.js')}}"></script>
+            <script src="{{asset('hp/main.js')}}"></script>
 
-            <!-- script -->
 
 

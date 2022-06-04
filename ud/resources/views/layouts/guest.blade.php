@@ -35,6 +35,8 @@
         <link rel="stylesheet" href="{{asset('css/perfect-scrollbar.css')}}" />
         <!-- custom css -->
         <link rel="stylesheet" href="{{asset('css/custom.css')}}" />
+        <link rel="stylesheet" href="{{asset('hp/bootstrap.min.css')}}" />
+        <link rel="stylesheet" href="{{asset('hp/main.css')}}" />
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
@@ -61,6 +63,7 @@
             }
         </script>
         <!-- jQuery -->
+        <script src="{{asset('hp/main.js')}}"></script>
         <script src="{{asset('js/jquery.min.js')}}"></script>
         <script src="{{asset('js/popper.min.js')}}"></script>
         <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -80,9 +83,12 @@
         <script src="{{asset('js/custom.js')}}"></script>
         <script src="{{asset('js/chart_custom_style1.js')}}"></script>
     </head>
+
+
     <body>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
     </body>
+
 </html>

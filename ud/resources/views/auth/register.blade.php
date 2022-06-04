@@ -4,6 +4,10 @@
     <br>
     <br>
     <br>
+    <div id="loading-wrapper">
+        <div class="spinner-border"></div>
+        PRIMEDATA......
+    </div>
     <div class="full_container">
         <div class="container">
             <div class="center verticle_center full_height">
@@ -76,4 +80,10 @@
                                         <button type="submit" class="main_bt">Sign Up</button>
                                     </div>
                             </form>
+                            <script src="{{asset('hp/jquery.min.js')}}"></script>
+                            <script src="{{asset('hp/bootstrap.bundle.min.js')}}"></script>
+                            <script src="{{asset('hp/modernizr.js')}}"></script>
+                            <script src="{{asset('hp/moment.js')}}"></script>
+                            <script src="{{asset('hp/main.js')}}"></script>
+
 </x-guest-layout>
