@@ -52,7 +52,7 @@ public function dashboard(Request $request)
             $totalcharge += (int)$ch->amount;
 
         }
-        $bil2 = bo::paginate(10);
+        $bil2 = bo::get();
         $bill = 0;
         $lock=0;
         foreach ($bil2 as $bill1) {
