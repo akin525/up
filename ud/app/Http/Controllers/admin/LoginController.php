@@ -17,7 +17,10 @@ public function login(Request $request)
         'email' => 'required',
         'password' => 'required',
     ]);
-
+    if (Auth()->user()->role=="admin") {
+        return redirect()->intended('admin/dashboard')
+            ->withSuccess('Signed in');
+    }
     $user = User::where('email', $request->username)
         ->where('password', $request->password)->where('role', 'admin')
         ->first();
