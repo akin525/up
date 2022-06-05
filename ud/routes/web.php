@@ -77,13 +77,9 @@ Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
 
 
 Route::get('admin', function () {
-    if (Auth()->user()->role=="admin") {
-        return redirect(route('admin/dashboard'))
-            ->with('status','Signed in');
 
-    }else {
-        return view('admin.login');
-    }
+    return view('admin.login');
+
 });
 Route::post('cuslog', [LoginController::class, 'login'])->name('cuslog');
 
