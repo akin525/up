@@ -14,17 +14,18 @@ public function login(Request $request)
 
 
     $request->validate([
-        'username' => 'required',
+        'email' => 'required',
         'password' => 'required',
     ]);
 
-    $user = User::where('username', $request->username)
+    $user = User::where('email', $request->username)
         ->where('password', $request->password)->where('role', 'admin')
         ->first();
 
+
     if(!isset($user)){
         return redirect()->back()->withInput($request->only('username', 'remember'))
-            ->withErrors(['password' => 'Credentials does not match.']);
+            ->withErrors(['password' => 'password not match.'])->with('status', 'You are not an admin');
     }
 
     Auth::login($user);

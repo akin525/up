@@ -1,5 +1,9 @@
 <x-guest-layout>
     <body class="inner_page login">
+    <div id="loading-wrapper">
+        <div class="spinner-border"></div>
+        PRIMEDATA......
+    </div>
     <div class="full_container">
         <div class="container">
             <div class="center verticle_center full_height">
@@ -11,35 +15,36 @@
                     </div>
 
 
-                    @if (session('status'))
-                        <div class="mb-4 font-medium text-sm text-green-600">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <div class="login_form">
-                        <center><h3 class="text-wh text-red">Admin Login</h3></center>
-                        <br>
-                        <br>
 
+                    <div class="login_form">
+                        <center><h3 class="text-wh text-red"><b>Admin Login</b></h3></center>
+                        <br>
+                        <br>
+                        @if (session('status'))
+                            <div class="alert alert-danger">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('cuslog') }}">
                             @csrf
+
                             <fieldset>
-                                @if ($errors->has('email'))<div class='alert alert-danger'>
+                                @if ($errors->has('email'))<div class='alert alert-danger text-white'>
                                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
                                     <i class='fa fa-ban-circle'></i>
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                 </div>
                                 @endif
-                                @if ($errors->has('password'))<div class='alert alert-danger'>
-                                    <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                                    <i class='fa fa-ban-circle'></i>
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                </div>
-                                @endif
+{{--                                @if ($errors->has('password'))<div class='alert alert-danger'>--}}
+{{--                                    <button type='button' class='close' data-dismiss='alert'>&times;</button>--}}
+{{--                                    <i class='fa fa-ban-circle'></i>--}}
+{{--                                    <span class="text-danger">{{ $errors->first('password') }}</span>--}}
+{{--                                </div>--}}
+{{--                                @endif--}}
                                 <div class="field">
 
-                                    <label class="label_field">Username</label>
-                                    <x-jet-input id="email" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus />
+                                    <label class="label_field">Email</label>
+                                    <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
                                 </div>
 
                                 <div class="field">
@@ -54,7 +59,7 @@
                                         @if (Route::has('password.request'))
                                             <a class="forgot" href="{{ route('password.request') }}">Forgotten Password?</a>
                                         @endif
-                                        <button type="submit" class="btn btn-send w3-round-large">Sign-in</button>
+                                        <button type="submit" class="btn btn-success">Sign-in</button>
                                     </div>
                                 </center>
 
@@ -66,4 +71,10 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('hp/jquery.min.js')}}"></script>
+    <script src="{{asset('hp/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('hp/modernizr.js')}}"></script>
+    <script src="{{asset('hp/moment.js')}}"></script>
+    <script src="{{asset('hp/main.js')}}"></script>
+
 </x-guest-layout>

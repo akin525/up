@@ -73,12 +73,24 @@ Route::get('tran/{reference}', [FundController::class, 'tran'])->name('tran');
 Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
 });
 
-Route::view('admin', 'admin.login');
+//Route::view('admin', 'admin.login');
 
+
+Route::get('admin', function () {
+    if (Auth()->user()->role=="admin") {
+        return redirect(route('admin/dashboard'))
+            ->with('status','Signed in');
+
+    }else {
+        return view('admin.login');
+    }
+});
 Route::post('cuslog', [LoginController::class, 'login'])->name('cuslog');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin/dashboard');
+    Route::get('admin/mcdtransaction', [DashboardController::class, 'mcdtran'])->name('admin/mcdtransaction');
 
 
 
