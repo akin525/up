@@ -17,7 +17,7 @@
         </div>
 <div class="alert alert-info">
     <button type='button' class='close' data-dismiss='alert'>&times;</button>
-    <i class="fa fa-bell"></i><b>Account Status:</b><h6 class="align-content-center text-center"><b>@if(Auth::user()->apikey ==NULL)
+    <i class="fa fa-bell"></i><b>Account Status:</b><h6 class="align-content-center text-center text-white"><b>@if(Auth::user()->apikey ==NULL)
         *Member* <button type="button" class="btn btn-success" onclick="window.location.href='https://mobile.primedata.com.ng/reseller';">Click to upgrade</button> @else*Reseller*
         @endif</b></h6>
 </div>
@@ -28,7 +28,7 @@
         </div>
         <div class='alert alert-info'>
             <button type='button' class='close' data-dismiss='alert'>&times;</button>
-            <i class='fa fa-ban-circle'></i><h6>Important Notification: </br><b>{{$me->message}}</b></h6>
+            <i class='fa fa-ban-circle'></i><h6 class="text-white">Important Notification: </br><b>{{$me->message}}</b></h6>
         </div>
         <br>
         <style>
