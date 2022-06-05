@@ -24,7 +24,7 @@ public function login(Request $request)
 
     if(!isset($user)){
         return redirect()->back()->withInput($request->only('username', 'remember'))
-            ->withErrors(['password' => 'password not match.'])->with('status', 'You are not an admin');
+            ->withErrors(['password' => 'password not match.']);
     }
 
     Auth::login($user);
