@@ -56,8 +56,8 @@ public function dashboard(Request $request)
         $bill = 0;
         $lock=0;
         foreach ($bil2 as $bill1) {
-            $bill += $bill1->amount;
-            $lock += $bill1->discountamoun;
+            $bill += (int)$bill1->amount;
+            $lock += (int)$bill1->discountamoun;
 
         }
         $resellerURL = 'https://app.mcd.5starcompany.com.ng/api/reseller/';
