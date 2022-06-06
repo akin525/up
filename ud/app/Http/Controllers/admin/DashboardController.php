@@ -147,7 +147,7 @@ public function ref()
 {
 
     $count = refer::where('username', '!=', '')->count();
-$refer=refer::where('username', '!=', '');
+$refer=refer::where('username', '!=', '')->get();
 
     return view('admin/refer', compact('count', 'refer' ));
 
