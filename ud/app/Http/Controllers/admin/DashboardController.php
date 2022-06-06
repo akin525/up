@@ -143,4 +143,14 @@ public function mcdtran()
     }
     return redirect("admin/login")->with('status', 'You are not allowed to access');
 }
+public function ref()
+{
+
+    $count = refer::where('username', "!=", '')->count();
+$refer=refer::where('username', "!=", '');
+
+    return view('admin/refer', compact('count', 'refer' ));
+
+
+}
 }

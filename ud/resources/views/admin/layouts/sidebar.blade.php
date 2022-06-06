@@ -91,6 +91,9 @@
                     <li class="active">
                         <a href="{{ route('admin/vertual') }}"  ><i class="fa fa-area-chart white_color"></i> <span>All-Vertual</span></a>
                     </li>
+                    <li class="active">
+                        <a href="{{ route('admin/refer') }}"  ><i class="fa fa-bar-chart white_color"></i> <span>All-Referal</span></a>
+                    </li>
                 </ul>
             </div>
         </nav>

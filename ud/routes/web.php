@@ -88,6 +88,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin/dashboard');
     Route::get('admin/mcdtransaction', [DashboardController::class, 'mcdtran'])->name('admin/mcdtransaction');
+    Route::get('admin/refer', [DashboardController::class, 'ref'])->name('admin/refer');
     Route::get('admin/vertual', [VertualAController::class, 'list'])->name('admin/vertual');
 
 
