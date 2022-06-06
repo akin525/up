@@ -11,25 +11,29 @@ class LoginController
 {
 public function login(Request $request)
 {
+    if (Auth()->user()->role == "admin") {
+        return redirect()->intended('admin/dashboard')
+            ->withSuccess('Signed in');
+    } else {
 
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
 
-    $request->validate([
-        'email' => 'required',
-        'password' => 'required',
-    ]);
+        $user = User::where('email', $request->username)
+            ->where('password', $request->password)->where('role', 'admin')
+            ->first();
 
-    $user = User::where('email', $request->username)
-        ->where('password', $request->password)->first();
+        if (!isset($user)) {
+            return redirect()->back()->withInput($request->only('username', 'remember'))
+                ->withErrors(['password' => 'Credentials does not match.']);
+        }
 
+        Auth::login($user);
 
-    if(!isset($user)){
-        return redirect()->back()->withInput($request->only('username', 'remember'))
-            ->withErrors(['password' => 'password not match.']);
+        return redirect()->intended('admin/dashboard')
+            ->withSuccess('Signed in');
     }
-
-    Auth::login($user);
-
-    return redirect()->intended('admin/dashboard')
-        ->withSuccess('Signed in');
 }
 }

@@ -13,11 +13,12 @@ use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 class DashboardController
 {
 public function dashboard(Request $request)
 {
+
     if (Auth()->user()->role=="admin") {
         $user = User::where('role', 'admin')->first();
         $me = Messages::where('status', 1)->first();
@@ -89,7 +90,18 @@ public function dashboard(Request $request)
         $success = $data["success"];
         $tran = $data["data"]["wallet"];
         $pa = $data["data"]["commission"];
-        return view('admin/dashboard', compact('user', 'wallet', 'lock', 'totalcharge',  'tran', 'alluser', 'totaldeposite', 'totalwallet', 'deposite', 'me', 'bil2', 'bill', 'totalrefer', 'totalprofit',  'count'));
+
+        $today = Carbon::now()->format('Y-m-d');
+
+
+        $data['bill'] = bo::where([['result', '=', '1'], ['date', 'LIKE', $today . '%']])->count();
+        $data['deposit'] = deposit::where([['status', '=', '1'], ['date', 'LIKE', $today . '%']])->count();
+        $data['user'] = User::where([['created_at', 'LIKE', $today . '%']])->count();
+        $data['nou'] = wallet::where([['updated_at', 'LIKE', $today . '%']])->count();
+        $data['sum_deposits'] = deposit::where([['date', 'LIKE', '%' . $today . '%']])->sum('amount');
+        $data['sum_bill'] = bo::where([['date', 'LIKE', '%' . $today . '%']])->sum('amount');
+
+        return view('admin/dashboard', compact('user', 'wallet', 'data', 'lock', 'totalcharge',  'tran', 'alluser', 'totaldeposite', 'totalwallet', 'deposite', 'me', 'bil2', 'bill', 'totalrefer', 'totalprofit',  'count'));
 
     }
     return redirect("admin/login")->with('status', 'You are not allowed to access');

@@ -38,6 +38,104 @@
                     <div class="full counter_section margin_bottom_30">
                         <div class="couter_icon">
                             <div>
+                                <i class="fa fa-bars yellow_color"></i>
+                            </div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <h5 class="total_no text-center">{{$data['bill']}}</h5>
+                                <h6 class="head_couter">Number Of Today Bill</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div>
+                                <i class="fa fa-bars blue1_color"></i>
+                            </div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <h5 class="total_no text-center">{{$data['deposit']}}</h5>
+                                <h6 class="head_couter">Number Of Today Deposit</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div>
+                                <i class="fa fa-users green_color"></i>
+                            </div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <h5 class="total_no text-center">{{$data['user']}}</h5>
+                                <h6 class="head_couter">Today New Users</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div>
+                                <i class="fa fa-users yellow_color"></i>
+                            </div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <h5 class="total_no text-center">{{$data['nou']}}</h5>
+                                <h6 class="head_couter">Number of uers Purchase Today</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </div>
+            <div class="row column1">
+                <div class="col-md-7 col-lg-6">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div>
+                                <i class="fa fa-money yellow_color"></i>
+                            </div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+                                <h5 class="total_no text-center">₦{{number_format(intval($data['sum_deposits'] *1),2)}}</h5>
+
+                                <h6 class="head_couter">Today Total Deposits</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-6">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div>
+                                <i class="fa fa-money blue1_color"></i>
+                            </div>
+                        </div>
+                        <div class="counter_no">
+                            <div>
+
+                                <h5 class="total_no text-center">₦{{ number_format(intval($data['sum_bill'] *1),2)}}</h5>
+                                <h6 class="head_couter">Today Total Purchase</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="row column1">
+                <div class="col-md-6 col-lg-3">
+                    <div class="full counter_section margin_bottom_30">
+                        <div class="couter_icon">
+                            <div>
                                 <i class="fa fa-google-wallet yellow_color"></i>
                             </div>
                         </div>
