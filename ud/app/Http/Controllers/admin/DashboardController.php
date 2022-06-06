@@ -146,8 +146,8 @@ public function mcdtran()
 public function ref()
 {
 
-    $count = refer::where('username', "!=", '')->count();
-$refer=refer::where('username', "!=", NULL);
+    $count = refer::where('username', '!=', '')->count();
+$refer=refer::where('username', '!=', '');
 
     return view('admin/refer', compact('count', 'refer' ));
 
