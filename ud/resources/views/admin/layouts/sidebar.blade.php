@@ -80,10 +80,16 @@
                 <h4>General</h4>
                 <ul class="list-unstyled components">
                     <li class="active">
+                        <a href="{{ route('dashboard') }}"  ><i class="fa fa-amazon white_color"></i> <span>Back To User Account</span></a>
+                    </li>
+                    <li class="active">
                         <a href="{{ route('admin/dashboard') }}"  ><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
                     </li>
                     <li class="active">
                         <a href="{{ route('admin/mcdtransaction') }}"  ><i class="fa fa-home white_color"></i> <span>Mcdtransaction</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ route('admin/vertual') }}"  ><i class="fa fa-area-chart white_color"></i> <span>All-Vertual</span></a>
                     </li>
                 </ul>
             </div>

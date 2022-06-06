@@ -74,6 +74,11 @@
             <div class="sidebar_blog_2">
                 <h4>General</h4>
                 <ul class="list-unstyled components">
+                    @if(Auth::user()->role=="admin")
+                        <li class="active">
+                            <a href="{{ route('admin/dashboard') }}"  ><i class="fa fa-amazon white_color"></i> <span>Administrartor</span></a>
+                        </li>
+                    @endif
                     <li class="active">
                         <a href="{{ route('dashboard') }}"  ><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
                     </li>

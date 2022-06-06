@@ -6,13 +6,15 @@ use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 
-class VertualController
+class VertualAController
 {
 public function list()
 {
     $vertual=wallet::get();
+    $alluser = User::count();
 
-    return view('admin/allvertual', compact('vertual' ));
+
+    return view('admin/vertual', compact('vertual', 'alluser' ));
 
 }
 public function users()
