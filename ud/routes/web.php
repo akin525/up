@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\admin\CandCController;
 use App\Http\Controllers\admin\VertualAController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\LoginController;
@@ -74,7 +76,6 @@ Route::get('tran/{reference}', [FundController::class, 'tran'])->name('tran');
 Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
 });
 
-//Route::view('admin', 'admin.login');
 
 
 Route::get('admin', function () {
@@ -90,8 +91,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/mcdtransaction', [DashboardController::class, 'mcdtran'])->name('admin/mcdtransaction');
     Route::get('admin/refer', [DashboardController::class, 'ref'])->name('admin/refer');
     Route::get('admin/vertual', [VertualAController::class, 'list'])->name('admin/vertual');
-
+    Route::get('admin/credit', [CandCController::class, 'cr'])->name('admin/credit');
+    Route::post('admin/cr', [CandCController::class, 'credit'])->name('admin/cr');
+    Route::post('admin/ch', [CandCController::class, 'charge'])->name('admin/ch');
+    Route::get('admin/charge', [CandCController::class, 'sp'])->name('admin/charge');
 
 
 });
+
 

@@ -94,6 +94,12 @@
                     <li class="active">
                         <a href="{{ route('admin/refer') }}"  ><i class="fa fa-bar-chart white_color"></i> <span>All-Referal</span></a>
                     </li>
+                    <li class="active">
+                        <a href="{{ route('admin/credit') }}"  ><i class="fa fa-money white_color"></i> <span>Credit User</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ route('admin/charge') }}"  ><i class="fa fa-money white_color"></i> <span>Charge User</span></a>
+                    </li>
                 </ul>
             </div>
         </nav>
