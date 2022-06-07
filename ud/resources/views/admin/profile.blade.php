@@ -62,7 +62,7 @@
                 <ul class="nav nav-pills mb-0" id="pills-tab" role="tablist">
                     <li class="nav-item"><a class="nav-link active" id="general_detail_tab" data-toggle="pill" href="#general_detail">General</a></li>
                     <li class="nav-item"><a class="nav-link" id="activity_detail_tab" data-toggle="pill" href="#activity_detail">Transactions</a></li>
-                    <li class="nav-item"><a class="nav-link" id="portfolio_detail_tab" data-toggle="pill" href="#portfolio_detail">Wallet</a></li>
+                    <li class="nav-item"><a class="nav-link" id="portfolio_detail_tab" data-toggle="pill" href="#portfolio_detail">Bills</a></li>
                     <li class="nav-item"><a class="nav-link" id="settings_detail_tab" data-toggle="pill" href="#settings_detail">Charges</a></li>
                 </ul>
             </div>
@@ -93,25 +93,25 @@
                                     <center>
                                     <div>
                                         <h4 class="font-weight-semibold ">&#8358;{{number_format($wallet->balance)}}</h4>
-                                        <p class="text-info ">Wallet Balance</p>
+                                        <p class="mb-0 ">Wallet Balance</p>
                                     </div>
                                     </center>
-{{--                                    <div>--}}
-{{--                                        <h4 class="mb-1 font-weight-semibold text-white">&#8358;{{$user->bonus}}</h4>--}}
-{{--                                        <p class="text-white mb-0">Bonus Balance</p>--}}
-{{--                                    </div>--}}
+                                    <div>
+                                        <h4 class="mb-1 font-weight-semibold ">&#8358;{{$sumtt}}</h4>
+                                        <p class="mb-0">Total Deposit</p>
+                                    </div>
                                 </div>
 
-{{--                                <div class="d-flex justify-content-between bg-purple p-3 mt-3 rounded">--}}
-{{--                                    <div>--}}
-{{--                                        <h4 class="mb-1 font-weight-semibold text-white">&#8358;{{number_format($user->agent_commision)}}</h4>--}}
-{{--                                        <p class="text-white mb-0">Agent Comm</p>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <h4 class="mb-1 font-weight-semibold text-white">{{$user->points}}</h4>--}}
-{{--                                        <p class="text-white mb-0">Mega Points</p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                                <div class="d-flex justify-content-between bg-purple p-3 mt-3 rounded">
+                                    <div>
+                                        <h4 class="mb-1 font-weight-semibold ">&#8358;{{number_format($sumbo)}}</h4>
+                                        <p class=" mb-0">Total Bills</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="mb-1 font-weight-semibold ">&#8358;{{number_format($sumch)}}</h4>
+                                        <p class="mb-0">Total Charges</p>
+                                    </div>
+                                </div>
                             </div>
                             <!--end card-body-->
                         </div>
@@ -235,8 +235,8 @@
                                                 <td>{{$dat->amount}}</td>
                                                 <td class="center">
 
-                                                    @if($dat->status=="1" || $dat->status=="Delivered" || $dat->status=="ORDER_RECEIVED" || $dat->status=="ORDER_COMPLETED")
-                                                        <span class="badge badge-success">{{$dat->status}}</span>
+                                                    @if($dat->status=="1")
+                                                        <span class="badge badge-success">Delivered</span>
                                                     @elseif($dat->status=="0" || $dat->status=="Not Delivered" || $dat->status=="Error" || $dat->status=="ORDER_CANCELLED" || $dat->status=="Invalid Number" || $dat->status=="Unsuccessful")
                                                         <span class="badge badge-warning">{{$dat->status}}</span>
                                                     @else
@@ -246,7 +246,7 @@
                                                 </td>
                                                 <td>{{$dat->iwallet}}</td>
                                                 <td>{{$dat->fwallet}}</td>
-                                                <td>{{$dat->refid}}</td>
+                                                <td>{{$dat->payment_ref}}</td>
                                                 <td>{{$dat->date}}</td>
                                             </tr>
                                         @endforeach
@@ -261,6 +261,57 @@
                 </div>
                 <!--end row-->
             </div>
+
+            <div class="tab-pane fade" id="portfolio_detail">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="mt-0 header-title">Bills Table</h4>
+                                {{--                    <p class="text-muted mb-4 font-13">Use <code>pencil icon</code> to view user profile.</p>--}}
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Username</th>
+                                            <th>Amount</th>
+                                            <th>Product</th>
+                                            <th>Number</th>
+                                            <th>Token</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($version as $dat)
+                                            <tr>
+                                                <td>{{$dat->id}}</td>
+                                                <td>{{$dat->username}}</td>
+                                                <td>&#8358;{{$dat->amount}}</td>
+                                                <td>{{$dat->plan}}</td>
+                                                <td>{{$dat->phone}}</td>
+                                                <td>{{$dat->token}}</td>
+                                                <td> @if($dat->result=="1")
+                                                        <span class="badge badge-success">Delivered</span>
+                                                    @elseif($dat->result=="0")
+                                                        <span class="badge badge-warning">Not-Delivered</span>
+                                                    @else
+                                                        <span class="badge badge-info">Not-Delivered</span>
+                                                    @endif</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{ $version->links() }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!--end row-->
+            </div>
+
 
         </div>
         <!--end tab-content-->

@@ -3,6 +3,7 @@
 namespace app\Http\Controllers\admin;
 
 use App\Models\bo;
+use App\Models\charp;
 use App\Models\deposit;
 use App\Models\refer;
 use App\Models\User;
@@ -32,7 +33,7 @@ class UsersController
             ->Where('phone_no', 'LIKE', "%$phoneno%")
             ->Where('email', 'LIKE', "%$email%")
             ->Where('created_at', 'LIKE', "%$regdate%")
-            ->limit(100)
+            ->limit(500)
             ->get();
 
         $cquery = User::Where('username', 'LIKE', "%$user_name%")
@@ -43,21 +44,24 @@ class UsersController
 
         return view('admin/finds', ['users' => $query, 'count'=>$cquery, 'result'=>true]);
     }
-    public function profile($user)
+    public function profile($username)
     {
-        $ap = User::where('username', $user)->first();
+        $ap = User::where('username', $username)->first();
 
         if(!$ap){
             return redirect('admin/finds')->with("error", "User does not exist");
         }
-$wallet=wallet::where('username', $user)->first();
-        $user =User::where('username', $user)->first();
-        $tt = deposit::where('username', $user)->count();
-        $td = deposit::where('username', $user)->orderBy('id', 'desc')->paginate(25);
-        $v = DB::table('bos')->where('username', $user)->orderBy('id', 'desc')->get();
-       $referrals = refer::where('username', $user)->get();
-        $tat = bo::where('username', $user)->count();
+$wallet=wallet::where('username', $username)->first();
+        $user =User::where('username', $username)->first();
+        $sumtt = deposit::where('username', $ap->username)->sum('amount');
+        $tt = deposit::where('username', $ap->username)->count();
+        $td = deposit::where('username', $ap->username)->paginate(25);
+        $v = DB::table('bos')->where('username', $ap->username)->orderBy('id', 'desc')->paginate(25);
+       $referrals = refer::where('username', $ap->usernamer)->get();
+        $tat = bo::where('username', $ap->username)->count();
+        $sumbo = bo::where('username', $ap->username)->sum('amount');
+        $sumch = charp::where('username', $ap->username)->sum('amount');
 //return $v;
-        return view('admin/profile', ['user' => $ap, 'tt' => $tt, 'wallet'=>$wallet, 'td' => $td,  'referrals' => $referrals, 'version' => $v,  'tat' =>$tat]);
+        return view('admin/profile', ['user' => $ap, 'sumtt'=>$sumtt, 'sumch'=>$sumch, 'sumbo'=>$sumbo, 'tt' => $tt, 'wallet'=>$wallet, 'td' => $td,  'referrals' => $referrals, 'version' => $v,  'tat' =>$tat]);
     }
 }
