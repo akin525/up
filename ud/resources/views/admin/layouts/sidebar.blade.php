@@ -100,6 +100,12 @@
                     <li class="active">
                         <a href="{{ route('admin/charge') }}"  ><i class="fa fa-money white_color"></i> <span>Charge User</span></a>
                     </li>
+                    <li class="active">
+                        <a href="{{ route('admin/user') }}"  ><i class="fa fa-users white_color"></i> <span>All User</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ route('admin/finds') }}"  ><i class="fa fa-search white_color"></i> <span>Find User</span></a>
+                    </li>
                 </ul>
             </div>
         </nav>

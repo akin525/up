@@ -48,18 +48,19 @@
                     <h4 class="mt-0 header-title">Users Table</h4>
                     <p class="text-muted mb-4 font-13">Use <code>pencil icon</code> to view user profile.</p>
                     <div class="table-responsive">
-                        <table class="table table-striped mb-0">
+                        <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
                             <thead>
                             <tr>
                                 <th>Customer</th>
                                 <th>Email</th>
                                 <th>Contact No</th>
                                 <th>Full-Name</th>
+                                <th>Balance</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
+                            @foreach($users as $user )
                                 <tr>
                                     <td>
                                             <img width="50" src="{{asset("images/bn.jpeg")}}" alt="" class="rounded-circle thumb-sm mr-1"> {{$user->username}}
@@ -67,12 +68,13 @@
                                     <td>{{$user->email }}</td>
                                     <td>{{$user->phone_no}}</td>
                                     <td>{{$user->name}}</td>
+                                    <td>₦{{$user->balance}}</td>
                                     <td><a href="profile/{{ $user->username }}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a></td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $users->links() }}
+
                     </div>
                 </div>
             </div>

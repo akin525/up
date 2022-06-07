@@ -15,8 +15,11 @@ class UsersController
 {
     public function index(Request $request)
     {
-
-        $users = DB::table('users')->orderBy('id', 'desc')->paginate(25);
+$u=User::get();
+        $users =DB::table('users')
+            ->join('wallets','users.username','=','users.username')
+            ->get();
+        $wallet = DB::table('wallets')->orderBy('id', 'desc')->get();
 
         $t_users = DB::table('users')->count();
         $f_users = DB::table('users')->where("role","=","")->count();
@@ -25,8 +28,8 @@ class UsersController
 
         $a_users = DB::table('users')->where("role","=","users")->count();
 
-
-        return view('admin/users', ['users' => $users, 't_users'=>$t_users,  'f_users'=>$f_users, 'r_users'=>$r_users,'a_users'=>$a_users]);
+//return $users;
+        return view('admin/users', ['users' => $users, 't_users'=>$t_users, 'wallet'=>$wallet, 'f_users'=>$f_users, 'r_users'=>$r_users,'a_users'=>$a_users]);
 
     }
     public function fin()
@@ -78,7 +81,7 @@ $wallet=wallet::where('username', $username)->first();
         $sumbo = bo::where('username', $ap->username)->sum('amount');
         $sumch = charp::where('username', $ap->username)->sum('amount');
         $charge = charp::where('username', $ap->username)->paginate(10);
-//return $v;
+//return $user;
         return view('admin/profile', ['user' => $ap, 'sumtt'=>$sumtt, 'charge'=>$charge,  'sumch'=>$sumch, 'sumbo'=>$sumbo, 'tt' => $tt, 'wallet'=>$wallet, 'td' => $td,  'referrals' => $referrals, 'version' => $v,  'tat' =>$tat]);
     }
 }

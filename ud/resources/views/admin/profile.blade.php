@@ -49,6 +49,12 @@
                                 <li class="mt-2"><i class="fa fa-calendar text-info"></i> <b>Reg. Date</b> : {{$user->created_at}}</li>
                                 <br>
                                 <li class="mt-2"><i class="fa fa-key text-info "></i> <b>Api</b> : {{$user->apikey}}</li>
+                                @if($wallet->account_number != "1")
+                                <br>
+                                <li class="mt-2"><i class="fa fa-phone text-info "></i> <b>Account-No</b> : {{$wallet->account_number}}</li>
+                                <br>
+                                <li class="mt-2"><i class="fa fa-user text-info "></i> <b>Account-Name</b> : {{$wallet->account_name}}</li>
+                                @endif
                             </ul>
                         </div>
                         <!--end col-->
@@ -58,12 +64,18 @@
                 <!--end f_profile-->
             </div>
             <!--end card-body-->
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="card-body">
                 <ul class="nav nav-pills mb-0" id="pills-tab" role="tablist">
                     <li class="nav-item"><a class="nav-link active" id="general_detail_tab" data-toggle="pill" href="#general_detail">General</a></li>
                     <li class="nav-item"><a class="nav-link" id="activity_detail_tab" data-toggle="pill" href="#activity_detail">Transactions</a></li>
                     <li class="nav-item"><a class="nav-link" id="portfolio_detail_tab" data-toggle="pill" href="#portfolio_detail">Bills</a></li>
                     <li class="nav-item"><a class="nav-link" id="settings_detail_tab" data-toggle="pill" href="#settings_detail">Charges</a></li>
+                    <li class="nav-item"><a class="nav-link" id="sms_tab" data-toggle="pill" href="#sms_detail">Update User</a></li>
                 </ul>
             </div>
             <!--end card-body-->
@@ -373,7 +385,55 @@
                 <!--end row-->
             </div>
 
+            <div class="tab-pane fade" id="sms_detail">
+                <div class="row">
+                    <div class="">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="general-label">
+                                    <form class="form-horizontal" method="POST" action="{{ route('admin/update') }}">
+                                        @csrf
+                                            <div class="">
+                                                <div class="field">
+                                                    <label class="label_field">Phone No</label>
+                                                    <input type="number" class="form-control" name="number" value="{{$user->phone_no}}" required />
+                                                </div>
+                                                <br>
+                                                <div class="field">
+                                                    <label class="label_field">Name</label>
+                                                    <input type="text" name="name" class="form-control" value="{{$user->name}}" required />
+                                                    <input type="hidden" name="username" class="form-control" value="{{$user->username}}" required />
+                                                </div>
+                                                <br>
+                                                <div class="field">
+                                                    <label class="label_field">Email</label>
+                                                    <input type="email" name="email" class="form-control" value="{{$user->email}}" required />
+                                                </div>
+                                                <br>
+                                                <div class="field">
+                                                    <label class="label_field">Role</label>
+                                                    <select  name="role" class="form-control"  required >
+                                                        <option value="{{$user->role}}">{{$user->role}}</option>
+                                                        <option value="user">User</option>
+                                                        <option value="admin">admin</option>
+                                                    </select>
+                                                </div>
+                                                <br>
+                                                    <button class="btn btn-primary " type="submit"><i class="fa fa-user"></i> Update User</button>
+                                                </div>
 
+                                        <!--end row-->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
 
         </div>
         <!--end tab-content-->

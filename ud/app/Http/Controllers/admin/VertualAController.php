@@ -35,8 +35,10 @@ public function updateuser(Request $request)
 {
     $request->validate([
         'email' => 'required',
+        'number' => 'required',
         'name' => 'required',
         'username' => 'required',
+        'role' => 'required',
     ]);
     $users=User::where('username', $request->username)->first();
     $users->name=$request->name;
@@ -45,7 +47,7 @@ public function updateuser(Request $request)
     $users->role=$request->role;
     $users->save();
 
-    return redirect(route('admin/users'))
+    return redirect(url('admin/profile/'.$users->username))
         ->with('status', $users->username.' was updated successfully');
 
 }

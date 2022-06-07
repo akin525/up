@@ -93,6 +93,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/mcdtransaction', [DashboardController::class, 'mcdtran'])->name('admin/mcdtransaction');
     Route::get('admin/refer', [DashboardController::class, 'ref'])->name('admin/refer');
     Route::get('admin/vertual', [VertualAController::class, 'list'])->name('admin/vertual');
+    Route::post('admin/update', [VertualAController::class, 'updateuser'])->name('admin/update');
     Route::get('admin/credit', [CandCController::class, 'cr'])->name('admin/credit');
     Route::post('admin/cr', [CandCController::class, 'credit'])->name('admin/cr');
     Route::post('admin/ch', [CandCController::class, 'charge'])->name('admin/ch');
