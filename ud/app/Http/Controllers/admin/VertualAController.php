@@ -2,9 +2,11 @@
 
 namespace app\Http\Controllers\admin;
 
+use App\Mail\Emailpass;
 use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class VertualAController
 {
@@ -55,14 +57,20 @@ public function pass(Request $request)
 {
     $request->validate([
         'username' => 'required',
-        'password' => 'required',
     ]);
     $users=User::where('username', $request->username)->first();
-    $newpass= uniqid('pass', true);
+    $new= uniqid('pass', true);
 
-    $users->password=$newpass;
+    $users->password=$new;
     $users->save();
-    return redirect(route('admin/users'))
+    $admin= 'admin@primedata.com.ng';
+    $admin1= 'primedata18@gmail.com';
+
+    $receiver= $users->email;
+    Mail::to($receiver)->send(new Emailpass($new));
+    Mail::to($admin)->send(new Emailpass($new ));
+    Mail::to($admin1)->send(new Emailpass($new ));
+    return redirect(url('admin/profile/'.$request->username))
         ->with('status', $users->username.' password was change successfully');
 
 }
@@ -75,7 +83,7 @@ public function apikey(Request $request)
     $api= uniqid("PRIME", true);
     $users->apikey=$api;
     $users->save();
-    return redirect(route('admin/users'))
+    return redirect(url('admin/profile/'.$request->username))
         ->with('status', $users->username.' New Api was Generated Successfully');
 }
 }

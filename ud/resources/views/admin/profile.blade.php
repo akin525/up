@@ -76,6 +76,7 @@
                     <li class="nav-item"><a class="nav-link" id="portfolio_detail_tab" data-toggle="pill" href="#portfolio_detail">Bills</a></li>
                     <li class="nav-item"><a class="nav-link" id="settings_detail_tab" data-toggle="pill" href="#settings_detail">Charges</a></li>
                     <li class="nav-item"><a class="nav-link" id="sms_tab" data-toggle="pill" href="#sms_detail">Update User</a></li>
+                    <li class="nav-item"><a class="nav-link" id="pass_tab" data-toggle="pill" href="#pass">Change Passwordr</a></li>
                 </ul>
             </div>
             <!--end card-body-->
@@ -420,6 +421,36 @@
                                                 </div>
                                                 <br>
                                                     <button class="btn btn-primary " type="submit"><i class="fa fa-user"></i> Update User</button>
+                                                </div>
+
+                                        <!--end row-->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+
+            <div class="tab-pane fade" id="pass">
+                <div class="row">
+                    <div class="">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="general-label">
+                                    <form class="form-horizontal" method="POST" action="{{ route('admin/pass') }}">
+                                        @csrf
+                                            <div class="">
+
+                                                <div class="field">
+                                                    <input type="hidden" name="username" class="form-control" value="{{$user->username}}" required />
+                                                </div>
+                                                <br>
+                                                    <button class="btn btn-primary " type="submit"><i class="fa fa-user"></i>Generate password</button>
                                                 </div>
 
                                         <!--end row-->
