@@ -48,7 +48,7 @@
                     <h4 class="mt-0 header-title">Users Table</h4>
                     <p class="text-muted mb-4 font-13">Use <code>pencil icon</code> to view user profile.</p>
                     <div class="table-responsive">
-                        <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
+                        <table  class="table table-striped table-bordered align-middle">
                             <thead>
                             <tr>
                                 <th>Customer</th>
