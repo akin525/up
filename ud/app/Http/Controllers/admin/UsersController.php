@@ -18,7 +18,7 @@ class UsersController
 $u=User::get();
         $users =DB::table('users')
             ->join('wallets','users.username','=','users.username')
-            ->get();
+            ->paginate(20);
         $wallet = DB::table('wallets')->orderBy('id', 'desc')->get();
 
         $t_users = DB::table('users')->count();
