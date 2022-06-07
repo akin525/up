@@ -20,7 +20,7 @@ $u=User::get();
             ->join('wallets','users.username','=','users.username')
             ->paginate(20);
         $wallet = DB::table('wallets')->orderBy('id', 'desc')->get();
-
+$reseller=DB::table('users')->where("apikey", "!=", "")->count();
         $t_users = DB::table('users')->count();
         $f_users = DB::table('users')->where("role","=","")->count();
 
@@ -29,7 +29,7 @@ $u=User::get();
         $a_users = DB::table('users')->where("role","=","users")->count();
 
 //return $users;
-        return view('admin/users', ['users' => $users, 't_users'=>$t_users, 'wallet'=>$wallet, 'f_users'=>$f_users, 'r_users'=>$r_users,'a_users'=>$a_users]);
+        return view('admin/users', ['users' => $users, 'res'=>$reseller, 't_users'=>$t_users, 'wallet'=>$wallet, 'f_users'=>$f_users, 'r_users'=>$r_users,'a_users'=>$a_users]);
 
     }
     public function fin()

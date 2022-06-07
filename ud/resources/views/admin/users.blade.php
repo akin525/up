@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="row column1">
-                    <div class="col-md-7 col-lg-6">
+                    <div class="col-md-7 col-lg-4">
                         <div class="full counter_section margin_bottom_30">
                             <div class="couter_icon">
                                 <div>
@@ -20,7 +20,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7 col-lg-6">
+                    <div class="col-md-7 col-lg-4">
+                        <div class="full counter_section margin_bottom_30">
+                            <div class="couter_icon">
+                                <div>
+                                    <i class="fa fa-users yellow_color"></i>
+                                </div>
+                            </div>
+                            <div class="counter_no">
+                                <div>
+                                    <h5 class="total_no text-center">{{ number_format($res) ?? 'Total reseller' }}</h5>
+
+                                    <h6 class="head_couter">Total Reseller</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-4">
                         <div class="full counter_section margin_bottom_30">
                             <div class="couter_icon">
                                 <div>
