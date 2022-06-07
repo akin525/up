@@ -52,9 +52,6 @@
                             <thead>
                             <tr>
                                 <th>Customer</th>
-                                <th>Email</th>
-                                <th>Contact No</th>
-                                <th>Full-Name</th>
                                 <th>Balance</th>
                                 <th>Action</th>
                             </tr>
@@ -65,9 +62,6 @@
                                     <td>
                                             <img width="50" src="{{asset("images/bn.jpeg")}}" alt="" class="rounded-circle thumb-sm mr-1"> {{$user->username}}
                                     </td>
-                                    <td>{{$user->email }}</td>
-                                    <td>{{$user->phone_no}}</td>
-                                    <td>{{$user->name}}</td>
                                     <td>₦{{$user->balance}}</td>
                                     <td><a href="profile/{{ $user->username }}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a></td>
                                 </tr>

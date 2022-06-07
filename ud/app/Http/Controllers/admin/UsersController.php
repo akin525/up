@@ -17,7 +17,6 @@ class UsersController
     {
 $u=User::get();
         $users =DB::table('users')
-            ->select('users.username','users.name','users.email', 'users.phone_no','wallets.balance')
             ->join('wallets','users.username','=','users.username')
             ->paginate(20);
         $wallet = DB::table('wallets')->orderBy('id', 'desc')->get();
