@@ -29,14 +29,14 @@ class UsersController
         $regdate=$input['regdate'];
 
         // Instantiates a Query object
-        $query = User::Where('username', 'LIKE', "%$user_name%")->where('username', '=', "%$user_name%")
+        $query = User::Where('username', 'LIKE', "%$user_name%")
             ->Where('phone_no', 'LIKE', "%$phoneno%")
             ->Where('email', 'LIKE', "%$email%")
             ->Where('created_at', 'LIKE', "%$regdate%")
             ->limit(500)
             ->get();
 
-        $cquery = User::Where('username', 'LIKE', "%$user_name%")->where('username', '=', "%$user_name%")
+        $cquery = User::Where('username', 'LIKE', "%$user_name%")
             ->Where('phone_no', 'LIKE', "%$phoneno%")
             ->Where('email', 'LIKE', "%$email%")
             ->Where('created_at', 'LIKE', "%$regdate%")
