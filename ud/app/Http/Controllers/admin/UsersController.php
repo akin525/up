@@ -13,6 +13,22 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController
 {
+    public function index(Request $request)
+    {
+
+        $users = DB::table('users')->orderBy('id', 'desc')->paginate(25);
+
+        $t_users = DB::table('users')->count();
+        $f_users = DB::table('users')->where("role","=","")->count();
+
+        $r_users = DB::table('refers')->where("username","!=","")->count();
+
+        $a_users = DB::table('users')->where("role","=","users")->count();
+
+
+        return view('admin/users', ['users' => $users, 't_users'=>$t_users,  'f_users'=>$f_users, 'r_users'=>$r_users,'a_users'=>$a_users]);
+
+    }
     public function fin()
     {
         $user=User::get();

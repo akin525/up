@@ -100,6 +100,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/finds', [UsersController::class, 'fin'])->name('admin/finds');
     Route::get('admin/profile/{username}', [UsersController::class, 'profile'])->name('admin/profile');
     Route::get('admin/charge', [CandCController::class, 'sp'])->name('admin/charge');
+    Route::get('admin/user', [UsersController::class, 'index'])->name('admin/user');
 
 });
 
