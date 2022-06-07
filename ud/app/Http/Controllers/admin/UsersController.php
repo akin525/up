@@ -55,13 +55,14 @@ $wallet=wallet::where('username', $username)->first();
         $user =User::where('username', $username)->first();
         $sumtt = deposit::where('username', $ap->username)->sum('amount');
         $tt = deposit::where('username', $ap->username)->count();
-        $td = deposit::where('username', $ap->username)->paginate(25);
+        $td = deposit::where('username', $ap->username)->paginate(10);
         $v = DB::table('bos')->where('username', $ap->username)->orderBy('id', 'desc')->paginate(25);
        $referrals = refer::where('username', $ap->usernamer)->get();
         $tat = bo::where('username', $ap->username)->count();
         $sumbo = bo::where('username', $ap->username)->sum('amount');
         $sumch = charp::where('username', $ap->username)->sum('amount');
+        $charge = charp::where('username', $ap->username)->paginate(10);
 //return $v;
-        return view('admin/profile', ['user' => $ap, 'sumtt'=>$sumtt, 'sumch'=>$sumch, 'sumbo'=>$sumbo, 'tt' => $tt, 'wallet'=>$wallet, 'td' => $td,  'referrals' => $referrals, 'version' => $v,  'tat' =>$tat]);
+        return view('admin/profile', ['user' => $ap, 'sumtt'=>$sumtt, 'charge'=>$charge,  'sumch'=>$sumch, 'sumbo'=>$sumbo, 'tt' => $tt, 'wallet'=>$wallet, 'td' => $td,  'referrals' => $referrals, 'version' => $v,  'tat' =>$tat]);
     }
 }
