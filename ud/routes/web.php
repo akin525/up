@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CandCController;
+use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\VertualAController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\LoginController;
@@ -85,6 +86,7 @@ Route::get('admin', function () {
 });
 Route::post('cuslog', [LoginController::class, 'login'])->name('cuslog');
 
+
 Route::middleware(['auth'])->group(function () {
 
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin/dashboard');
@@ -94,8 +96,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/credit', [CandCController::class, 'cr'])->name('admin/credit');
     Route::post('admin/cr', [CandCController::class, 'credit'])->name('admin/cr');
     Route::post('admin/ch', [CandCController::class, 'charge'])->name('admin/ch');
+    Route::post('admin/finduser', [UsersController::class, 'finduser'])->name('admin/finduser');
+    Route::get('admin/finds', [UsersController::class, 'fin'])->name('admin/finds');
+    Route::get('admin/profile/{username}', [UsersController::class, 'profile'])->name('admin/profile');
     Route::get('admin/charge', [CandCController::class, 'sp'])->name('admin/charge');
-
 
 });
 

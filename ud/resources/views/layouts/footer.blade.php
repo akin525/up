@@ -103,18 +103,18 @@
     }
 </script>
 <!-- html -->
-<table id="data-table-buttons" class="table table-striped table-bordered align-middle">
-    <thead>
-    <tr>
-        <th width="1%"></th>
-        <th width="1%" data-orderable="false"></th>
-        ...
-    </tr>
-    </thead>
-    <tbody>
-    ...
-    </tbody>
-</table>
+{{--<table id="data-table-buttons" class="table table-striped table-bordered align-middle">--}}
+{{--    <thead>--}}
+{{--    <tr>--}}
+{{--        <th width="1%"></th>--}}
+{{--        <th width="1%" data-orderable="false"></th>--}}
+{{--        ...--}}
+{{--    </tr>--}}
+{{--    </thead>--}}
+{{--    <tbody>--}}
+{{--    ...--}}
+{{--    </tbody>--}}
+{{--</table>--}}
 
 <!-- script -->
 {{--<script>--}}
