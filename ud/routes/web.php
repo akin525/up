@@ -104,8 +104,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/profile/{username}', [UsersController::class, 'profile'])->name('admin/profile');
     Route::get('admin/charge', [CandCController::class, 'sp'])->name('admin/charge');
     Route::get('admin/product', [productController::class, 'index'])->name('admin/product');
-    Route::get('admin/do/{id}', [ProductController::class, 'on'])->name('admin/do');
-    Route::get('admin/editproduct/{id}', [ProductController::class, 'on'])->name('admin/editproduct');
+    Route::get('admin/do/{id}', [ProductController::class, ''])->name('admin/do');
+    Route::get('admin/editproduct/{id}', [ProductController::class, 'in'])->name('admin/editproduct');
+    Route::post('admin/pd', [ProductController::class, 'on'])->name('admin/pd');
     Route::get('admin/user', [UsersController::class, 'index'])->name('admin/user');
 
 });

@@ -28,6 +28,15 @@ public function on(Request $request)
     return redirect('admin/product')->with('success', 'Product update successfully');
 
 }
+public function in(Request $request)
+{
+    $request->validate([
+        'id' => 'required',
+    ]);
+    $pro=data::where('id', $request->id)->first();
+
+return view('admin/editproduct', compact('pro'));
+}
 public function edit(Request $request)
 {
     $request->validate([
