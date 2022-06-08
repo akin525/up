@@ -18,7 +18,7 @@
         <link href="{{asset('asset/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" />
         <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
         <!-- site css -->
-        <link rel="stylesheet" href="{{asset('style.css')}}" />
+        <link rel="stylesheet" href="{{asset('style1.css')}}" />
         <!-- responsive css -->
         <link rel="stylesheet" href="{{asset('css/responsive.css')}}" />
         <!-- color css -->
