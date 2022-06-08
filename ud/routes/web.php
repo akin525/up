@@ -106,7 +106,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/product', [productController::class, 'index'])->name('admin/product');
     Route::post('admin/do', [ProductController::class, 'edit'])->name('admin/do');
     Route::get('admin/editproduct/{id}', [ProductController::class, 'in'])->name('admin/editproduct');
-    Route::post('admin/pd', [ProductController::class, 'on'])->name('admin/pd');
+    Route::get('admin/pd/{id}', [ProductController::class, 'on'])->name('admin/pd');
     Route::get('admin/user', [UsersController::class, 'index'])->name('admin/user');
 
 });

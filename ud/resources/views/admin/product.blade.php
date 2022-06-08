@@ -54,7 +54,7 @@
                                         <input type="checkbox" name="status" value="0" id="myCheckBox"
                                                {{$seller->status =="1"?'checked':''}}
                                                {{--                                            @if($pay->status==1?'checked':'')--}}
-                                               onclick="window.location='{{route('admin/do', $seller->id)}}'"/>
+                                               onclick="window.location='{{route('admin/pd', $seller->id)}}'"/>
                                         <!--                                            <button  type="submit" class="btn-info col-lg">Update</button>-->
                                         <span>
                                                 <span>off</span>
