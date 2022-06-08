@@ -30,9 +30,7 @@ public function on(Request $request)
 }
 public function in(Request $request)
 {
-    $request->validate([
-        'id' => 'required',
-    ]);
+
     $pro=data::where('id', $request->id)->first();
 
 return view('admin/editproduct', compact('pro'));

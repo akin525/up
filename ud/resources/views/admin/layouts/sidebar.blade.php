@@ -106,6 +106,9 @@
                     <li class="active">
                         <a href="{{ route('admin/finds') }}"  ><i class="fa fa-search white_color"></i> <span>Find User</span></a>
                     </li>
+                    <li class="active">
+                        <a href="{{ route('admin/product') }}"  ><i class="fa fa-shopping-cart white_color"></i> <span>Product</span></a>
+                    </li>
                 </ul>
             </div>
         </nav>
