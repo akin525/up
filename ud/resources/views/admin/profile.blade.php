@@ -76,7 +76,7 @@
                     <li class="nav-item"><a class="nav-link" id="portfolio_detail_tab" data-toggle="pill" href="#portfolio_detail">Bills</a></li>
                     <li class="nav-item"><a class="nav-link" id="settings_detail_tab" data-toggle="pill" href="#settings_detail">Charges</a></li>
                     <li class="nav-item"><a class="nav-link" id="sms_tab" data-toggle="pill" href="#sms_detail">Update User</a></li>
-                    <li class="nav-item"><a class="nav-link" id="pass_tab" data-toggle="pill" href="#pass">Change Passwordr</a></li>
+                    <li class="nav-item"><a class="nav-link" id="pass_tab" data-toggle="pill" href="#pass">Change Password</a></li>
                 </ul>
             </div>
             <!--end card-body-->

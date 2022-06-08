@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CandCController;
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\VertualAController;
 use App\Http\Controllers\admin\DashboardController;
@@ -102,6 +103,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/finds', [UsersController::class, 'fin'])->name('admin/finds');
     Route::get('admin/profile/{username}', [UsersController::class, 'profile'])->name('admin/profile');
     Route::get('admin/charge', [CandCController::class, 'sp'])->name('admin/charge');
+    Route::get('admin/product', [productController::class, 'index'])->name('admin/product');
+    Route::get('admin/do/{id}', [ProductController::class, 'on'])->name('admin/do');
+    Route::get('admin/editproduct/{id}', [ProductController::class, 'on'])->name('admin/editproduct');
     Route::get('admin/user', [UsersController::class, 'index'])->name('admin/user');
 
 });

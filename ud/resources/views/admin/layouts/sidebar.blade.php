@@ -23,7 +23,7 @@
     <link href="{{asset('asset/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
     <!-- site css -->
-    <link rel="stylesheet" href="{{asset('style.css')}}" />
+    <link rel="stylesheet" href="{{asset('style1.css')}}" />
     <!-- responsive css -->
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}" />
     <!-- color css -->
@@ -82,19 +82,19 @@
                     <li class="active">
                         <a href="{{ route('dashboard') }}"  ><i class="fa fa-amazon white_color"></i> <span>Back To User Account</span></a>
                     </li>
-                    <li class="active">
-                        <a href="{{ route('admin/dashboard') }}"  ><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
+                    <li class="nav-item">
+                        <a  class="nav-link" href="{{ route('admin/dashboard') }}"  ><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
                     </li>
-                    <li class="active">
-                        <a href="{{ route('admin/mcdtransaction') }}"  ><i class="fa fa-home white_color"></i> <span>Mcdtransaction</span></a>
+                    <li class="nav-item">
+                        <a  class="nav-link" href="{{ route('admin/mcdtransaction') }}"  ><i class="fa fa-home white_color"></i> <span>Mcdtransaction</span></a>
                     </li>
-                    <li class="active">
-                        <a href="{{ route('admin/vertual') }}"  ><i class="fa fa-area-chart white_color"></i> <span>All-Vertual</span></a>
+                    <li class="nav-item">
+                        <a  class="nav-link" href="{{ route('admin/vertual') }}"  ><i class="fa fa-area-chart white_color"></i> <span>All-Vertual</span></a>
                     </li>
-                    <li class="active">
-                        <a href="{{ route('admin/refer') }}"  ><i class="fa fa-bar-chart white_color"></i> <span>All-Referal</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin/refer') }}"  ><i class="fa fa-bar-chart white_color"></i> <span>All-Referal</span></a>
                     </li>
-                    <li class="active">
+                    <li class="nav-item">
                         <a href="{{ route('admin/credit') }}"  ><i class="fa fa-money white_color"></i> <span>Credit User</span></a>
                     </li>
                     <li class="active">
