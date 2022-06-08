@@ -18,9 +18,9 @@
                         </div>
                     @endif
                     <p class="text-muted mb-4 font-13">Product Controller</p>
-                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
-                           style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
+                        <div class="table-responsive">
+                            <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
+                                <thead>
                         <tr>
                             <th>Network</th>
                             <th>Plan</th>
@@ -79,3 +79,4 @@
         <!-- end col -->
     </div>
     <!-- end row -->
+@include('layouts.footer')
