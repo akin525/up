@@ -103,10 +103,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('admin/ch', [CandCController::class, 'charge'])->name('admin/ch');
     Route::post('admin/finduser', [UsersController::class, 'finduser'])->name('admin/finduser');
     Route::get('admin/finds', [UsersController::class, 'fin'])->name('admin/finds');
+    Route::get('admin/server', [UsersController::class, 'server'])->name('admin/server');
+    Route::get('admin/noti', [UsersController::class, 'mes'])->name('admin/noti');
+    Route::get('admin/up/{id}', [UsersController::class, 'up'])->name('admin/up');
     Route::get('admin/profile/{username}', [UsersController::class, 'profile'])->name('admin/profile');
     Route::get('admin/charge', [CandCController::class, 'sp'])->name('admin/charge');
     Route::get('admin/product', [productController::class, 'index'])->name('admin/product');
     Route::post('admin/do', [ProductController::class, 'edit'])->name('admin/do');
+    Route::post('admin/not', [UsersController::class, 'me'])->name('admin/not');
     Route::get('admin/editproduct/{id}', [ProductController::class, 'in'])->name('admin/editproduct');
     Route::get('admin/pd/{id}', [ProductController::class, 'on'])->name('admin/pd');
     Route::get('admin/user', [UsersController::class, 'index'])->name('admin/user');

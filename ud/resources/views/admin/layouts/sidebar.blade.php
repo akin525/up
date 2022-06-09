@@ -83,31 +83,43 @@
                         <a href="{{ route('dashboard') }}"  ><i class="fa fa-amazon white_color"></i> <span>Back To User Account</span></a>
                     </li>
                     <li class="nav-item">
-                        <a  class="nav-link" href="{{ route('admin/dashboard') }}"  ><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
+                        <a  class="nav-link" href="{{ route('admin/dashboard') }}"  ><i class="fa fa-dashboard red_color"></i> <span>Dashboard</span></a>
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link" href="{{ route('admin/mcdtransaction') }}"  ><i class="fa fa-home white_color"></i> <span>Mcdtransaction</span></a>
                     </li>
                     <li class="nav-item">
-                        <a  class="nav-link" href="{{ route('admin/vertual') }}"  ><i class="fa fa-area-chart white_color"></i> <span>All-Vertual</span></a>
+                        <a  class="nav-link" href="{{ route('admin/vertual') }}"  ><i class="fa fa-area-chart red_color"></i> <span>All-Vertual</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin/refer') }}"  ><i class="fa fa-bar-chart white_color"></i> <span>All-Referal</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin/credit') }}"  ><i class="fa fa-money white_color"></i> <span>Credit User</span></a>
+                        <a href="{{ route('admin/credit') }}"  ><i class="fa fa-money red_color"></i> <span>Credit User</span></a>
                     </li>
                     <li class="active">
                         <a href="{{ route('admin/charge') }}"  ><i class="fa fa-money white_color"></i> <span>Charge User</span></a>
                     </li>
                     <li class="active">
-                        <a href="{{ route('admin/user') }}"  ><i class="fa fa-users white_color"></i> <span>All User</span></a>
+                        <a href="{{ route('admin/user') }}"  ><i class="fa fa-users red_color"></i> <span>All User</span></a>
                     </li>
                     <li class="active">
                         <a href="{{ route('admin/finds') }}"  ><i class="fa fa-search white_color"></i> <span>Find User</span></a>
                     </li>
                     <li class="active">
-                        <a href="{{ route('admin/product') }}"  ><i class="fa fa-shopping-cart white_color"></i> <span>Product</span></a>
+                        <a href="{{ route('admin/finddeposite') }}"  ><i class="fa fa-search red_color"></i> <span>Find Deposit</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ route('admin/product') }}"  ><i class="fa fa-shopping-cart red_color"></i> <span>Product</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ route('admin/deposits') }}"  ><i class="fa fa-shopping-bag white_color"></i> <span>All-Deposit</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ route('admin/server') }}"  ><i class="fa fa-bars red_color"></i> <span>Control Server</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ route('admin/noti') }}"  ><i class="fa fa-bell white_color"></i> <span>Change Notification</span></a>
                     </li>
                 </ul>
             </div>

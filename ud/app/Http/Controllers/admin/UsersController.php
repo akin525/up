@@ -120,11 +120,11 @@ $wallet=wallet::where('username', $username)->first();
     {
         $request->validate([
             'id' => 'required',
-            'body' => 'required',
+            'message' => 'required',
         ]);
         $message=Messages::where('id', $request->id)->first();
 
-        $message->message=$request->body;
+        $message->message=$request->message;
         $message->save();
         return redirect(url('admin/noti'))
             ->with('status',' Notification change successfully');
