@@ -5,7 +5,9 @@ namespace app\Http\Controllers\admin;
 use App\Models\bo;
 use App\Models\charp;
 use App\Models\deposit;
+use App\Models\Messages;
 use App\Models\refer;
+use App\Models\server;
 use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
@@ -83,5 +85,48 @@ $wallet=wallet::where('username', $username)->first();
         $charge = charp::where('username', $ap->username)->paginate(10);
 //return $user;
         return view('admin/profile', ['user' => $ap, 'sumtt'=>$sumtt, 'charge'=>$charge,  'sumch'=>$sumch, 'sumbo'=>$sumbo, 'tt' => $tt, 'wallet'=>$wallet, 'td' => $td,  'referrals' => $referrals, 'version' => $v,  'tat' =>$tat]);
+    }
+    public function server()
+    {
+        $server=server::get();
+
+        return view('admin/server', compact('server'));
+    }
+
+    public function up(Request $request)
+    {
+        $server=server::where('id', $request->id)->first();
+        if ($server->status==1)
+        {
+            $u="0";
+        }else{
+            $u="1";
+        }
+
+        $server->status=$u;
+        $server->save();
+        return redirect(url('admin/server'))
+            ->with('status',' Server change successfully');
+
+    }
+    public function mes()
+    {
+        $message=Messages::where('status', 1)->first();
+
+        return view('admin/noti', compact('message'));
+    }
+
+    public function me(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'body' => 'required',
+        ]);
+        $message=Messages::where('id', $request->id)->first();
+
+        $message->message=$request->body;
+        $message->save();
+        return redirect(url('admin/noti'))
+            ->with('status',' Notification change successfully');
     }
 }

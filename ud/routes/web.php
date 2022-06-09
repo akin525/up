@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\CandCController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\TransactionController;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\VertualAController;
 use App\Http\Controllers\admin\DashboardController;
@@ -85,6 +86,7 @@ Route::get('admin', function () {
     return view('admin.login');
 
 });
+
 Route::post('cuslog', [LoginController::class, 'login'])->name('cuslog');
 
 
@@ -108,6 +110,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/editproduct/{id}', [ProductController::class, 'in'])->name('admin/editproduct');
     Route::get('admin/pd/{id}', [ProductController::class, 'on'])->name('admin/pd');
     Route::get('admin/user', [UsersController::class, 'index'])->name('admin/user');
+    Route::get('admin/deposits', [TransactionController::class, 'in'])->name('admin/deposits');
+    Route::get('admin/finddeposite', [TransactionController::class, 'index'])->name('admin/finddeposite');
+    Route::post('admin/depo', [TransactionController::class, 'finduser'])->name('admin/depo');
+
 
 });
 
