@@ -2,6 +2,7 @@
 
 namespace app\Http\Controllers\admin;
 
+use App\Models\bo;
 use App\Models\deposit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -57,6 +58,24 @@ public function index()
 
 
         return view('admin/deposits', ['data' => $data,'amount'=>$amount, 'am'=>$am, 'am1'=>$am1, 'am2'=>$am2,  'tt' => $tt, 'ft' => $ft, 'st' => $st, 'rt' => $rt]);
+
+    }
+    public function bill()
+    {
+        $today = Carbon::now()->format('Y-m-d');
+
+
+        $data =bo::orderBy('id', 'desc')->paginate(25);
+        $tt = bo::count();
+        $ft = bo::where([['date', 'like', Carbon::now()->format('Y-m-d') . '%']])->count();
+        $st = bo::where([['date', 'like', Carbon::now()->subDay()->format('Y-m-d') . '%']])->count();
+        $rt = bo::where([['date', 'like', Carbon::now()->subDays(2)->format('Y-m-d') . '%']])->count();
+        $amount=bo::sum('amount');
+        $am=bo::where([['date', 'LIKE', '%' . $today . '%']])->sum('amount');
+        $am1=bo::where([['date', 'like', '%'. Carbon::now()->subDay()->format('y-m-d'). '%']])->sum('amount');
+        $am2=bo::where([['date', 'like', '%'. Carbon::now()->subDays(2)->format('y-m-d'). '%']])->sum('amount');
+
+        return view('admin/bills', ['data' => $data,'amount'=>$amount, 'am'=>$am, 'am1'=>$am1, 'am2'=>$am2,  'tt' => $tt, 'ft' => $ft, 'st' => $st, 'rt' => $rt]);
 
     }
 

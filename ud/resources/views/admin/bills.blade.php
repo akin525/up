@@ -10,8 +10,8 @@
                 </div>
                 <div class="counter_no">
                     <div>
-                        <h5 class="total_no text-center">{{ number_format($tt) ?? 'Total Transactions' }}</h5>
-                        <h6 class="head_couter">Total Transactions</h6>
+                        <h5 class="total_no text-center">{{ number_format($tt) ?? 'Total Bills Purchase' }}</h5>
+                        <h6 class="head_couter">Total Bills</h6>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <div class="counter_no">
                     <div>
                         <h5 class="total_no text-center">{{ number_format($ft) ?? 'Total Today' }}</h5>
-                        <h6 class="head_couter">Transactions Today</h6>
+                        <h6 class="head_couter">Bills Purchase Today</h6>
                     </div>
                 </div>
             </div>
@@ -40,8 +40,8 @@
                 </div>
                 <div class="counter_no">
                     <div>
-                        <h5 class="total_no text-center">{{ $st ?? 'Transactions Yesterday' }}</h5>
-                        <h6 class="head_couter">Transactions Yesterday</h6>
+                        <h5 class="total_no text-center">{{ $st ?? 'Bills Purchase Yesterday' }}</h5>
+                        <h6 class="head_couter">Bills Purchase Yesterday</h6>
                     </div>
                 </div>
             </div>
@@ -56,14 +56,14 @@
                 <div class="counter_no">
                     <div>
                         <h5 class="total_no text-center">{{ number_format($rt) ?? 'Total Reversed' }}</h5>
-                        <h6 class="head_couter">Transactions 2Days Ago</h6>
+                        <h6 class="head_couter">Bills Purchase 2Days Ago</h6>
                     </div>
                 </div>
             </div>
-    </div>
-
         </div>
+
     </div>
+</div>
 
 <div class="row">
     <div class="row column1">
@@ -76,7 +76,7 @@
                 </div>
                 <div class="counter_no">
                     <div>
-                        <h5 class="total_no text-center">₦{{ number_format($amount) ?? 'Total Transactions' }}</h5>
+                        <h5 class="total_no text-center">₦{{ number_format($amount) ?? 'Total Bills Purchase' }}</h5>
                         <h6 class="head_couter">Sum of Total Transaction </h6>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                 <div class="counter_no">
                     <div>
                         <h5 class="total_no text-center">₦{{ number_format($am) ?? 'Total Today' }}</h5>
-                        <h6 class="head_couter">Sum Of Today Transactions </h6>
+                        <h6 class="head_couter">Sum Of Today Bills Purchase </h6>
                     </div>
                 </div>
             </div>
@@ -106,8 +106,8 @@
                 </div>
                 <div class="counter_no">
                     <div>
-                        <h5 class="total_no text-center">₦{{ $am1 ?? 'Transactions Yesterday' }}</h5>
-                        <h6 class="head_couter">Sum Of  Yesterday Transactions</h6>
+                        <h5 class="total_no text-center">₦{{ $am1 ?? 'Bills Purchase Yesterday' }}</h5>
+                        <h6 class="head_couter">Sum Of  Yesterday Bills Purchase</h6>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
                 <div class="counter_no">
                     <div>
                         <h5 class="total_no text-center">₦{{ number_format($am2) ?? 'Total Reversed' }}</h5>
-                        <h6 class="head_couter">Sum Of Total Transactions 2Days Ago</h6>
+                        <h6 class="head_couter">Sum Of Total Bills Purchase 2Days Ago</h6>
                     </div>
                 </div>
             </div>
@@ -135,7 +135,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="mt-0 header-title">Deposit Table</h4>
+                <h4 class="mt-0 header-title">Bills Purchase Table</h4>
                 {{--                    <p class="text-muted mb-4 font-13">Use <code>pencil icon</code> to view user profile.</p>--}}
                 <div class="table-responsive">
                     <table class="table table-striped mb-0">
@@ -145,8 +145,9 @@
                             <th>Username</th>
                             <th>Amount</th>
                             <th>Status</th>
-                            <th>I. Wallet</th>
-                            <th>F. Wallet</th>
+                            <th>Number</th>
+                            <th>Token</th>
+                            <th>Plan</th>
                             <th>Ref</th>
                             <th>Date</th>
                             <th>Action</th>
@@ -161,18 +162,19 @@
                                 <td>{{$dat->amount}}</td>
                                 <td class="center">
 
-                                    @if($dat->status=="1")
+                                    @if($dat->result=="1")
                                         <span class="badge badge-success">Delivered</span>
-                                    @elseif($dat->status=="0")
+                                    @elseif($dat->result=="0")
                                         <span class="badge badge-warning">Not-Delivered</span>
                                     @else
-                                        <span class="badge badge-info">{{$dat->status}}</span>
+                                        <span class="badge badge-info">{{$dat->result}}</span>
                                     @endif
 
                                 </td>
-                                <td>{{$dat->iwallet}}</td>
-                                <td>{{$dat->fwallet}}</td>
-                                <td>{{$dat->payment_ref}}</td>
+                                <td>{{$dat->phone}}</td>
+                                <td>{{$dat->token}}</td>
+                                <td>{{$dat->plan}}</td>
+                                <td>{{$dat->refid}}</td>
                                 <td>{{$dat->date}}</td>
                                 <td><a href="profile/{{ $dat->username }}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a></td>
                             </tr>
