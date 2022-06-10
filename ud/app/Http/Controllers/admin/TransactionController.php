@@ -24,18 +24,20 @@ public function index()
         $date = $input['date'];
 
         // Instantiates a Query object
-        $query = deposit::Where('username', 'LIKE', "%$user_name%")
-            ->orWhere('payment_ref', 'LIKE', "%$reference%")
+        $query = deposit::Where('username',  "%$user_name%")
+            ->orWhere('payment_ref',  "%$reference%")
             ->orWhere('amount', "$amount")
-            ->orWhere('date', 'LIKE', "%$date%")
+            ->orWhere('date',  "%$date%")
             ->OrderBy('id', 'desc')
             ->limit(1000)
             ->get();
-
-        $cquery = deposit::Where('username', 'LIKE', "%$user_name%")
-            ->orWhere('payment_ref', 'LIKE', "%$reference%")
+        if(!$query){
+            return redirect('admin/finddeposite')->with("error", "details does not exist");
+        }
+        $cquery = deposit::Where('username',  "%$user_name%")
+            ->orWhere('payment_ref',  "%$reference%")
             ->orWhere('amount', "$amount")
-            ->orWhere('date', 'LIKE', "%$date%")
+            ->orWhere('date',  "%$date%")
             ->count();
 
         return view('admin/finddeposite', ['datas' => $query, 'count' => $cquery, 'result' => true]);
