@@ -42,6 +42,8 @@ public function index()
     }
     public function in(Request $request)
     {
+        $today = Carbon::now()->format('Y-m-d');
+
 
         $data =deposit::orderBy('id', 'desc')->paginate(25);
         $tt = deposit::count();
@@ -49,9 +51,9 @@ public function index()
         $st = deposit::where([['date', 'like', Carbon::now()->subDay()->format('Y-m-d') . '%']])->count();
         $rt = deposit::where([['date', 'like', Carbon::now()->subDays(2)->format('Y-m-d') . '%']])->count();
         $amount=deposit::sum('amount');
-        $am=deposit::where([['date', 'like', Carbon::now()->format('y-m-d'). '%']])->sum('amount');
-        $am1=deposit::where([['date', 'like', Carbon::now()->subDay()->format('y-m-d'). '%']])->sum('amount');
-        $am2=deposit::where([['date', 'like', Carbon::now()->subDays(2)->format('y-m-d'). '%']])->sum('amount');
+        $am=deposit::where([['date', 'LIKE', '%' . $today . '%']])->sum('amount');
+        $am1=deposit::where([['date', 'like', '%'. Carbon::now()->subDay()->format('y-m-d'). '%']])->sum('amount');
+        $am2=deposit::where([['date', 'like', '%'. Carbon::now()->subDays(2)->format('y-m-d'). '%']])->sum('amount');
 
 
         return view('admin/deposits', ['data' => $data,'amount'=>$amount, 'am'=>$am, 'am1'=>$am1, 'am2'=>$am2,  'tt' => $tt, 'ft' => $ft, 'st' => $st, 'rt' => $rt]);
