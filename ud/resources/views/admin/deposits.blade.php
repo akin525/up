@@ -5,7 +5,7 @@
             <div class="full counter_section margin_bottom_30">
                 <div class="couter_icon">
                     <div>
-                        <i class="fa fa-google-wallet yellow_color"></i>
+                        <i class="fa fa-google-wallet blue1_color"></i>
                     </div>
                 </div>
                 <div class="counter_no">
@@ -35,7 +35,7 @@
             <div class="full counter_section margin_bottom_30">
                 <div class="couter_icon">
                     <div>
-                        <i class="fa fa-google-wallet yellow_color"></i>
+                        <i class="fa fa-google-wallet blue1_color"></i>
                     </div>
                 </div>
                 <div class="counter_no">
@@ -64,6 +64,72 @@
 
         </div>
     </div>
+
+<div class="row">
+    <div class="row column1">
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money blue1_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ number_format($amount) ?? 'Total Transactions' }}</h5>
+                        <h6 class="head_couter">Sum of Total Transaction </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money red_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ number_format($am) ?? 'Total Today' }}</h5>
+                        <h6 class="head_couter">Sum Of Today Transactions </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money blue1_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ $am1 ?? 'Transactions Yesterday' }}</h5>
+                        <h6 class="head_couter">Sum Of  Yesterday Transactions</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money red_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ number_format($am2) ?? 'Total Reversed' }}</h5>
+                        <h6 class="head_couter">Sum Of Total Transactions 2Days Ago</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <div class="row">
     <div class="col-lg-12">
