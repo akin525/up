@@ -21,7 +21,7 @@ public function with(Request $request)
         'username' => 'required',
     ]);
     $walle=wallet::where('username', $request->username)->first();
-    $refer1=refer::where('username', Auth::user()->username)->first();
+    $refer1=refer::where('username', Auth::user()->username)->get();
     $refer=refer::where('username', Auth::user()->username)->sum('amount');
 
     if ($refer < $request->amount)
@@ -37,8 +37,10 @@ public function with(Request $request)
 
         return redirect("referwith")->with('status', $msg);
     }
-    $refer1->amount=0;
-    $refer1->save();
+    foreach ($refer1 as $pa) {
+        $pa->amount = 0;
+        $pa->save();
+    }
 $tp=$walle->balance + $request->amount;
     $walle->balance=$tp;
     $walle->save();
