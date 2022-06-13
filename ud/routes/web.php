@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CandCController;
+use App\Http\Controllers\admin\McdController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\TransactionController;
 use App\Http\Controllers\admin\UsersController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\AlltvController;
 use App\Http\Controllers\AirtimeController;
 use App\Http\Controllers\EkectController;
 use App\Http\Controllers\listdata;
+use App\Http\Controllers\RefersController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\VertualController;
 use Illuminate\Support\Facades\Route;
@@ -74,6 +76,8 @@ Route::post('buydata', [AuthController::class, 'buydata'])->name('buydata');
 Route::post('redata', [AuthController::class, 'redata'])->name('redata');
 Route::post('pre', [AuthController::class, 'pre'])->name('pre');
 Route::post('bill', [BillController::class, 'bill'])->name('bill');
+Route::get('referwith', [RefersController::class, 'index'])->name('referwith');
+Route::post('referwith1', [RefersController::class, 'with'])->name('referwith1');
 Route::get('fund', [FundController::class, 'fund'])->name('fund');
 Route::get('tran/{reference}', [FundController::class, 'tran'])->name('tran');
 Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
@@ -106,9 +110,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/server', [UsersController::class, 'server'])->name('admin/server');
     Route::get('admin/noti', [UsersController::class, 'mes'])->name('admin/noti');
     Route::get('admin/up/{id}', [UsersController::class, 'up'])->name('admin/up');
+    Route::get('admin/verify', [McdController::class, 'index'])->name('admin/verify');
     Route::get('admin/profile/{username}', [UsersController::class, 'profile'])->name('admin/profile');
     Route::get('admin/charge', [CandCController::class, 'sp'])->name('admin/charge');
     Route::get('admin/product', [productController::class, 'index'])->name('admin/product');
+//    Route::post('admin/do', [McdController::class, 'edit'])->name('admin/do');
     Route::post('admin/do', [ProductController::class, 'edit'])->name('admin/do');
     Route::post('admin/not', [UsersController::class, 'me'])->name('admin/not');
     Route::get('admin/editproduct/{id}', [ProductController::class, 'in'])->name('admin/editproduct');

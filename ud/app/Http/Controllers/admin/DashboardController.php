@@ -18,7 +18,6 @@ class DashboardController
 {
 public function dashboard(Request $request)
 {
-
     if (Auth()->user()->role=="admin") {
         $user = User::where('role', 'admin')->first();
         $me = Messages::where('status', 1)->first();
@@ -110,6 +109,7 @@ public function dashboard(Request $request)
 public function mcdtran()
 {
     if (Auth()->user()->role == "admin") {
+
         $resellerURL = 'https://app.mcd.5starcompany.com.ng/api/reseller/';
 
 
