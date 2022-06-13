@@ -35,7 +35,7 @@ public function with(Request $request)
     {
         $msg= "Your amount must be up to 100";
 
-        return redirect("referwith")->with('status', $msg);
+        return redirect("referwith")->with('error', $msg);
     }
     foreach ($refer1 as $pa) {
         $pa->amount = 0;
