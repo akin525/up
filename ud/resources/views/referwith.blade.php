@@ -63,7 +63,7 @@
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label>Enter Amount </label>
-                                                <input type="number" name="amount" class="form-control" placeholder="Amount to fund" required/>
+                                                <input type="number" name="amount" class="form-control" value="{{$refer}}" placeholder="Amount to fund" readonly/>
                                             </div>
                                         </div>
                                     </div>
