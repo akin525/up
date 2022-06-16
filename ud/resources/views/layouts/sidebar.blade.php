@@ -171,10 +171,10 @@
             </div>
             <!-- end topbar -->
 
-            <div class="alert alert-info">
-                <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                <i class="fa fa-bell"></i><b>Notics:</b><h6 class="align-content-center text-center text-white"><b><button type="button" class="btn btn-success" onclick="window.location.href='{{route('referwith')}}';">Click to Withdraw Your Referal Bonus</button></b></h6>
-            </div>
+{{--            <div class="alert alert-info">--}}
+{{--                <button type='button' class='close' data-dismiss='alert'>&times;</button>--}}
+{{--                <i class="fa fa-bell"></i><b>Notics:</b><h6 class="align-content-center text-center text-white"><b><button type="button" class="btn btn-success" onclick="window.location.href='{{route('referwith')}}';">Click to Withdraw Your Referal Bonus</button></b></h6>--}}
+{{--            </div>--}}
 
 
             <script type="text/javascript">
