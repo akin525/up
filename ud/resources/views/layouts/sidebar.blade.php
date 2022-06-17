@@ -183,8 +183,10 @@
                         <div class="card card-body align-content-center">
                             <a href="https://play.google.com/store/apps/details?id=com.wPrimeData_15605638" class="font-weight-bold text-center">
                                 <b>Download  our Mobile App</b>
-                                <img width="200" src="{{asset('images/dd.png')}}" alt="">
+                                <img width="300" src="{{asset('images/dd.png')}}" alt="">
+
                             </a>
+
                         </div>
                     </div>
 
@@ -212,12 +214,20 @@
                     x.parentNode.insertBefore(s, x);
                 })();
             </script>
+            <center>
 
+            <iframe width="300" class="widget widget-chat-message"
+                    src="https://www.youtube.com/embed/ICXSsBrh9_0?autoplay=1">
+            </iframe>
+            </center>
+{{--            <center>--}}
+{{--            <iframe width="250" height="100"--}}
+{{--                    src="https://www.youtube.com/embed/ICXSsBrh9_0?autoplay=1"--}}
+{{--                    title="PrimeData Promo Video Official | Buy Data Easily!"--}}
+{{--                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>--}}
 
-
-
-
-
+{{--            </iframe>--}}
+{{--            </center>--}}
 
 
 
