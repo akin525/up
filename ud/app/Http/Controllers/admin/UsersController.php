@@ -20,7 +20,7 @@ class UsersController
 $u=User::get();
         $users =DB::table('users')
             ->join('wallets','users.username','=','users.username')
-            ->paginate(20);
+            ->paginate(30);
         $wallet = DB::table('wallets')->orderBy('id', 'desc')->get();
 $reseller=DB::table('users')->where("apikey", "!=", "")->count();
         $t_users = DB::table('users')->count();
