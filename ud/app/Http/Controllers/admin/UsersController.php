@@ -18,9 +18,10 @@ class UsersController
     public function index(Request $request)
     {
 $u=User::get();
-        $users =DB::table('users')
-            ->join('wallets','users.username','=','users.username')
-            ->paginate(30);
+//        $users =DB::table('users')
+//            ->join('wallets','users.username','=','users.username')
+//            ->paginate(30);
+        $users=User::paginate(30);
         $wallet = DB::table('wallets')->orderBy('id', 'desc')->get();
 $reseller=DB::table('users')->where("apikey", "!=", "")->count();
         $t_users = DB::table('users')->count();
