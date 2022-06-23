@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\HonorApi;
 use App\Http\Controllers\admin\CandCController;
 use App\Http\Controllers\admin\McdController;
 use App\Http\Controllers\admin\ProductController;
@@ -71,6 +72,8 @@ Route::post('mp', [ResellerController::class, 'reseller'])->name('mp');
 Route::get('reseller', [ResellerController::class, 'sell'])->name('reseller');
 Route::get('upgrade', [ResellerController::class, 'apiaccess'])->name('upgrade');
 Route::post('buyairtime', [AirtimeController::class, 'airtime'])->name('buyairtime');
+Route::post('buyairtime1', [AirtimeController::class, 'honor'])->name('buyairtime1');
+//Route::get('airtime1', [AuthController::class, 'airtime'])->name('airtime1');
 Route::get('airtime', [AuthController::class, 'airtime'])->name('airtime');
 Route::post('buydata', [AuthController::class, 'buydata'])->name('buydata');
 Route::post('redata', [AuthController::class, 'redata'])->name('redata');
@@ -109,16 +112,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/finds', [UsersController::class, 'fin'])->name('admin/finds');
     Route::get('admin/server', [UsersController::class, 'server'])->name('admin/server');
     Route::get('admin/noti', [UsersController::class, 'mes'])->name('admin/noti');
+    Route::get('admin/air', [ProductController::class, 'air'])->name('admin/air');
     Route::get('admin/up/{id}', [UsersController::class, 'up'])->name('admin/up');
+    Route::get('admin/up1/{id}', [ProductController::class, 'pair'])->name('admin/up1');
     Route::get('admin/verify', [McdController::class, 'index'])->name('admin/verify');
     Route::get('admin/profile/{username}', [UsersController::class, 'profile'])->name('admin/profile');
     Route::get('admin/charge', [CandCController::class, 'sp'])->name('admin/charge');
     Route::get('admin/product', [productController::class, 'index'])->name('admin/product');
+    Route::get('admin/product1', [productController::class, 'index1'])->name('admin/product1');
 //    Route::post('admin/do', [McdController::class, 'edit'])->name('admin/do');
     Route::post('admin/do', [ProductController::class, 'edit'])->name('admin/do');
+    Route::post('admin/do1', [ProductController::class, 'edit1'])->name('admin/do1');
     Route::post('admin/not', [UsersController::class, 'me'])->name('admin/not');
+    Route::get('admin/editproduct1/{id}', [ProductController::class, 'in1'])->name('admin/editproduct1');
     Route::get('admin/editproduct/{id}', [ProductController::class, 'in'])->name('admin/editproduct');
     Route::get('admin/pd/{id}', [ProductController::class, 'on'])->name('admin/pd');
+    Route::get('admin/pd1/{id}', [ProductController::class, 'on1'])->name('admin/pd1');
     Route::get('admin/user', [UsersController::class, 'index'])->name('admin/user');
     Route::get('admin/deposits', [TransactionController::class, 'in'])->name('admin/deposits');
     Route::get('admin/bills', [TransactionController::class, 'bill'])->name('admin/bills');
@@ -127,5 +136,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 });
+Route::get('admin/api', [HonorApi::class, 'api'])->name('admin/api');
 
 

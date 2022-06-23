@@ -89,7 +89,7 @@
                         <div class="counter_no">
                             <div>
                                 <h5 class="total_no text-center">{{$data['nou']}}</h5>
-                                <h6 class="head_couter">Number of uers Purchase Today</h6>
+                                <h6 class="head_couter">Number of Today Visitors</h6>
                             </div>
                         </div>
                     </div>

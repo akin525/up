@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\airtimecon;
+use App\Models\big;
 use App\Models\charp;
 use App\Mail\Emailpass;
 use App\Models\Messages;
 use App\Models\refer;
+use App\Models\server;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +16,7 @@ use App\Models\wallet;
 use App\Models\bo;
 use App\Models\data;
 use App\Models\deposit;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -152,25 +156,48 @@ public function pass(Request $request)
          }
     public function buydata(Request  $request)
     {
+        $request->validate([
+            'id' => 'required',
+        ]);
+        $serve = server::where('status', '1')->first();
 
+        if ($serve->name == 'mcd') {
             $user = User::find($request->user()->id);
-            $data = data::where(['status'=> 1 ])->where('network', $request->id)->get();
+            $data = data::where(['status' => 1])->where('network', $request->id)->get();
 
 
             return view('buydata', compact('user', 'data'));
+        } elseif ($serve->name == 'honorworld') {
+            $user = User::find($request->user()->id);
+            $data= big::where('status', '1')->where('network', $request->id)->get();
+//return $data;
+            return view('buydata', compact('user', 'data'));
+
+        }
        }
     public function redata(Request  $request)
     {
-        if(Auth::check()){
+
+        $request->validate([
+            'id' => 'required',
+        ]);
+        $daterserver = new DataserverController();
+        $serve = server::where('status', '1')->first();
+//return $request->id;
+        if ($serve->name == 'mcd') {
             $user = User::find($request->user()->id);
-            $data = data::where(['status'=> 1 ])->where('network', $request->id)->get();
+            $data = data::where(['status' => 1])->where('network', $request->id)->get();
 
 //return $data;
             return view('redata', compact('user', 'data'));
-        }
+        } elseif ($serve->name == 'honorworld') {
+            $user = User::find($request->user()->id);
+            $data= big::where('status', '1')->where('network', $request->id)->get();
+//return $data;
+            return view('redata', compact('user', 'data'));
 
-        return redirect("login")->withSuccess('You are not allowed to access');
-    }
+        }
+       }
     public function pre(Request $request)
 
 
@@ -189,15 +216,18 @@ public function pass(Request $request)
     }
     public function airtime(Request  $request)
     {
-        if(Auth::check()){
+        $con=DB::table('airtimecons')->where('status', '=', '1')->first();
+        $se=$con->server;
+        if ($se == 'MCD') {
             $user = User::find($request->user()->id);
-            $data = data::where('plan_id',"airtime" )->get();
+            $data = data::where('plan_id', "airtime")->get();
             $wallet = wallet::where('username', $user->username)->first();
 
             return view('airtime', compact('user', 'data', 'wallet'));
-        }
+        } elseif ($se == 'Honor'){
+            return view('airtime1');
 
-        return redirect("login")->withSuccess('You are not allowed to access');
+        }
     }
 
     public function invoice(Request  $request)

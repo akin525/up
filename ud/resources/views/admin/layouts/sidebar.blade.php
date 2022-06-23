@@ -86,6 +86,12 @@
                         <a  class="nav-link" href="{{ route('admin/dashboard') }}"  ><i class="fa fa-dashboard red_color"></i> <span>Dashboard</span></a>
                     </li>
                     <li class="nav-item">
+                        <a  class="nav-link" href="{{ route('admin/air') }}"  ><i class="fa fa-laptop white_color"></i> <span>Airtime Control</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link" href="{{ route('admin/product1') }}"  ><i class="fa fa-shopping-cart white_color"></i> <span>Honorworld Product</span></a>
+                    </li>
+                    <li class="nav-item">
                         <a  class="nav-link" href="{{ route('admin/bills') }}"  ><i class="fa fa-shopping-basket white_color"></i> <span>All Bills</span></a>
                     </li>
                     <li class="nav-item">
