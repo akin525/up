@@ -8,24 +8,41 @@
                     Buy Data</h3></center>
         </div>
         <center>
+            <script>
+                function myNewFunction(sel) {
+                    // alert(sel.options[sel.selectedIndex].id);
+                    document.getElementById("po").value = (sel.options[sel.selectedIndex].id);
+                    document.getElementById("pk").value = (sel.options[sel.selectedIndex].text);
+                }
+            </script>
             <div class="btn-controls">
-                <form action="{{ route('pre') }}" method="post">
+                <form action="{{ route('bill') }}" method="post">
                     @csrf
                     <label for="network" class=" requiredField">
                         Select Network from the Rectangular Box<span class="asteriskField">*</span>
                     </label>
-                    <select  name="id" class="text-success form-control" required="">
-{{--                        <option value="">MTN | GLO | 9Mobile | Airtel</option>--}}
+                    <select  name="productid" class="text-success form-control" onChange="myNewFunction(this);" required="">
+                        <option>-------</option>
                         @foreach($data as $datas)
-                                <option value="{{$datas->id}}">{{$datas->network}}{{$datas->plan}}||NGN{{$datas->tamount}}
-
-                                </option>
-                                @endforeach
+                            <option value="{{$datas->id}}" id="{{$datas->tamount}}" >{{$datas->network}}{{$datas->plan}}
+                            </option>
+                        @endforeach
 
                     </select>
-
                     <br>
-                    <button type="submit" class=" btn" style="color: white;background-color: #ff0066">Click Next</button>
+                    <label for="network" class=" requiredField">
+                        Amount<span class="asteriskField">*</span>
+                    </label>
+                    <input name="amount" class="text-success form-control" value="" placeholder="Amount" id="po" readonly>
+                    <br>
+                    <input type="hidden" name="id" value="<?php echo rand(10000000, 999999999); ?>">
+
+                    <label for="network" class=" requiredField">
+                        Enter Phone no<span class="asteriskField">*</span>
+                    </label>
+                    <input type="number" name="number" class="form-control" required>
+                    <br>
+                    <button type="submit" class=" btn" style="color: white;background-color: #ff0066">Buy Now</button>
                 </form>
         </center>
         <br>

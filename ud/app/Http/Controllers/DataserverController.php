@@ -20,29 +20,35 @@ class DataserverController extends Controller
     public function honourwordbill($request)
     {
 
+//return $request;
+        $curl = curl_init();
 
-                        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.honourworld.com.ng/api/v1/purchase/data',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>'{
+  "network" : "'.$request->network.'",
+   "planId" : "'.$request->plan_id.'",
+  "phone" : "'.$request->number.'"
 
-                        curl_setopt_array($curl, array(
-                            CURLOPT_URL => 'https://honourworld.ng/datatopup',
-                            CURLOPT_RETURNTRANSFER => true,
-                            CURLOPT_ENCODING => '',
-                            CURLOPT_MAXREDIRS => 10,
-                            CURLOPT_TIMEOUT => 0,
-                            CURLOPT_FOLLOWLOCATION => true,
-                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                            CURLOPT_SSL_VERIFYHOST => 0,
-                            CURLOPT_SSL_VERIFYPEER => 0,
-                            CURLOPT_CUSTOMREQUEST => 'POST',
-                            CURLOPT_POSTFIELDS => array('action' => 'data-topup', 'category_id' => $request->cat_id, 'plan_id' => $request->plan_id, 'contact_opt' => '2', 'phone_num' => $request->number),
-                            CURLOPT_HTTPHEADER => array(
-                                'Cookie: PHPSESSID=be3030e3b1a0cb40c0b2c5903d05fdf6; lang=en-US; nplh=4915.13266a73e5010cb60ede277741fdb032; nplrmm=1'
-                            ),
-                        ));
-                        $response = curl_exec($curl);
+}',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer sk_live_9a55cd84-8ad7-46d9-9136-c5962858f753',
+                'Accept: application/json',
+                'Content-Type: application/json'
+            ),
+        ));
 
-                        curl_close($curl);
-                        // echo $response;
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+//        echo $response;
 
                     return $response;
 
