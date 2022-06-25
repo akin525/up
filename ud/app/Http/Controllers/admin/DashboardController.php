@@ -146,7 +146,7 @@ public function mcdtran()
 }
 public function webbook()
 {
-    $book=webook::orderBy('id', 'desc')->paginate(50);
+    $book=webook::orderBy('id', 'desc')->paginate(10);
     return view("admin/webbook", compact("book"));
 }
 public function ref()
