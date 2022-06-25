@@ -11,6 +11,7 @@ use App\Models\profit;
 use App\Models\refer;
 use App\Models\User;
 use App\Models\wallet;
+use App\Models\webook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -142,6 +143,11 @@ public function mcdtran()
 
     }
     return redirect("admin/login")->with('status', 'You are not allowed to access');
+}
+public function webbook()
+{
+    $book=webook::orderBy('id', 'desc')->paginate(50);
+    return view("admin/webbook", compact("book"));
 }
 public function ref()
 {

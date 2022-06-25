@@ -102,6 +102,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin/dashboard');
     Route::get('admin/mcdtransaction', [DashboardController::class, 'mcdtran'])->name('admin/mcdtransaction');
     Route::get('admin/refer', [DashboardController::class, 'ref'])->name('admin/refer');
+    Route::get('admin/webbook', [DashboardController::class, 'webbook'])->name('admin/webbook');
     Route::get('admin/vertual', [VertualAController::class, 'list'])->name('admin/vertual');
     Route::post('admin/update', [VertualAController::class, 'updateuser'])->name('admin/update');
     Route::post('admin/pass', [VertualAController::class, 'pass'])->name('admin/pass');
