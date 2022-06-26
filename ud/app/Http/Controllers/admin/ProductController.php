@@ -74,12 +74,14 @@ public function edit(Request $request)
         'tamount' => 'required',
         'ramount' => 'required',
         'name' => 'required',
+        'network' => 'required',
     ]);
     $pro=data::where('id', $request->id)->first();
     $pro->plan=$request->name;
     $pro->amount=$request->amount;
     $pro->tamount=$request->tamount;
     $pro->ramount=$request->ramount;
+    $pro->ramount=$request->network;
     $pro->save();
     return redirect('admin/product')->with('success', 'Product update successfully');
 

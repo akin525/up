@@ -62,6 +62,12 @@
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
+                                                <label>Network</label>
+                                                <input type="text" name="network" class="form-control" value="{{$pro->network}}" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
                                                 <label>Actual Amount </label>
                                                 <input type="number" name="amount" class="form-control" value="{{$pro->amount}}" required/>
                                             </div>
