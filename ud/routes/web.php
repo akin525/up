@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\McdController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\TransactionController;
 use App\Http\Controllers\admin\UsersController;
+use App\Http\Controllers\admin\SetController;
 use App\Http\Controllers\admin\VertualAController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\LoginController;
@@ -102,6 +103,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin/dashboard');
     Route::get('admin/mcdtransaction', [DashboardController::class, 'mcdtran'])->name('admin/mcdtransaction');
     Route::get('admin/refer', [DashboardController::class, 'ref'])->name('admin/refer');
+    Route::get('admin/setmin', [SetController::class, 'index1'])->name('admin/setmin');
+    Route::post('admin/min', [SetController::class, 'min'])->name('admin/min');
+    Route::get('admin/setcharge', [SetController::class, 'index'])->name('admin/setcharge');
+    Route::post('admin/setc', [SetController::class, 'charge'])->name('admin/setc');
     Route::get('admin/webbook', [DashboardController::class, 'webbook'])->name('admin/webbook');
     Route::get('admin/vertual', [VertualAController::class, 'list'])->name('admin/vertual');
     Route::post('admin/update', [VertualAController::class, 'updateuser'])->name('admin/update');

@@ -95,10 +95,16 @@
                         <a  class="nav-link" href="{{ route('admin/product1') }}"  ><i class="fa fa-shopping-cart white_color"></i> <span>Honorworld Product</span></a>
                     </li>
                     <li class="nav-item">
+                        <a  class="nav-link" href="{{ route('admin/setcharge') }}"  ><i class="fa fa-bell red_color"></i> <span>Set Charges</span></a>
+                    </li>
+                    <li class="nav-item">
                         <a  class="nav-link" href="{{ route('admin/bills') }}"  ><i class="fa fa-shopping-basket white_color"></i> <span>All Bills</span></a>
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link" href="{{ route('admin/mcdtransaction') }}"  ><i class="fa fa-home white_color"></i> <span>Mcdtransaction</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link" href="{{ route('admin/setmin') }}"  ><i class="fa fa-bell red_color"></i> <span>Set Minimum Fund</span></a>
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link" href="{{ route('admin/vertual') }}"  ><i class="fa fa-area-chart red_color"></i> <span>All-Vertual</span></a>
