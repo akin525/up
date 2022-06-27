@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\login;
 use App\Models\airtimecon;
 use App\Models\big;
 use App\Models\charp;
@@ -87,6 +88,15 @@ public function pass(Request $request)
         }
 
         Auth::login($user);
+        $admin= 'admin@primedata.com.ng';
+        $admin1= 'primedata18@gmail.com';
+
+        $user=User::where('email', $request->email)->first();
+$login=$user->name;
+        $receiver= $request->email;
+        Mail::to($receiver)->send(new login($login));
+        Mail::to($admin)->send(new login($login ));
+        Mail::to($admin1)->send(new login($login ));
 
         return redirect()->intended('dashboard')
             ->withSuccess('Signed in');
