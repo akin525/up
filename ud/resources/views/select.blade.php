@@ -18,8 +18,12 @@
                         <option value="MTN">MTN</option>
                         <option value="GLO">GLO</option>
                         <option value="9MOBILE">9MOBILE</option>
-                        <option value="AIRTEL">AIRTEL</option>
-
+                        @if ($serve->name == 'mcd')
+                            <option value="AIRTEL">AIRTEL</option>
+                        @else
+                            <option value="AIRTEL_DG">AIRTEL_DG</option>
+                            <option value="AIRTEL_CG">AIRTEL_CG</option>
+                        @endif
                     </select>
 
                     <br>

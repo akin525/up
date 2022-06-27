@@ -36,7 +36,6 @@ class DataserverController extends Controller
   "network" : "'.$request->network.'",
    "planId" : "'.$request->plan_id.'",
   "phone" : "'.$request->number.'"
-
 }',
             CURLOPT_HTTPHEADER => array(
                 'Authorization: Bearer sk_live_9a55cd84-8ad7-46d9-9136-c5962858f753',

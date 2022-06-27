@@ -140,19 +140,21 @@ public function pass(Request $request)
     }
     public function select(Request  $request)
     {
+        $serve = server::where('status', '1')->first();
 
             $user = User::find($request->user()->id);
 
 
-            return view('select', compact('user'));
+            return view('select', compact('user', 'serve'));
        }
     public function select1(Request  $request)
     {
+        $serve = server::where('status', '1')->first();
 
             $user = User::find($request->user()->id);
 
 
-            return view('select1', compact('user'));
+            return view('select1', compact('user', 'serve'));
          }
     public function buydata(Request  $request)
     {
