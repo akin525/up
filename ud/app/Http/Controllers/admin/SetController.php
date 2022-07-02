@@ -25,7 +25,7 @@ class SetController
            'body'=>'required',
         ]);
 
-        $charge=setting::first();
+        $charge=setting::where('id',1)->first();
 
         $charge->charges=$request->body;
         $charge->save();
@@ -43,7 +43,7 @@ class SetController
         $request->validate([
             'body'=>'required',
         ]);
-        $min=setting::first();
+        $min=setting::where('id',1)->first();
         $min->len=$request->body;
         $min->save();
 
