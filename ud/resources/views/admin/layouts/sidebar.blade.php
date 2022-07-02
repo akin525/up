@@ -94,6 +94,9 @@
                     <li class="nav-item">
                         <a  class="nav-link" href="{{ route('admin/product1') }}"  ><i class="fa fa-shopping-cart white_color"></i> <span>Honorworld Product</span></a>
                     </li>
+                    <li class="active">
+                        <a href="{{ route('admin/product') }}"  ><i class="fa fa-shopping-cart red_color"></i> <span>MCD Product</span></a>
+                    </li>
                     <li class="nav-item">
                         <a  class="nav-link" href="{{ route('admin/setcharge') }}"  ><i class="fa fa-bell red_color"></i> <span>Set Charges</span></a>
                     </li>
@@ -127,9 +130,7 @@
                     <li class="active">
                         <a href="{{ route('admin/finddeposite') }}"  ><i class="fa fa-search red_color"></i> <span>Find Deposit</span></a>
                     </li>
-                    <li class="active">
-                        <a href="{{ route('admin/product') }}"  ><i class="fa fa-shopping-cart red_color"></i> <span>Product</span></a>
-                    </li>
+
                     <li class="active">
                         <a href="{{ route('admin/deposits') }}"  ><i class="fa fa-shopping-bag white_color"></i> <span>All-Deposit</span></a>
                     </li>
