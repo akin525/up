@@ -80,7 +80,6 @@ public function edit(Request $request)
     $pro->amount=$request->amount;
     $pro->tamount=$request->tamount;
     $pro->ramount=$request->ramount;
-    $pro->ramount=$request->network;
     $pro->save();
     return redirect('admin/product')->with('success', 'Product update successfully');
 
