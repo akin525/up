@@ -31,13 +31,13 @@
                                 @if ($errors->has('email'))<div class='alert alert-danger'>
                                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
                                     <i class='fa fa-ban-circle'></i>
-                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    <span class="text-white">{{ $errors->first('email') }}</span>
                                 </div>
                                 @endif
                                 @if ($errors->has('password'))<div class='alert alert-danger'>
                                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
                                     <i class='fa fa-ban-circle'></i>
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    <span class="text-white">{{ $errors->first('password') }}</span>
                                 </div>
                                 @endif
                                 <div class="field">

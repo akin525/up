@@ -13,17 +13,17 @@ public function list(Request $request)
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.honourworld.com.ng/api/v1/get/data/plans',
+        CURLOPT_URL => 'https://app.mcd.5starcompany.com.ng/api/reseller/list',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 0,
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => array('service' => 'data','coded' => '9'),
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer sk_live_9a55cd84-8ad7-46d9-9136-c5962858f753',
-            'Accept: application/json'
+            'Authorization: mcd_key_75rq4][oyfu545eyuriup1q2yue4poxe3jfd'
         ),
     ));
 
@@ -32,19 +32,19 @@ public function list(Request $request)
     curl_close($curl);
     return $response;
 
-    $data = json_decode($response, true);
-
-//return $success;
+    $d= json_decode($response, true);
+$data=$d['data'];
+//return $data;
 foreach ($data as $plan){
-    $success =$plan["network"];
-    $planid = $plan["planId"];
-    $price= $plan['price'];
-    $allowance=$plan['allowance'];
-    $validity =$plan['validity'];
-    $insert= big::create([
+    $success =$plan["type"];
+    $planid = $plan["code"];
+    $price= $plan['amount'];
+    $allowance=$plan['name'];
+//    $validity =$plan['validity'];
+    $insert= data::create([
         'plan_id' =>$planid,
         'network' =>$success,
-        'plan' =>$allowance.$validity,
+        'plan' =>$allowance,
         'code' =>$planid,
         'amount'=>$price,
         'tamount'=>$price,
