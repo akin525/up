@@ -19,8 +19,7 @@ use App\Models\data;
 use App\Models\deposit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class AuthController
@@ -34,6 +33,7 @@ public function pass(Request $request)
     $user = User::where('email', $request->email)->first();
 
     if (!isset($user)){
+
         return redirect(route('password.request'))
             ->with('error', "Email not found in our system");
 
@@ -83,8 +83,10 @@ public function pass(Request $request)
             ->first();
 
         if(!isset($user)){
-            return redirect()->back()->withInput($request->only('email', 'remember'))
-                ->withErrors(['password' => 'Credentials does not match.']);
+
+            Alert::error('Credentials does not match', 'Kindly Provide correct email & password');
+
+            return back();
         }
 
         Auth::login($user);
@@ -98,6 +100,7 @@ $login=$user->name;
         Mail::to($admin)->send(new login($login ));
         Mail::to($admin1)->send(new login($login ));
 
+        Alert::success('Dashboard', 'Login Successfully');
         return redirect()->intended('dashboard')
             ->withSuccess('Signed in');
 

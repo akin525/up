@@ -156,7 +156,7 @@
                 </nav>
             </div>
             <!-- end topbar -->
-
+            @include('sweetalert::alert')
 
 
             <script type="text/javascript">

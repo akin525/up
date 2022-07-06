@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CandCController
 {
@@ -42,14 +43,17 @@ public function credit(Request $request)
 
         $user = User::where('username', $request->username)->first();
         if (!isset($user)){
-            return redirect("admin/credit")->with('error','Username not found');
+            Alert::warning('Admin', 'Username not found');
+            return redirect("admin/credit");
 
         }
         $wallet = wallet::where('username', $request->username)->first();
 
         $depo = deposit::where('payment_ref', $request->refid)->first();
         if (isset($depo)) {
-            return redirect("admin/credit")->with('error','Duplicate Transaction');
+            Alert::warning('Admin', 'Duplicate Transaction');
+
+            return redirect("admin/credit");
 
         } else {
             $gt = $wallet->balance + $request->amount;
@@ -71,8 +75,10 @@ public function credit(Request $request)
             Mail::to($admin)->send(new Emailfund($deposit));
             Mail::to($admin2)->send(new Emailfund($deposit));
 
-            return redirect(route('admin/credit'))
-                ->with('status', $request->amount . " was credited to " . $user->username . ' successfully');
+            $mg= $request->amount . " was credited to " . $user->username . ' successfully';
+            Alert::success('Admin', $mg);
+
+            return redirect(route('admin/credit'));
 
         }
     }
@@ -96,7 +102,8 @@ public function charge(Request $request)
     if (Auth()->user()->role == "admin") {
         $user = User::where('username', $request->username)->first();
         if (!isset($user)){
-            return redirect("admin/charge")->with('error','Username not found');
+            Alert::warning('Admin', 'Username not found');
+            return redirect("admin/charge");
 
         }
         $wallet = wallet::where('username', $request->username)->first();
@@ -123,8 +130,10 @@ public function charge(Request $request)
         Mail::to($admin)->send(new Emailcharges($charp));
         Mail::to($admin2)->send(new Emailcharges($charp));
 
-        return redirect(route('admin/charge'))
-            ->with('status', $request->amount . " was charge from " . $user->username . ' wallet successfully');
+        $mg= $request->amount . " was charge from " . $user->username . ' wallet successfully';
+        Alert::success('Admin', $mg);
+
+        return redirect(route('admin/charge'));
 
     }
     return redirect("admin/login")->with('status', 'You are not allowed to access');

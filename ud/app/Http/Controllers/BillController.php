@@ -12,6 +12,7 @@ use App\Models\setting;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -42,20 +43,23 @@ class BillController extends Controller
 
             if ($wallet->balance < $amount) {
                 $mg = "You Cant Make Purchase Above" . "NGN" . $amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
+                Alert::error('Insufficient Balance', $mg);
 
-                return view('bill', compact('user', 'mg'));
+                return redirect(route('dashboard'));
 
             }
             if ($request->amount < 0) {
 
                 $mg = "error transaction";
-                return view('bill', compact('user', 'mg'));
+                Alert::error('Error', $mg);
+                return redirect(route('dashboard'));
 
             }
             $bo = bo::where('refid', $request->id)->first();
             if (isset($bo)) {
                 $mg = "duplicate transaction";
-                return view('bill', compact('user', 'mg'));
+                Alert::error('Error', $mg);
+                return redirect(route('dashboard'));
 
             } else {
                 $user = User::find($request->user()->id);
@@ -118,8 +122,8 @@ class BillController extends Controller
                         Mail::to($admin)->send(new Emailtrans($bo));
                         Mail::to($admin2)->send(new Emailtrans($bo));
 
-
-                        return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+                        Alert::success('Success', $am.' '.$ph);
+                        return redirect(route('dashboard'));
 
                     } elseif ($data['code'] == '300') {
                         $success = 0;
@@ -130,8 +134,10 @@ class BillController extends Controller
                         $name = $product->plan;
                         $am = "NGN $request->amount Was Refunded To Your Wallet";
                         $ph = ", Transaction fail";
+                        Alert::error('Error', $am.' '.$ph);
 
-                        return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+
+                        return redirect(route('dashboard'));
                     }
                 } else if ($mcd->name == "mcd") {
                     $response = $daterserver->mcdbill($object);
@@ -173,8 +179,9 @@ class BillController extends Controller
                         Mail::to($admin)->send(new Emailtrans($bo));
                         Mail::to($admin2)->send(new Emailtrans($bo));
 
+                        Alert::success('Success', $am.' '.$ph);
 
-                        return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+                        return redirect(route('dashboard'));
 
                     }elseif (!isset($data['success'])) {
                         $success = 0;
@@ -185,8 +192,8 @@ class BillController extends Controller
                         $name = $product->plan;
                         $am = "NGN $request->amount Was Refunded To Your Wallet";
                         $ph = ", Transaction fail";
-
-                        return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+                        Alert::error('Error', $am.' '.$ph);
+                        return redirect(route('dashboard'));
                     }
 
                 }

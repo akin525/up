@@ -20,6 +20,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @include('sweetalert::alert')
                     <div class="login_form">
                         <center><h3 class="text-wh text-red">LOG-IN</h3></center>
                         <br>

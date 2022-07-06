@@ -169,6 +169,7 @@
                     </div>
                 </nav>
             </div>
+        @include('sweetalert::alert')
             <!-- end topbar -->
 
 {{--            <div class="alert alert-info">--}}

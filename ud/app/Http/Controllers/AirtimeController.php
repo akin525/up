@@ -10,6 +10,7 @@ use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AirtimeController
 {
@@ -25,20 +26,22 @@ class AirtimeController
 
             if ($wallet->balance < $request->amount) {
                 $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-
-                return view('bill', compact('user', 'mg'));
+                Alert::error('Insufficient Fund', $mg);
+                return back();
 
             }
             if ($request->amount < 0) {
 
                 $mg = "error transaction";
-                return view('bill', compact('user', 'mg'));
+                Alert::warning('Warning', $mg);
+                return back();
 
             }
             $bo = bo::where('refid', $request->refid)->first();
             if (isset($bo)) {
                 $mg = "duplicate transaction";
-                return view('bill', compact('user', 'mg'));
+                Alert::error($mg);
+                return back();
 
             } else {
                 $user = User::find($request->user()->id);
@@ -109,7 +112,8 @@ class AirtimeController
                     Mail::to($admin)->send(new Emailtrans($bo));
                     Mail::to($admin2)->send(new Emailtrans($bo));
 
-                    return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+                    Alert::success('Success', $am.''.$ph);
+                    return back();
 
                 } elseif ($success == 0) {
                     $zo = $user->balance + $request->amount;
@@ -137,20 +141,22 @@ class AirtimeController
 
         if ($wallet->balance < $request->amount) {
             $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-
-            return view('bill', compact('user', 'mg'));
+Alert::error('Insufficient Balance', $mg);
+            return back();
 
         }
         if ($request->amount < 0) {
 
             $mg = "error transaction";
-            return view('bill', compact('user', 'mg'));
+            Alert::warning('Warning', $mg);
+            return back();
 
         }
         $bo = bo::where('refid', $request->refid)->first();
         if (isset($bo)) {
             $mg = "duplicate transaction";
-            return view('bill', compact('user', 'mg'));
+            Alert::error('Error', $mg);
+            return back();
 
         } else {
             $user = User::find($request->user()->id);
@@ -226,7 +232,8 @@ class AirtimeController
                 Mail::to($admin)->send(new Emailtrans($bo));
                 Mail::to($admin2)->send(new Emailtrans($bo));
 
-                return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+                Alert::success('Success', $am.' '.$ph);
+                return back();
 
             } elseif ($data['message']== 'Possible duplicate transaction, Please retry after 2 minutes') {
                 $zo = $user->balance + $request->amount;
@@ -237,7 +244,8 @@ $success=0;
                 $am = "NGN $request->amount Was Refunded To Your Wallet";
                 $ph = ", Possible duplicate transaction, Please retry after 2 minutesl";
 
-                return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+                Alert::error('Error', $am.' '.$ph);
+                return back();
 
             } elseif ($data['message']== 'Failed') {
                 $zo = $user->balance + $request->amount;
@@ -247,8 +255,8 @@ $success=0;
                 $name = 'Airtime';
                 $am = "NGN $request->amount Was Refunded To Your Wallet";
                 $ph = ", Transaction fail";
-
-                return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
+                Alert::error('Error', $am.' '.$ph);
+                return back();
 
             }
         }

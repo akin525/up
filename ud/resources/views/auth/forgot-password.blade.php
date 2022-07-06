@@ -21,7 +21,7 @@
                         </center>
                         <br>
                         <br>
-
+                        @include('sweetalert::alert')
         <form method="POST" action="{{ route('passw') }}">
             @csrf
             <fieldset>
