@@ -249,8 +249,8 @@ $success=0;
 
             } elseif ($data['message']== 'Failed') {
                 $zo = $user->balance + $request->amount;
-                $user->balance = $zo;
-                $user->save();
+                $wallet->balance = $zo;
+                $wallet->save();
                 $success=0;
                 $name = 'Airtime';
                 $am = "NGN $request->amount Was Refunded To Your Wallet";
