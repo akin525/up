@@ -7,6 +7,7 @@ use App\Models\deposit;
 use App\Models\setting;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class ResellerController
 //            $wallet->account_number = $number;-
 //            $wallet->account_name = $account;
 //            $wallet->save();
-
+            Alert::info('Upgrade', 'You can request for a website after you upgrade. You will have access to cheaper prices of products too!');
             return view('reseller', compact('user', 'wallet'));
 
 
@@ -56,8 +57,8 @@ class ResellerController
 
             if ($wallet->balance < $request->amount) {
                 $mg = "You Cant Upgrade Your Account" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-
-                return view('bill', compact('user', 'mg'));
+                Alert::info('Insufficient Balance', $mg);
+                return back();
 
             }
             if ($request->amount < 0) {

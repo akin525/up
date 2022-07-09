@@ -25,7 +25,7 @@
                         <option value="9MOBILE">9MOBILE</option>
                         @endif
                         @if ($serve->name == 'mcd')
-                        <option value="AIRTEL">AIRTEL</option>
+                        <option value="airtel-data">AIRTEL</option>
                         @else
                         <option value="AIRTEL_DG">AIRTEL_DG</option>
                         <option value="AIRTEL_CG">AIRTEL_CG</option>
