@@ -21,6 +21,7 @@ class AirtimeController
         if (Auth::check()) {
             $user = User::find($request->user()->id);
             $wallet = wallet::where('username', $user->username)->first();
+            $bt = data::where("id", $request->id)->first();
 
 
             if ($wallet->balance < $request->amount) {
@@ -41,9 +42,6 @@ class AirtimeController
                 return view('bill', compact('user', 'mg'));
 
             } else {
-                $user = User::find($request->user()->id);
-                $bt = data::where("id", $request->id)->first();
-                $wallet = wallet::where('username', $user->username)->first();
 
 
                 $gt = $wallet->balance - $request->amount;
@@ -112,9 +110,9 @@ class AirtimeController
                     return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
 
                 } elseif ($success == 0) {
-                    $zo = $user->balance + $request->amount;
-                    $user->balance = $zo;
-                    $user->save();
+                    $zo = $wallet->balance + $request->amount;
+                    $wallet->balance = $zo;
+                    $wallet->save();
 
                     $name = $bt->plan;
                     $am = "NGN $request->amount Was Refunded To Your Wallet";
