@@ -1,5 +1,9 @@
 <x-guest-layout>
     <body class="inner_page login">
+    <div id="loading-wrapper">
+        <div class="spinner-border"></div>
+        PRIMEDATA......
+    </div>
     <div class="full_container">
         <div class="container">
             <div class="center verticle_center full_height">
@@ -10,36 +14,35 @@
                         </div>
                     </div>
 
-                    <div class="text-center">
-                        <h6>Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</h6>
-        </div>
-
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
                     <div class="login_form">
-                        <center><h5 class="text-wh text-red">Primedata Reset Password</h5></center>
+                        <center><h5 class="text-wh text-red">Primedata Get New Password</h5></center>
+                        <center>
+                            <a href="{{route('login')}}" class="btn btn-success">Login</a>
+                        </center>
                         <br>
                         <br>
-<div class="card-body text-center">
-        <x-jet-validation-errors class="mb-4" />
-</div>
-
-        <form method="POST" action="{{ route('password.email') }}">
+                        @include('sweetalert::alert')
+        <form method="POST" action="{{ route('passw') }}">
             @csrf
             <fieldset>
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{session('error')}}
+                    </div>
+                @endif
+
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{session('success')}}
+                            </div>
+                        @endif
                 <div class="field">
                     <label class="label_field">Email</label>
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <input id="email" class="form-control" type="email" name="email"  required autofocus />
             </div>
-
-            <div class="btn btn-outline-cyan">
-                <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-jet-button>
-            </div>
+<center>
+                <button type="submit" class="btn btn-success" >Get password</button>
+</center>
         </form>
                         </fieldset>
 
@@ -48,4 +51,10 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('hp/jquery.min.js')}}"></script>
+    <script src="{{asset('hp/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('hp/modernizr.js')}}"></script>
+    <script src="{{asset('hp/moment.js')}}"></script>
+    <script src="{{asset('hp/main.js')}}"></script>
+
 </x-guest-layout>

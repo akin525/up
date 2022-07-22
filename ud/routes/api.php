@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('run', [VertualController::class, 'run'])->name('run');
+Route::post('honor', [VertualController::class, 'honor'])->name('honor');
 
 Route::group(['middleware'=> 'apikey'], function () {
     Route::get('dashboard', [ResellerdetailsController::class, 'details']);

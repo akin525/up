@@ -6,6 +6,7 @@ use App\Mail\Emailfund;
 use App\Models\bo;
 use App\Models\charp;
 use App\Models\web;
+use App\Models\webook;
 use App\Models\deposit;
 use App\Models\setting;
 use App\Models\wallet;
@@ -108,18 +109,21 @@ class VertualController
 
                 $deposit = deposit::create([
                     'username' => $wallet->username,
-                    'payment_ref' => $reference,
+                    'payment_ref' =>"Api". $reference,
                     'amount' => $amount,
                     'iwallet' => $pt,
                     'fwallet' => $gt,
                 ]);
                 $charp = charp::create([
                     'username' => $wallet->username,
-                    'payment_ref' => $reference,
+                    'payment_ref' =>"Api". $reference,
                     'amount' => $char->charges,
                     'iwallet' => $pt,
                     'fwallet' => $gt,
                 ]);
+                $wallet->balance = $gt;
+                $wallet->save();
+                $user = user::where('username', $wallet->username)->first();
 
 
                 $admin= 'admin@primedata.com.ng';
@@ -130,9 +134,6 @@ class VertualController
                 Mail::to($admin)->send(new Emailcharges($charp ));
                 Mail::to($admin2)->send(new Emailcharges($charp ));
 
-                $wallet->balance = $gt;
-                $wallet->save();
-                $user = user::where('username', $wallet->username)->first();
 
                 $receiver = $user->email;
                 Mail::to($receiver)->send(new Emailfund($deposit));
@@ -143,5 +144,33 @@ class VertualController
 
 
         }
+    }
+
+    public function honor(Request $request)
+    {
+//        dd($request->all());
+//        $webook=webook::create([
+//            'code'=>$request,
+//            'message'=>$request,
+//        ]);
+
+       $json = json_decode(file_get_contents("php://input"), true) ;
+//            print_r($json['ref']);
+//    print_r($json['accountDetails']['accountName']);
+//        return $request;
+//        $data = json_decode($request, true);
+
+        $data = $json;
+//        return $data;
+
+
+
+        $code=$data['code'];
+        $message=$data['message'];
+
+        $webook=webook::create([
+            'code'=>$code,
+            'message'=>$message,
+        ]);
     }
 }

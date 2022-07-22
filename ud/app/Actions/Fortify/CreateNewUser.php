@@ -37,12 +37,12 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
         return DB::transaction(function () use ($input) {
-
-            $refe= refer::create([
-                'username' => $input['refer'],
-                'newuserid' => $input['username'],
-                'amount' =>100 ,
-            ]);
+//
+//            $refe= refer::create([
+//                'username' => $input['refer'],
+//                'newuserid' => $input['username'],
+//                'amount' =>100 ,
+//            ]);
 
             $wallet= wallet::create([
                 'username' => $input['username'],

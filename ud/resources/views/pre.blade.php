@@ -1,5 +1,5 @@
 @include('layouts.sidebar')
-
+<center>
 <div class="span9">
     <div class="content">
         <div class="module">
@@ -8,12 +8,14 @@
                     Preview Data</h3>
             </div>
             <center>
+
+                <center>
                 <div class="card">
                     <div class="card-body">
                         <div class="row page-breadcrumbs">
                             <div class="col-md-12 align-self-center">
 
-                                <h4 class="theme-cl">Product Detail</h4>
+                                <h4 class="theme-cl">Product Details</h4>
                             </div>
                         </div>
                     </div>
@@ -213,14 +215,15 @@
                                         @endforeach
                                         <br>
 
-                                        <h3 class="box-title mrg-top-30">Key Highlights</h3>
+                                        <h4 class="box-title mrg-top-30">Key Highlights</h4>
 
                                         <ul class="list-icons">
-                                            <li><i class="fa fa-check text-success"></i> Secure Payment Gateways</li>
-                                            <li><i class="fa fa-check text-success"></i> Instant Activation</li>
-                                            <li><i class="fa fa-check text-success"></i> Efficient Performance</li>
+                                            <li><i class="fa fa-check text-success"></i> Enter number without international format e.g. 08103153004</li>
+                                            <li><i class="fa fa-check text-success"></i> PrimeData cannot be held responsible for numbers entered incorrectly. Please double check the cell number you've entered before Data Top-up.</li>
+                                            <li><i class="fa fa-check text-success"></i> Read our Terms here https://primedata.com.ng/terms/</li>
                                         </ul>
                                     </div>
+                                    </center>
 
 
                                 </div>
@@ -232,6 +235,8 @@
         </div>
     </div>
 </div>
+</center>
+
 <!--        <div class="col-sm-4 ">-->
 <!--            <br>-->
 <!--            <center> <h4>Codes for Data Balance: </h4></center>-->

@@ -121,13 +121,12 @@ foreach ($plan as $pla) {
 //    }
     public function tv(Request $request)
     {
-        if (Auth::check()) {
+
             $user = User::find($request->user()->id);
             $tv = data::where('plan', 'tv')->get();
 
             return  view('tv', compact('user', 'tv'));
 
-        }
         return redirect("login")->withSuccess('You are not allowed to access');
 
     }

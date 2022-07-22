@@ -109,7 +109,7 @@
             <div class="card-body">
                 <div class='alert alert-info'>
                     <button type='button' class='close'></button>
-                    <i class='fa fa-ban-circle'></i><h6>Transfer money to your Virtual Bank Account to get your PrimeData Wallet credited instantly! </br></h6>
+                    <i class='fa fa-ban-circle'></i><h6 class="text-center text-white">Transfer money to your Virtual Bank Account to get your PrimeData Wallet credited instantly! </br></h6>
 
                     <center>
                         <div class="card-body">

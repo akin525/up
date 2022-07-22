@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <!-- site metas -->
-        <title>The Primedata Mobile Digital Network</title>
+        <title>PrimeData Nig | Data Refill, Airtime, Cable TV, Electricity Subscription</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -24,7 +24,7 @@
         <link href="{{asset('asset/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" />
         <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
         <!-- site css -->
-        <link rel="stylesheet" href="{{asset('style.css')}}" />
+        <link rel="stylesheet" href="{{asset('style1.css')}}" />
         <!-- responsive css -->
         <link rel="stylesheet" href="{{asset('css/responsive.css')}}" />
         <!-- color css -->
@@ -35,6 +35,8 @@
         <link rel="stylesheet" href="{{asset('css/perfect-scrollbar.css')}}" />
         <!-- custom css -->
         <link rel="stylesheet" href="{{asset('css/custom.css')}}" />
+        <link rel="stylesheet" href="{{asset('hp/bootstrap.min.css')}}" />
+        <link rel="stylesheet" href="{{asset('hp/main.css')}}" />
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
@@ -61,6 +63,7 @@
             }
         </script>
         <!-- jQuery -->
+        <script src="{{asset('hp/main.js')}}"></script>
         <script src="{{asset('js/jquery.min.js')}}"></script>
         <script src="{{asset('js/popper.min.js')}}"></script>
         <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -80,9 +83,12 @@
         <script src="{{asset('js/custom.js')}}"></script>
         <script src="{{asset('js/chart_custom_style1.js')}}"></script>
     </head>
+
+
     <body>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
     </body>
+
 </html>

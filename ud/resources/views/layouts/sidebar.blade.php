@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>User Dashboard</title>
+    <title>{{Auth::user()->name }} Dashboard</title>
     <meta name="keywords" content="Buy data in a few clicks to keep surfing the internet. You can buy whatever size of data plan for whichever network you desire. All plans are topped-up to your specified number in seconds.">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -23,7 +23,7 @@
     <link href="{{asset('asset/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
     <!-- site css -->
-    <link rel="stylesheet" href="{{asset('style.css')}}" />
+    <link rel="stylesheet" href="{{asset('style1.css')}}" />
     <!-- responsive css -->
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}" />
     <!-- color css -->
@@ -34,9 +34,16 @@
     <link rel="stylesheet" href="{{asset('css/perfect-scrollbar.css')}}" />
     <!-- custom css -->
     <link rel="stylesheet" href="{{asset('css/custom.css')}}" />
+
+    <link rel="stylesheet" href="{{asset('hp/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('hp/main.css')}}" />
 </head>
 
 <body class="dashboard dashboard_1">
+<div id="loading-wrapper">
+    <div class="spinner-border"></div>
+    PRIMEDATA......
+</div>
 <div class="full_container">
     <div class="inner_container">
         <!-- Sidebar  -->
@@ -67,6 +74,11 @@
             <div class="sidebar_blog_2">
                 <h4>General</h4>
                 <ul class="list-unstyled components">
+                    @if(Auth::user()->role=="admin")
+                        <li class="active">
+                            <a href="{{ route('admin/dashboard') }}"  ><i class="fa fa-amazon white_color"></i> <span>Administrartor</span></a>
+                        </li>
+                    @endif
                     <li class="active">
                         <a href="{{ route('dashboard') }}"  ><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
                     </li>
@@ -157,9 +169,30 @@
                     </div>
                 </nav>
             </div>
+        @include('sweetalert::alert')
             <!-- end topbar -->
 
+{{--            <div class="alert alert-info">--}}
+{{--                <button type='button' class='close' data-dismiss='alert'>&times;</button>--}}
+{{--                <i class="fa fa-bell"></i><b>Notics:</b><h6 class="align-content-center text-center text-white"><b><button type="button" class="btn btn-success" onclick="window.location.href='{{route('referwith')}}';">Click to Withdraw Your Referal Bonus</button></b></h6>--}}
+{{--            </div>--}}
 
+
+{{--            <center>--}}
+{{--                <div class="container-fluid">--}}
+{{--                    <div class="row column_title">--}}
+{{--                        <div class="card card-body align-content-center">--}}
+{{--                            <a href="https://play.google.com/store/apps/details?id=com.wPrimeData_15605638" class="font-weight-bold text-center">--}}
+{{--                                <b>Download  our Mobile App</b>--}}
+{{--                                <img width="300" src="{{asset('images/dd.png')}}" alt="">--}}
+
+{{--                            </a>--}}
+
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                </div>--}}
+{{--            </center>--}}
 
             <script type="text/javascript">
                 (function() {
@@ -183,11 +216,14 @@
                 })();
             </script>
 
+{{--            <center>--}}
+{{--            <iframe width="250" height="100"--}}
+{{--                    src="https://www.youtube.com/embed/ICXSsBrh9_0?autoplay=1"--}}
+{{--                    title="PrimeData Promo Video Official | Buy Data Easily!"--}}
+{{--                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>--}}
 
-
-
-
-
+{{--            </iframe>--}}
+{{--            </center>--}}
 
 
 
@@ -215,7 +251,11 @@
             <script src="{{asset('js/custom.js')}}"></script>
             <script src="{{asset('js/chart_custom_style1.js')}}"></script>
 
+            <script src="{{asset('hp/jquery.min.js')}}"></script>
+            <script src="{{asset('hp/bootstrap.bundle.min.js')}}"></script>
+            <script src="{{asset('hp/modernizr.js')}}"></script>
+            <script src="{{asset('hp/moment.js')}}"></script>
+            <script src="{{asset('hp/main.js')}}"></script>
 
-            <!-- script -->
 
 
