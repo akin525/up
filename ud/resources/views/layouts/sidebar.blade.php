@@ -13,6 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- site icon -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
     <link rel="icon" href="https://mobile.primedata.com.ng/images/bn.jpeg" type="image/png" />
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -37,6 +38,8 @@
 
     <link rel="stylesheet" href="{{asset('hp/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('hp/main.css')}}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+
 </head>
 
 <body class="dashboard dashboard_1">
@@ -170,66 +173,6 @@
                 </nav>
             </div>
         @include('sweetalert::alert')
-            <!-- end topbar -->
-
-{{--            <div class="alert alert-info">--}}
-{{--                <button type='button' class='close' data-dismiss='alert'>&times;</button>--}}
-{{--                <i class="fa fa-bell"></i><b>Notics:</b><h6 class="align-content-center text-center text-white"><b><button type="button" class="btn btn-success" onclick="window.location.href='{{route('referwith')}}';">Click to Withdraw Your Referal Bonus</button></b></h6>--}}
-{{--            </div>--}}
-
-
-{{--            <center>--}}
-{{--                <div class="container-fluid">--}}
-{{--                    <div class="row column_title">--}}
-{{--                        <div class="card card-body align-content-center">--}}
-{{--                            <a href="https://play.google.com/store/apps/details?id=com.wPrimeData_15605638" class="font-weight-bold text-center">--}}
-{{--                                <b>Download  our Mobile App</b>--}}
-{{--                                <img width="300" src="{{asset('images/dd.png')}}" alt="">--}}
-
-{{--                            </a>--}}
-
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                </div>--}}
-{{--            </center>--}}
-
-            <script type="text/javascript">
-                (function() {
-                    var options = {
-                        whatsapp: "+2348103153004", // WhatsApp number
-                        call_to_action: "Message us", // Call to action
-                        position: "left", // Position may be 'right' or 'left'
-                    };
-                    var proto = document.location.protocol,
-                        host = "whatshelp.io",
-                        url = proto + "//static." + host;
-                    var s = document.createElement('script');
-                    s.type = 'text/javascript';
-                    s.async = true;
-                    s.src = url + '/widget-send-button/js/init.js';
-                    s.onload = function() {
-                        WhWidgetSendButton.init(host, proto, options);
-                    };
-                    var x = document.getElementsByTagName('script')[0];
-                    x.parentNode.insertBefore(s, x);
-                })();
-            </script>
-
-{{--            <center>--}}
-{{--            <iframe width="250" height="100"--}}
-{{--                    src="https://www.youtube.com/embed/ICXSsBrh9_0?autoplay=1"--}}
-{{--                    title="PrimeData Promo Video Official | Buy Data Easily!"--}}
-{{--                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>--}}
-
-{{--            </iframe>--}}
-{{--            </center>--}}
-
-
-
-
-
-
 
             <!-- jQuery -->
             <script src="{{asset('js/jquery.min.js')}}"></script>
@@ -257,5 +200,9 @@
             <script src="{{asset('hp/moment.js')}}"></script>
             <script src="{{asset('hp/main.js')}}"></script>
 
+
+
+            {{-- toastr js --}}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 
 

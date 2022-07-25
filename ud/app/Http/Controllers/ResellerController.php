@@ -23,7 +23,7 @@ class ResellerController
 //            $wallet->account_number = $number;-
 //            $wallet->account_name = $account;
 //            $wallet->save();
-            Alert::info('Upgrade', 'You can request for a website after you upgrade. You will have access to cheaper prices of products too!');
+//            Alert::info('Upgrade', 'You can request for a website after you upgrade. You will have access to cheaper prices of products too!');
             return view('reseller', compact('user', 'wallet'));
 
 
@@ -64,6 +64,7 @@ class ResellerController
             if ($request->amount < 0) {
 
                 $mg = "error transaction";
+                Alert::error('error', $mg);
                 return view('bill', compact('user', 'mg'));
 
             }else {
@@ -82,8 +83,10 @@ class ResellerController
 
                 $user->apikey = $token;
                 $user->save();
+                Alert::success('Success', 'You have successful upgrade your account! Thanks');
 
-                return redirect("upgrade")->withSuccess('You are not allowed to access');
+
+                return redirect("upgrade");
             }
 
 

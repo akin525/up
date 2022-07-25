@@ -22,6 +22,7 @@ class data extends Authenticatable
         'plan_id',
         'network',
         'plan',
+        'code',
         'amount',
         'tamount',
         'ramount',
