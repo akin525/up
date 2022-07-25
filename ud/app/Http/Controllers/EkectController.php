@@ -20,7 +20,7 @@ class EkectController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://test.mcd.5starcompany.com.ng/api/reseller/list',
+            CURLOPT_URL => 'https://app2.mcd.5starcompany.com.ng/api/reseller/list',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -76,7 +76,7 @@ class EkectController
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://test.mcd.5starcompany.com.ng/api/reseller/validate',
+                CURLOPT_URL => 'https://app2.mcd.5starcompany.com.ng/api/reseller/validate',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -139,7 +139,7 @@ class EkectController
 
                 $wallet->balance = $gt;
                 $wallet->save();
-                $resellerURL = 'https://app.mcd.5starcompany.com.ng/api/reseller/';
+                $resellerURL = 'https://app2.mcd.5starcompany.com.ng/api/reseller/';
 
 
                 $curl = curl_init();

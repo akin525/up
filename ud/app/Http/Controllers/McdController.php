@@ -62,7 +62,7 @@ class McdController
 
                     if ($fg->plan == "airtime") {
 
-                        $resellerURL = 'https://app.mcd.5starcompany.com.ng/api/reseller/';
+                        $resellerURL = 'https://app2.mcd.5starcompany.com.ng/api/reseller/';
                         $curl = curl_init();
 
                         curl_setopt_array($curl, array(
