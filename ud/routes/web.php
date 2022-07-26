@@ -44,6 +44,7 @@ Route::get('/', function () {
     }
 });
 Route::post('log', [AuthController::class, 'customLogin'])->name('log');
+Route::post('passw', [AuthController::class, 'pass'])->name('passw');
 
 //Route::get('select', function () {
 //    return view('select');
@@ -52,7 +53,6 @@ Route::post('log', [AuthController::class, 'customLogin'])->name('log');
 //    return view('dashboard');
 //})->name('dashboard');
 Route::middleware(['auth'])->group(function () {
-Route::post('passw', [AuthController::class, 'pass'])->name('passw');
 Route::get('tv', [AlltvController::class, 'tv'])->name('tv');
 Route::get('select', [AuthController::class, 'select'])->name('select');
 Route::get('select1', [AuthController::class, 'select1'])->name('select1');
