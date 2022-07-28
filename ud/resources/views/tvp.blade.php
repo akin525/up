@@ -42,7 +42,17 @@
                                             </label>
                                             <input type="text" name="number" class="form-control" value="{{$request->number}}" readonly required/>
                                         </div>
-                                        <input type="hidden" name="id" value="{{$request->id}}"/>
+                                        <div  class="form-group">
+                                            <label  class="requiredField">
+                                                Select Tv Product
+                                                <span class="asteriskField">*</span>
+                                            </label>
+                                            <select name="id" class="text-success form-control" required>
+                                                @foreach($tv as $t)
+                                                <option value="{{$t->id}}">{{$t->plan}}</option>
+                                                    @endforeach
+                                            </select>
+                                        </div>
                                         <input type="hidden" name="refid" value="<?php echo rand(10000000, 999999999); ?>">
 
                                         <button type="submit" class="btn process"

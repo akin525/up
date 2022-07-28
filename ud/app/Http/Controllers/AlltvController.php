@@ -12,6 +12,7 @@ use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AlltvController
 {
@@ -64,10 +65,15 @@ foreach ($plan as $pla) {
     public function verifytv(Request $request)
     {
 //        return $request;
-        $ve=data::where('id', $request->id)->first();
+        $request->validate([
+            'id'=>'required',
+            'number'=>'required',
+        ]);
 //        return $request;
 
 //return $ve;
+$tv=data::where('network', $request->id)->get();
+
         $resellerURL='https://app2.mcd.5starcompany.com.ng/api/reseller/';
 
 
@@ -86,7 +92,7 @@ foreach ($plan as $pla) {
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('service' => 'tv', 'coded' =>$ve->plan_id, 'phone' => $request->number),
+            CURLOPT_POSTFIELDS => array('service' => 'tv', 'coded' =>$request->id, 'phone' => $request->number),
             CURLOPT_HTTPHEADER => array(
                 'Authorization: MCDKEY_903sfjfi0ad833mk8537dhc03kbs120r0h9a'
             )
@@ -105,7 +111,7 @@ foreach ($plan as $pla) {
         }else{
             $log= "Unable to Identify IUC Number";
         }
-        return view('tvp', compact('log', 'request', 'name'));
+        return view('tvp', compact('log', 'request', 'name', 'tv'));
 
 
     }
@@ -125,7 +131,7 @@ foreach ($plan as $pla) {
     {
 
             $user = User::find($request->user()->id);
-            $tv = data::where('plan', 'tv')->get();
+            $tv = data::where('network', 'tv')->get();
 
             return  view('tv', compact('user', 'tv'));
 
@@ -144,21 +150,20 @@ foreach ($plan as $pla) {
 
                 if ($wallet->balance < $tv->tamount) {
                     $mg = "You Cant Make Purchase Above" . "NGN" . $tv->tamount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-
-                    return view('bill', compact('user', 'mg'));
-
+                    Alert::error('Error', $mg);
+                    return redirect('tv');
                 }
                 if ($tv->tamount < 0) {
 
                     $mg = "error transaction";
-                    return view('bill', compact('user', 'mg'));
-
+                    Alert::error('Error', $mg);
+                    return redirect('tv');
                 }
                 $bo = bo::where('refid', $request->refid)->first();
                 if (isset($bo)) {
                     $mg = "duplicate transaction";
-                    return view('bill', compact('user', 'mg'));
-
+                    Alert::info('Info', $mg);
+                    return redirect('tv');
                 } else {
                     $gt = $wallet->balance - $tv->tamount;
 

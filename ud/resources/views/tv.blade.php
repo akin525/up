@@ -35,9 +35,11 @@
                                             </label>
                                             <select name="id" class="text-success form-control" required>
                                                 <option selected="">---------</option>
-                                                @foreach($tv as $tv1)
-                                                <option value="{{$tv1['id']}}">{{$tv1['network']}}</option>
-                                                @endforeach
+                                                <option value="gotv">GOTV</option>
+                                                <option value="dstv">DSTV</option>
+                                                <option value="startimes">STARTIMES</option>
+                                                <option value="showmax">SHOWMAX</option>
+
                                             </select>
                                         </div>
 
