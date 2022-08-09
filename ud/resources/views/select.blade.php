@@ -21,6 +21,8 @@
                             <option value="etisalat-data">9MOBILE</option>
                         @else
                             <option value="MTN">MTN</option>
+                            <option value="MTN_CG">MTN_CG</option>
+                            <option value="MTN_DG">MTN_DG</option>
                             <option value="GLO">GLO</option>
                             <option value="9MOBILE">9MOBILE</option>
                         @endif

@@ -84,6 +84,8 @@ class BillController extends Controller
                     $response = $daterserver->honourwordbill($object);
 
                     $data = json_decode($response, true);
+
+//                    return $response;
                     $success = "";
                     if ($data['code'] == '200') {
                         $success = 1;
