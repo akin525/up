@@ -103,7 +103,7 @@
                         </li>
                     @endif
                         <li>
-                            <a href="{{route('myaccount')}}"><i class="fa fa-user-circle "></i> <span>My Account</span></a>
+                            <a href="{{route('myaccount')}}"><i class="fa fa-user"></i> <span>My Account</span></a>
                         </li>
 
                     <li><a href="{{ route('fund') }}"><i class="fa fa-credit-card orange_color"></i> <span>Fund Wallet</span></a></li>
