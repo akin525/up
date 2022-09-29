@@ -102,8 +102,8 @@
                                 @foreach($users as $user)
                                     <tr>
                                         <td>
-                                            @if($user->photo)
-                                                <img src="https://mcd.5starcompany.com.ng/app/avatar/{{$user->photo}}" alt="" class="rounded-circle thumb-sm mr-1"> {{$user->username}}
+                                            @if($user->profile_photo_path)
+                                                <img width="50" src="{{url('/', $user->profile_photo_path)}}" alt="" class="rounded-circle thumb-sm mr-1"> {{\App\Console\encription::decryptdata($user->username)}}
                                             @else
                                                 <img width="50" src="{{asset("images/bn.jpeg")}}" alt="" class="rounded-circle thumb-sm mr-1"> {{$user->username}}
                                             @endif

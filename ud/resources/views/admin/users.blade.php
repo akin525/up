@@ -78,7 +78,11 @@
                             @foreach($users as $user )
                                 <tr>
                                     <td>
-                                            <img width="50" src="{{asset("images/bn.jpeg")}}" alt="" class="rounded-circle thumb-sm mr-1"> {{$user->username}}
+                                        @if($user->profile_photo_path==NULL) <img width="50" src="{{asset("images/bn.jpeg")}}" alt="" class="rounded-circle thumb-sm mr-1">
+                                        @else
+                                            <img width="50" src="{{url('/', $user->profile_photo_path)}}" alt="" class="rounded-circle thumb-sm mr-1">
+                                        @endif
+                                        {{$user->username}}
                                     </td>
 {{--                                    <td>₦{{$user->balance}}</td>--}}
                                     <td>{{$user->email}}</td>
