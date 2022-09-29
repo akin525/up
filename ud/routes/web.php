@@ -16,6 +16,7 @@ use App\Http\Controllers\EkectController;
 use App\Http\Controllers\listdata;
 use App\Http\Controllers\RefersController;
 use App\Http\Controllers\ResellerController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VertualController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -43,6 +44,7 @@ Route::get('/', function () {
         return view('auth.login');
     }
 });
+Route::get('listdata', [listdata::class, 'lis'])->name('listdata');
 Route::post('log', [AuthController::class, 'customLogin'])->name('log');
 Route::post('passw', [AuthController::class, 'pass'])->name('passw');
 
@@ -59,7 +61,6 @@ Route::get('select1', [AuthController::class, 'select1'])->name('select1');
 Route::post('tvp', [AlltvController::class, 'paytv'])->name('tvp');
 Route::get('paytv', [AlltvController::class, 'paytv'])->name('paytv');
 Route::post('verifytv', [AlltvController::class, 'verifytv'])->name('verifytv');
-Route::get('listdata', [listdata::class, 'lis'])->name('listdata');
 Route::get('listtv', [AlltvController::class, 'listtv'])->name('listv');
 Route::get('listelect', [EkectController::class, 'listelect'])->name('listelect');
 Route::get('elect', [EkectController::class, 'electric'])->name('elect');
@@ -85,6 +86,10 @@ Route::post('referwith1', [RefersController::class, 'with'])->name('referwith1')
 Route::get('fund', [FundController::class, 'fund'])->name('fund');
 Route::get('tran/{reference}', [FundController::class, 'tran'])->name('tran');
 Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
+    Route::post('pic', [UserController::class, 'updateprofilephoto'])->name('pic');
+    Route::post('update', [UserController::class, 'updateuserdecry'])->name('update');
+    Route::get('myaccount', [UserController::class, 'viewuserencry'])->name('myaccount');
+    Route::get('deletepic', [UserController::class, 'removephoto'])->name('deletepic');
 });
 
 
@@ -144,4 +149,17 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('admin/api', [HonorApi::class, 'api'])->name('admin/api');
 
+Route::get('/profile/{filename}', function ($filename) {
+    $path = storage_path('app/profile/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    return $response;
+})->name('profile');
 
