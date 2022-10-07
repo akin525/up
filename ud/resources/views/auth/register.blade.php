@@ -77,7 +77,69 @@
                                     </div>
                                     <div class="field margin_0">
                                         <label class="label_field hidden">hidden label</label>
-                                        <button type="submit" class="main_bt">Sign Up</button>
+                                        <style>
+                                            .button {
+                                                position: relative;
+                                                padding: 8px 16px;
+                                                background: #009579;
+                                                border: none;
+                                                outline: none;
+                                                border-radius: 2px;
+                                                cursor: pointer;
+                                            }
+
+                                            .button:active {
+                                                background: #e7eceb;
+                                            }
+
+                                            .button__text {
+                                                font: bold 20px "Quicksand", san-serif;
+                                                color: #ffffff;
+                                                transition: all 0.2s;
+                                            }
+
+                                            .button--loading .button__text {
+                                                visibility: hidden;
+                                                opacity: 0;
+                                            }
+
+                                            .button--loading::after {
+                                                content: "";
+                                                position: absolute;
+                                                width: 16px;
+                                                height: 16px;
+                                                top: 0;
+                                                left: 0;
+                                                right: 0;
+                                                bottom: 0;
+                                                margin: auto;
+                                                border: 8px solid transparent;
+                                                border-top-color: #ffffff;
+                                                border-radius: 50%;
+                                                animation: button-loading-spinner 1s ease infinite;
+                                            }
+
+                                            @keyframes button-loading-spinner {
+                                                from {
+                                                    transform: rotate(0turn);
+                                                }
+
+                                                to {
+                                                    transform: rotate(1turn);
+                                                }
+                                            }
+                                        </style>
+
+                                        <button type="submit" class="button btn btn-success " onclick="this.classList.toggle('button--loading') ">
+                                            <span class="button__text">Sign up</span>
+                                        </button>
+                                        <script>
+                                            const btn = document.querySelector(".button");
+
+                                            btn.classList.add("button--loading");
+                                            btn.classList.remove("button--loading");
+
+                                        </script>
                                     </div>
                             </form>
                             <script src="{{asset('hp/jquery.min.js')}}"></script>

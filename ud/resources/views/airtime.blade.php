@@ -64,7 +64,69 @@
                         </div>
                     </div>
                     <input type="hidden" name="refid" value="<?php echo rand(10000000, 999999999); ?>">
-                    <button type="submit" class=" btn" style="color: white;background-color: #ff0066" id="btnsubmit"> Purchase Now</button>
+                    <style>
+                        .button {
+                            position: relative;
+                            padding: 8px 16px;
+                            background: #009579;
+                            border: none;
+                            outline: none;
+                            border-radius: 2px;
+                            cursor: pointer;
+                        }
+
+                        .button:active {
+                            background: #e7eceb;
+                        }
+
+                        .button__text {
+                            font: bold 20px "Quicksand", san-serif;
+                            color: #ffffff;
+                            transition: all 0.2s;
+                        }
+
+                        .button--loading .button__text {
+                            visibility: hidden;
+                            opacity: 0;
+                        }
+
+                        .button--loading::after {
+                            content: "";
+                            position: absolute;
+                            width: 16px;
+                            height: 16px;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            margin: auto;
+                            border: 8px solid transparent;
+                            border-top-color: #ffffff;
+                            border-radius: 50%;
+                            animation: button-loading-spinner 1s ease infinite;
+                        }
+
+                        @keyframes button-loading-spinner {
+                            from {
+                                transform: rotate(0turn);
+                            }
+
+                            to {
+                                transform: rotate(1turn);
+                            }
+                        }
+                    </style>
+
+                    <button type="submit" class="button btn btn-success" onclick="this.classList.toggle('button--loading') ">
+                        <span class="button__text">Purchase Now</span>
+                    </button>
+                    <script>
+                        const btn = document.querySelector(".button");
+
+                        btn.classList.add("button--loading");
+                        btn.classList.remove("button--loading");
+
+                    </script>
                 </div>
             </div>
             <div class="col-sm-4 ">

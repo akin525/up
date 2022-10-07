@@ -50,8 +50,8 @@ class CreateNewUser implements CreatesNewUsers
             ]);
             $receiver=$input ['email'];
             $admin= 'admin@primedata.com.ng';
-            Mail::to($receiver)->send(new Emailotp($input));
-            Mail::to($admin)->send(new Emailotp($input));
+//            Mail::to($receiver)->send(new Emailotp($input));
+//            Mail::to($admin)->send(new Emailotp($input));
 
 
 
