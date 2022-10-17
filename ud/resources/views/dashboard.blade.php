@@ -15,12 +15,12 @@
                 </div>
             </div>
         </div>
-<div class="alert alert-info">
-    <button type='button' class='close text-white' data-dismiss='alert'>&times;</button>
-    <i class="fa fa-bell"></i><b>Account Status:</b><h6 class="align-content-center text-center text-white"><b>@if(Auth::user()->apikey ==NULL)
-        *Member* <button type="button" class="btn btn-success" onclick="window.location.href='https://mobile.primedata.com.ng/reseller';">Click to upgrade</button> @else*Reseller*
-        @endif</b></h6>
-</div>
+{{--<div class="alert alert-info">--}}
+{{--    <button type='button' class='close text-white' data-dismiss='alert'>&times;</button>--}}
+{{--    <i class="fa fa-bell"></i><b>Account Status:</b><h6 class="align-content-center text-center text-white"><b>@if(Auth::user()->apikey ==NULL)--}}
+{{--        *Member* <button type="button" class="btn btn-success" onclick="window.location.href='https://mobile.primedata.com.ng/reseller';">Click to upgrade</button> @else*Reseller*--}}
+{{--        @endif</b></h6>--}}
+{{--</div>--}}
 
 {{--        <div class='alert alert-info'>--}}
 {{--            <button type='button' class='close' data-dismiss='alert'>&times;</button>--}}
@@ -31,6 +31,54 @@
             <i class='fa fa-ban-circle'></i><h6 class="text-white">Important Notification: </br><b>{{$me->message}}</b></h6>
         </div>
         <br>
+        <div class="card">
+            <div class="card-body">
+                <div class="alert alert-info">
+                    @foreach($wallet as $wallet1)
+                        @if ($wallet1->account_number==1 && $wallet1->account_name==1)
+                            <a href='{{route('vertual')}}' class='text-white'>Click this section to get your permament Virtual Bank Account (Transfer money to the account no to get your PrimeData Wallet funded instantly!)</a>
+                        @else
+                            <div class="row column1">
+                                <div class="col-md-7 col-lg-6">
+                                    <div class="card-body">
+                                        <ul style="list-style-type:square">
+                                            <li class="text-white"><h3 class="text-white"><b>Personal Vertual Account Number</b></h3></li>
+                                            <br>
+                                            <li class='text-white'><h5 class="text-white"><b>{{$wallet1->account_name}}</b></h5></li>
+                                            <li class='text-white'><h5 class="text-white"><b>Account No:{{$wallet1->account_number}}</b></h5></li>
+                                            <li class='text-white'><h5 class="text-white"><b>WEMA-BANK</b></h5></li>
+                                            <br>
+                                            <li class='text-white'><h5 class="text-white"><b>Note: All vertual funding are being set automatically</b></h5></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-lg-6">
+                                    <div>
+                                        <center>
+                                            <a href="#">
+                                                <img width="200" src="{{asset("images/bn.jpeg")}}"  alt="">
+                                            </a>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Your Referal Link</h6>
+                                <!-- The text field -->
+                                <input id="myInput" type="text" class="form-control" value="https://mobile.primedata.com.ng/register?refer={{$user->username}}" >
+
+                                <!-- The button used to copy the text -->
+                                <button class="btn-info" onclick="myFunction()">Copy Referal Link</button>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
         <style>
             img {
                 max-width: 100%;
@@ -85,17 +133,6 @@
             }
 
         </style>
-        <div class="card">
-            <div class="card-body">
-                <h6>Your Referal Link</h6>
-                <!-- The text field -->
-                <input id="myInput" type="text" class="form-control" value="https://mobile.primedata.com.ng/register?refer={{$user->username}}" >
-
-                <!-- The button used to copy the text -->
-                <button class="btn-info" onclick="myFunction()">Copy Referal Link</button>
-            </div>
-        </div>
-
 
         <script>
             function myFunction() {
@@ -114,31 +151,6 @@
             }
         </script>
         <br>
-        <div class="card">
-            <div class="card-body">
-                <div class='alert alert-info'>
-                    <button type='button' class='close'></button>
-                    <i class='fa fa-ban-circle'></i><strong>Notification: </br></strong>
-                    <center>
-                        <div class="card-body">
-                            <li  class=" btn-info">
-                                @foreach($wallet as $wallet1)
-                                    @if ($wallet1->account_number==1 && $wallet1->account_name==1)
-                                        <a href='{{route('vertual')}}' class='text-white'>Click this section to get your permament Virtual Bank Account (Transfer money to the account no to get your PrimeData Wallet funded instantly!)</a>
-                                    @else
-                                        <h6 class='text-white'>{{$wallet1->account_name}}</h6>
-                                        <h5 class='text-white'>Account No:{{$wallet1->account_number}}</h5>
-                                        <h6 class='text-white'>WEMA-BANK</h6>
-                                    @endif
-                                @endforeach
-
-                            </li>
-                        </div>
-                    </center>
-                </div>
-            </div>
-        </div>
-
     <!-- end graph -->
 
     <!-- end graph -->
