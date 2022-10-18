@@ -69,7 +69,7 @@
                         @endif
                         <div class="user_info">
                             <h6> {{Auth::user()->username }}</h6>
-                            <p><span class="online_animation"></span> Online</p>
+                            <p><span class="online_animation" style="color: #FF0066"></span> Online</p>
                         </div>
                     </div>
                     <form method="post" action="{{route('pic')}}" enctype="multipart/form-data">
