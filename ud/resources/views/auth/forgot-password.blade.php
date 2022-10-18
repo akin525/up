@@ -1,7 +1,7 @@
 <x-guest-layout>
     <body class="inner_page login">
     <div id="loading-wrapper">
-        <div class="spinner-border"></div>
+        <div class="spinner-border" style="color: #FF0066"></div>
         PRIMEDATA......
     </div>
     <div class="full_container">
@@ -15,9 +15,9 @@
                     </div>
 
                     <div class="login_form">
-                        <center><h5 class="text-wh text-red">Primedata Get New Password</h5></center>
+                        <center><h5 class="text-wh text-red" style="color: #FF0066" >Primedata Get New Password</h5></center>
                         <center>
-                            <a href="{{route('login')}}" class="btn btn-success">Login</a>
+                            <a href="{{route('login')}}" class="btn btn-success"  style="background-color: #FF0066">Login</a>
                         </center>
                         <br>
                         <br>
@@ -41,7 +41,16 @@
                 <input id="email" class="form-control" type="email" name="email"  required autofocus />
             </div>
 <center>
-                <button type="submit" class="btn btn-success" >Get password</button>
+                <button type="submit" class="btn btn-success"  style="background-color: #FF0066" >Get password<span class="load loading"></span>
+                </button>
+    <script>
+        const btns = document.querySelectorAll('button');
+        btns.forEach((items)=>{
+            items.addEventListener('click',(evt)=>{
+                evt.target.classList.add('activeLoading');
+            })
+        })
+    </script>
 </center>
         </form>
                         </fieldset>

@@ -64,18 +64,18 @@
                             </div>
                         @endif
                     @endforeach
-                        <div class="card">
-                            <div class="card-body">
-                                <h6>Your Referal Link</h6>
-                                <!-- The text field -->
-                                <input id="myInput" type="text" class="form-control" value="https://mobile.primedata.com.ng/register?refer={{$user->username}}" >
-
-                                <!-- The button used to copy the text -->
-                                <button class="btn-info" onclick="myFunction()">Copy Referal Link</button>
-                            </div>
-                        </div>
 
                 </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h6>Your Referal Link</h6>
+                <!-- The text field -->
+                <input id="myInput" type="text" class="form-control" value="https://mobile.primedata.com.ng/register?refer={{$user->username}}" >
+
+                <!-- The button used to copy the text -->
+                <button class="btn-info" onclick="myFunction()">Copy Referal Link</button>
             </div>
         </div>
 

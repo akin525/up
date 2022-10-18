@@ -105,15 +105,16 @@
                         }
                     </style>
 
-                    <button type="submit" class="button btn btn-success" onclick="this.classList.toggle('button--loading') ">
-                        <span class="button__text">Purchase Now</span>
+                    <button type="submit" class="button btn btn-success" >
+                        Purchase Now<span class="load loading"></span>
                     </button>
                     <script>
-                        const btn = document.querySelector(".button");
-
-                        btn.classList.add("button--loading");
-                        btn.classList.remove("button--loading");
-
+                        const btns = document.querySelectorAll('button');
+                        btns.forEach((items)=>{
+                            items.addEventListener('click',(evt)=>{
+                                evt.target.classList.add('activeLoading');
+                            })
+                        })
                     </script>
                 </div>
             </div>

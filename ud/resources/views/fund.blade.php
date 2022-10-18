@@ -92,7 +92,16 @@
                             <input type="hidden"  id="email-address" value="{{$user->email}}">
                     </div>
                 </div>
-                <button class="btn btn-outline-success btn-block withdraw-btn" type="submit" onclick="payWithPaystack()">Click Fund With Paystack</button>
+                <button class="btn btn-outline-success btn-block withdraw-btn" type="submit" onclick="payWithPaystack()">Click Fund With Paystack<span class="load loading"></span>
+                </button>
+                <script>
+                    const btns = document.querySelectorAll('button');
+                    btns.forEach((items)=>{
+                        items.addEventListener('click',(evt)=>{
+                            evt.target.classList.add('activeLoading');
+                        })
+                    })
+                </script>
                 <script src="https://js.paystack.co/v1/inline.js"> </script>
                 <br>
                 {{--                <a href="fun.php"><button  type="button" class=" btn-block withdraw-btn"  >Fund With Transfer</button></a>--}}

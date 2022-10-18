@@ -93,7 +93,16 @@
                             </div>
                     </div>
                 </div>
-                <button class="btn btn-outline-info btn-block withdraw-btn" type="submit">Upgrade Now</button>
+                <button class="btn btn-outline-info btn-block withdraw-btn" type="submit">Upgrade Now<span class="load loading"></span>
+                </button>
+                <script>
+                    const btns = document.querySelectorAll('button');
+                    btns.forEach((items)=>{
+                        items.addEventListener('click',(evt)=>{
+                            evt.target.classList.add('activeLoading');
+                        })
+                    })
+                </script>
                 <br>
                 </form>
                 <!--                <button class="btn btn-success btn-block withdraw-btn" type="submit" onClick="makePayment()"> Fund With Flutterwave</button>-->
