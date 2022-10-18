@@ -46,7 +46,7 @@
 
 <body class="dashboard dashboard_1">
 <div id="loading-wrapper">
-    <div class="spinner-border"></div>
+    <div class="spinner-border" style="color: #FF0066"></div>
     PRIMEDATA ADMIN......
 </div>
 <div class="full_container">
