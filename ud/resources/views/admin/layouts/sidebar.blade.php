@@ -74,12 +74,12 @@
                     </div>
                     <form method="post" action="{{route('pic')}}" enctype="multipart/form-data">
                         @csrf
-                        <input type="file" name="pic" required><button type="submit" class="badge badge-success">Upload</button>
+                        <input type="file" name="pic" required><button type="submit" class="badge badge-success" style="background-color: #FF0066">Upload</button>
                     </form>
                     <form method="POST" action="{{ route('logout') }}" x-data>
                         @csrf
                         <br>
-                        <a href="{{ route('logout') }}"><button type="submit" class="btn btn-success">logout</button></a>
+                        <a href="{{ route('logout') }}"><button type="submit" class="btn btn-success" style="background-color: #FF0066">logout</button></a>
                     </form>
                 </div>
 
