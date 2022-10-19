@@ -174,7 +174,7 @@
 
     <body>
 
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="logo_login" style="background-image: url(images/banner.jpg)">
             {{ $slot }}
         </div>
     </body>

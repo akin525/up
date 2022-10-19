@@ -74,7 +74,8 @@
                     </div>
                     <form method="post" action="{{route('pic')}}" enctype="multipart/form-data">
                         @csrf
-                        <input type="file" name="pic" required><button type="submit" class="badge badge-success">Upload</button>
+                        <input type="file" name="pic" required>
+                        <button type="submit" class="badge badge-success">Upload</button>
                     </form>
                     <form method="POST" action="{{ route('logout') }}" x-data>
                         @csrf
