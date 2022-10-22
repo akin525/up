@@ -25,13 +25,17 @@
                         <center>
                             <h3 class="text-wh text-red">LOG-IN</h3>
                             <hr>
+                            <h6 class="text-wh text-red">Login With</h6>
+
+                            <div class="btn-group">
                             <a href="{{ route('google.login') }}" class="btn btn-secondary btn-user" >
-                                <i class="fa fa-google "></i> Login with Google
+                                <i class="fa fa-google "></i> Login Google
                             </a>
-                            OR
+                                .OR.
                             <a href="{{ route('facebook.login') }}" class="btn btn-secondary " >
-                                <i class="fa fa-facebook"></i> Login with Facebook
+                                <i class="fa fa-facebook"></i> Login Facebook
                             </a>
+                            </div>
                         </center>
                         <br>
                         <br>
