@@ -22,7 +22,17 @@
                     @endif
                     @include('sweetalert::alert')
                     <div class="login_form">
-                        <center><h3 class="text-wh text-red">LOG-IN</h3></center>
+                        <center>
+                            <h3 class="text-wh text-red">LOG-IN</h3>
+                            <hr>
+                            <a href="{{ route('google.login') }}" class="btn btn-secondary btn-user" >
+                                <i class="fa fa-google "></i> Login with Google
+                            </a>
+                            OR
+                            <a href="{{ route('facebook.login') }}" class="btn btn-secondary " >
+                                <i class="fa fa-facebook"></i> Login with Facebook
+                            </a>
+                        </center>
                         <br>
                         <br>
 
@@ -64,6 +74,7 @@
                                         <button type="submit" class="btn btn-danger" style="background-color: #FF0066">
                                             login<span class="load loading"></span>
                                         </button>
+
                                         <script>
                                             const btns = document.querySelectorAll('button');
                                             btns.forEach((items)=>{
@@ -86,6 +97,7 @@
                                     <label class="label_field hidden">hidden label</label>
                                     <a href="{{ route('register') }}" ><button type="button" class="main_bt" style="background-color: #FF0066">Sign Up</button></a>
                                 </div>
+
                             </fieldset>
 
                         </form>

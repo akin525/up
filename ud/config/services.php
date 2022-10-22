@@ -31,4 +31,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => '444581195531-kic0mgg7tv69easi6938abcdab7scrb2.apps.googleusercontent.com', //USE FROM Google DEVELOPER ACCOUNT
+        'client_secret' => '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', //USE FROM Google DEVELOPER ACCOUNT
+        'redirect' => 'https://mobile.primedata.com.ng/google/callback/'
+    ],
+    'facebook' => [
+        'client_id' => '656120242615409', //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'client_secret' => '51fb0de9e0502f82b6699bd7984a83db', //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'redirect' => 'https://mobile.primedata.com.ng/facebook/callback/'
+    ],
+
 ];

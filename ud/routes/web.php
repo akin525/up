@@ -14,6 +14,8 @@ use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\AlltvController;
 use App\Http\Controllers\AirtimeController;
 use App\Http\Controllers\EkectController;
+use App\Http\Controllers\FaceBookController;
+use App\Http\Controllers\GoogleLogin;
 use App\Http\Controllers\listdata;
 use App\Http\Controllers\RefersController;
 use App\Http\Controllers\ResellerController;
@@ -151,6 +153,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/billquery', [QueryController::class, 'billdate'])->name('admin/billquery');
 
 
+});
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', [GoogleLogin::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [GoogleLogin::class, 'callbackFromGoogle'])->name('callback');
+});
+Route::prefix('facebook')->name('facebook.')->group( function(){
+    Route::get('auth', [FaceBookController::class, 'loginUsingFacebook'])->name('login');
+    Route::get('callback', [FaceBookController::class, 'callbackFromFacebook'])->name('callback');
 });
 Route::get('admin/api', [HonorApi::class, 'api'])->name('admin/api');
 

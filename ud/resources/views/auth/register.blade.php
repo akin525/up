@@ -23,6 +23,16 @@
 
                         <div class="login_form">
                             <h3 class="text-center text-purple">SIGN-UP</h3>
+                            <center>
+                                <hr>
+                                <a href="{{ route('google.login') }}" class="btn btn-secondary btn-user" >
+                                    <i class="fa fa-google "></i> Signup with Google
+                                </a>
+                                OR
+                                <a href="{{ route('facebook.login') }}" class="btn btn-secondary " >
+                                    <i class="fa fa-facebook"></i> Signup with Facebook
+                                </a>
+                            </center>
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
 
