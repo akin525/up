@@ -29,11 +29,11 @@
 
                             <div class="btn-group">
                             <a href="{{ route('google.login') }}" class="btn btn-secondary btn-user" >
-                                <i class="fa fa-google "></i> Login Google
+                                <i class="fa fa-google "></i> Google
                             </a>
                                 .OR.
                             <a href="{{ route('facebook.login') }}" class="btn btn-secondary " >
-                                <i class="fa fa-facebook"></i> Login Facebook
+                                <i class="fa fa-facebook"></i> Facebook
                             </a>
                             </div>
                         </center>
