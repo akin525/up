@@ -25,17 +25,15 @@
                             <h3 class="text-center text-purple">SIGN-UP</h3>
                             <center>
                                 <hr>
-                                <h6 class="text-center text-purple">Signup With</h6>
-
-                                <div class="btn-group">
+{{--                                <div class="btn-group">--}}
                                 <a href="{{ route('google.login') }}" class="btn btn-secondary btn-user" >
-                                    <i class="fa fa-google "></i> Google
+                                    <i class="fa fa-google "></i>Signup with Google
                                 </a>
-                                    .OR.
-                                    <a href="{{ route('facebook.login') }}" class="btn btn-secondary " >
-                                    <i class="fa fa-facebook"></i>Facebook
-                                </a>
-                                </div>
+{{--                                    .OR.--}}
+{{--                                    <a href="{{ route('facebook.login') }}" class="btn btn-secondary " >--}}
+{{--                                    <i class="fa fa-facebook"></i>Facebook--}}
+{{--                                </a>--}}
+{{--                                </div>--}}
                             </center>
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
