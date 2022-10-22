@@ -32,14 +32,14 @@ return [
     ],
 
     'google' => [
-        'client_id' => '444581195531-kic0mgg7tv69easi6938abcdab7scrb2.apps.googleusercontent.com', //USE FROM Google DEVELOPER ACCOUNT
-        'client_secret' => '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', //USE FROM Google DEVELOPER ACCOUNT
-        'redirect' => 'https://mobile.primedata.com.ng/google/callback/'
+        'client_id' => env('google_id'), //USE FROM Google DEVELOPER ACCOUNT
+        'client_secret' => env('google_sec'), //USE FROM Google DEVELOPER ACCOUNT
+        'redirect' => env('google_re')
     ],
     'facebook' => [
-        'client_id' => '656120242615409', //USE FROM FACEBOOK DEVELOPER ACCOUNT
-        'client_secret' => '51fb0de9e0502f82b6699bd7984a83db', //USE FROM FACEBOOK DEVELOPER ACCOUNT
-        'redirect' => 'https://mobile.primedata.com.ng/facebook/callback/'
+        'client_id' => env('facebook_id'), //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'client_secret' => env('facebook_sec'), //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'redirect' => env('facebook_re')
     ],
 
 ];
