@@ -81,7 +81,7 @@
                                                             <table width='100%' cellspacing='0' cellpadding='0' role='presentation' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px'>
                                                                 <tr>
                                                                     <td class='es-m-txt-c' align='left' style='padding:0;Margin:0'><h3 style='Margin:0;line-height:40px;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#666666'>
-                                                                            {{ Auth::user()->name }}</h3><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px'></p></td>
+                                                                            {{$bo['username']}}</h3><p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px'></p></td>
                                                                 </tr>
                                                             </table></td>
                                                     </tr>
