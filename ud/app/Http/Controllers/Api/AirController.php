@@ -29,6 +29,7 @@ class AirController
                 'errors' => $this->error_processor($validator)
             ], 403);
         }
+
         $apikey = $request->header('apikey');
 
         $user = User::where('apikey', $apikey)->first();
