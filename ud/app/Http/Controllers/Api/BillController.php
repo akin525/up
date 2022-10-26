@@ -2,26 +2,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\DataserverController;
+use App\Mail\Emailtrans;
 use App\Models\bo;
 use App\Models\data;
+use App\Models\profit;
 use App\Models\server;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\CentralLogics\Helpers;
 use Mockery\Exception;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BillController
 {
 
-    public function bill(Request $request)
+    public function data(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'productid' => 'required',
+            'code' => 'required',
             'amount' => 'required',
             'number' => 'required',
-            'id' => 'required',
+            'refid' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -53,7 +57,7 @@ class BillController
                 ], 200);
 
             }
-            $bo = bo::where('refid', $request->id)->first();
+            $bo = bo::where('refid', $request->refid)->first();;
             if (isset($bo)) {
                 $mg = "duplicate transaction";
                 return response()->json([
@@ -63,143 +67,151 @@ class BillController
                 ], 200);
 
             } else {
-                $bt = data::where("id", $request->productid)->get();
-
+                $bt = data::where("plan_id", $request->code)->first();
+                if (!isset($bt)) {
+                    return response()->json([
+                        'message' => "invalid code, check and try again later",
+                        'user' => $user,
+                        'success' => 0
+                    ], 200);
+                }
                 $gt = $wallet->balance - $request->amount;
 
 
                 $wallet->balance = $gt;
                 $wallet->save();
 
-                foreach ($bt as $fg) {
-                    $daterserver = new DataserverController();
-                    if ($fg->plan == "airtime") {
+                $daterserver = new DataserverController();
 
-                        $resellerURL = 'https://app2.mcd.5starcompany.com.ng/api/reseller/';
-                        $curl = curl_init();
+                $object = json_decode($bt);
+                $object->number = $request->number;
+                $json = json_encode($object);
 
-                        curl_setopt_array($curl, array(
-                            CURLOPT_URL => $resellerURL.'pay',
-                            CURLOPT_RETURNTRANSFER => true,
-                            CURLOPT_ENCODING => '',
-                            CURLOPT_MAXREDIRS => 10,
-                            CURLOPT_TIMEOUT => 0,
-                            CURLOPT_FOLLOWLOCATION => true,
-                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                            CURLOPT_SSL_VERIFYHOST => 0,
-                            CURLOPT_SSL_VERIFYPEER => 0,
-                            CURLOPT_CUSTOMREQUEST => 'POST',
-                            CURLOPT_POSTFIELDS => array('service' => 'airtime', 'coded' => $fg->cat_id, 'phone' => $request->number, 'amount' => $request->amount, 'reseller_price' => $request->amount),
+                $mcd = server::where('status', "1")->first();
+                if ($mcd->name == "honorworld") {
+                    $response = $daterserver->honourwordbill($object);
+                    $data = json_decode($response, true);
 
-                            CURLOPT_HTTPHEADER => array(
-                                'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
-                            )));
+//                    return $response;
+                    if ($data['code'] == '200') {
+                        $success = 1;
+                        $ms = $data['message'];
 
-                        $response = curl_exec($curl);
+//                    echo $success;
 
-                        curl_close($curl);
-//                    echo $response;
-//    return;
-                        $data = json_decode($response, true);
-                        $success = $data["success"];
-                        $tran1 = $data["discountAmount"];
+                        $po = $bt->ramount - $bt->amount;
 
-//                        return $response;
-                        if ($success==1) {
-                            $bo = bo::create([
-                                'username' => $user->username,
-                                'plan' => $fg->plan,
-                                'amount' => $request->amount,
-                                'server_res' => $response,
-                                'result' => $success,
-                                'phone' => $request->number,
-                                'refid' => "Api".$request->id,
-                                'discountamoun' => $tran1,
-                            ]);
-                            $name= $fg->plan;
-                            $am= "NGN $request->amount  Airtime Purchase Was Successful To";
-                            $ph= $request->number;
+                        $bo = bo::create([
+                            'username' => $user->username,
+                            'plan' => $bt->network . '|' . $bt->plan,
+                            'amount' => $request->amount,
+                            'server_res' => $response,
+                            'result' => $success,
+                            'phone' => $request->number,
+                            'refid' => 'api' . $request->refid,
+                        ]);
 
-                            return response()->json([
-                                'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
-                                'user' => $user,
-                                // 'success' => 0
-                            ], 200);
+                        $profit = profit::create([
+                            'username' => $user->username,
+                            'plan' => $bt->network . '|' . $bt->plan,
+                            'amount' => $po,
+                        ]);
 
-                        }elseif ($success==0){
-                            $zo=$user->balance+$request->amount;
-                            $user->balance = $zo;
-                            $user->save();
-
-                            $name= $fg->plan;
-                            $am= "NGN $request->amount Was Refunded To Your Wallet";
-                            $ph=", Transaction fail";
-                            return response()->json([
-                                'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
-                                'user' => $user
-                            ], 200);
-
-                        }
-
-                    } else {
-                        $object = json_decode($fg);
-                        $object->number = $request->number;
-                        $json = json_encode($object);
-
-                        $mcd = server::where('status', "1")->first();
-                        if ($mcd->name == "honorworld") {
-                            $response = $daterserver->honourwordbill($object);
-                        }else if ($mcd->name == "mcd") {
-                            $response = $daterserver->mcdbill($object);
-                        }
-                        // echo $response;
+                        $name = $bt->plan;
+                        $am = "$bt->plan  was successful delivered to";
+                        $ph = $request->number;
 
 
-                        $data = json_decode($response, true);
-                        if (isset($data['result'])){
-                            $success=$data['result'];
-                        }else{
-                            $success=$data["success"];
-                        }
-                        if ($success==1){
-                            $bo = bo::create([
-                                'username' => $user->username,
-                                'plan' => $fg->plan,
-                                'amount' => $request->amount,
-                                'server_res' => $response,
-                                'result' => $success,
-                                'phone' =>$request->number,
-                                'refid' => "Api".$request->id,
-                            ]);
-                            $name= $fg->plan;
-                            $am= "$fg->plan  was successful delivered to";
-                            $ph= $request->number;
+                        $receiver = $user->email;
+                        $admin = 'admin@primedata.com.ng';
+                        $admin2 = 'primedata18@gmail.com';
 
+                        Mail::to($receiver)->send(new Emailtrans($bo));
+                        Mail::to($admin)->send(new Emailtrans($bo));
+                        Mail::to($admin2)->send(new Emailtrans($bo));
+                        return response()->json([
+                            'success' => $success,  'message' => $am, 'name' => $name, 'ph' => $ph,
+                            'user' => $user
+                        ], 200);
+                    }elseif ($data['code'] == '300') {
+                        $success = 0;
+                        $zo = $wallet->balance + $bt->ramount;
+                        $wallet->balance = $zo;
+                        $wallet->save();
 
-                            return response()->json([
-                                'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
-                                'user' => $user
-                            ], 200);
-
-                        }elseif ($success==0){
-                            $zo=$user->balance+$request->amount;
-                            $user->balance = $zo;
-                            $user->save();
-
-                            $name= $fg->plan;
-                            $am= "NGN $request->amount Was Refunded To Your Wallet";
-                            $ph=", Transaction fail";
-                            return response()->json([
-                                'message' => $am, 'name' => $name, 'ph'=>$ph, 'success'=>$success,
-                                'user' => $user
-                            ], 200);
-
-
-                        }
-
+                        $name = $bt->plan;
+                        $am = "NGN $request->amount Was Refunded To Your Wallet";
+                        $ph = ", Transaction fail";
+                        return response()->json([
+                            'success' => $success,  'message' => $am, 'name' => $name, 'ph' => $ph,
+                            'user' => $user
+                        ], 200);
 
                     }
+
+                }else if ($mcd->name == "mcd") {
+                    $response = $daterserver->mcdbill($object);
+                    $data = json_decode($response, true);
+
+                    if (isset($data['success'])) {
+
+//                    echo $success;
+                        $success = "1";
+                        $po = $bt->ramount - $bt->amount;
+
+                        $bo = bo::create([
+                            'username' => $user->username,
+                            'plan' => $bt->network . '|' . $bt->plan,
+                            'amount' => $request->amount,
+                            'server_res' => $response,
+                            'result' => $success,
+                            'phone' => $request->number,
+                            'refid' =>'api'. $request->refid,
+                        ]);
+
+                        $profit = profit::create([
+                            'username' => $user->username,
+                            'plan' => $bt->network . '|' . $bt->plan,
+                            'amount' => $po,
+                        ]);
+
+                        $name = $bt->plan;
+                        $am = "$bt->plan  was successful delivered to";
+                        $ph = $request->number;
+
+
+                        $receiver = $user->email;
+                        $admin = 'admin@primedata.com.ng';
+                        $admin2 = 'primedata18@gmail.com';
+
+                        Mail::to($receiver)->send(new Emailtrans($bo));
+                        Mail::to($admin)->send(new Emailtrans($bo));
+                        Mail::to($admin2)->send(new Emailtrans($bo));
+
+                        return response()->json([
+                            'success' => $success,  'message' => $am, 'name' => $name, 'ph' => $ph,
+                            'user' => $user
+                        ], 200);
+
+                    }elseif (!isset($data['success'])) {
+                        $success = 0;
+                        $zo = $wallet->balance + $request->amount;
+                        $wallet->balance = $zo;
+                        $wallet->save();
+
+                        $name = $bt->plan;
+                        $am = "NGN $request->amount Was Refunded To Your Wallet";
+                        $ph = ", Transaction fail";
+                        return response()->json([
+                            'success' => $success,  'message' => $am, 'name' => $name, 'ph' => $ph,
+                            'user' => $user
+                        ], 200);
+                    }
+
                 }
+                // echo $response;
+
+
             }
         }else {
             return response()->json([
