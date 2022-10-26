@@ -56,7 +56,7 @@ class AirController
                 ], 200);
 
             }
-            $bo = bo::where('refid', $request->refid)->first();;
+            $bo = bo::where('refid', 'api'.$request->refid)->first();;
             if (isset($bo)) {
                 $mg = "duplicate transaction";
                 return response()->json([
