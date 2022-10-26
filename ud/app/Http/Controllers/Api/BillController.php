@@ -36,14 +36,12 @@ class BillController
         $apikey = $request->header('apikey');
         $user = User::where('apikey',$apikey)->first();
         $serve = server::where('status', '1')->first();
-        return $serve;
         if ($serve->name == 'honorworld') {
             $bt = big::where('id', $request->code)->first();
         } elseif ($serve->name == 'mcd') {
             $bt = data::where('id', $request->code)->first();
         }
 
-        return $bt;
         if ($user) {
             $wallet = wallet::where('username', $user->username)->first();
 
