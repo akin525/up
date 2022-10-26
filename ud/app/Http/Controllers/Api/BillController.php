@@ -37,9 +37,9 @@ class BillController
         $user = User::where('apikey',$apikey)->first();
         $serve = server::where('status', '1')->first();
         if ($serve->name == 'honorworld') {
-            $bt = big::where('id', $request->code)->first();
+            $bt = big::where('plan_id', $request->code)->first();
         } elseif ($serve->name == 'mcd') {
-            $bt = data::where('id', $request->code)->first();
+            $bt = data::where('plan_id', $request->code)->first();
         }
 
         if ($user) {
