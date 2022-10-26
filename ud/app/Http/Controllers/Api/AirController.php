@@ -80,7 +80,7 @@ class AirController
                     'server_res' => 'api use',
                     'result' => 1,
                     'phone' =>$request->number,
-                    'refid' => "Api".$request->refid,
+                    'refid' => "api".$request->refid,
                 ]);
                 $bo['name']=$user->name;
 
