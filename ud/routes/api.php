@@ -26,7 +26,7 @@ Route::post('honor', [VertualController::class, 'honor'])->name('honor');
 
 Route::group(['middleware'=> 'apikey'], function () {
     Route::get('dashboard', [ResellerdetailsController::class, 'details']);
-    Route::get('airtime', [AirController::class, 'airtime']);
+    Route::post('airtime', [AirController::class, 'airtime']);
     Route::get('buydata', [BuyController::class, 'buydata']);
     Route::get('pre', [BuyController::class, 'pre']);
     Route::post('bill', [BillController::class, 'bill']);
