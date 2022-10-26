@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\DataserverController;
 use App\Mail\Emailtrans;
+use App\Models\big;
 use App\Models\bo;
 use App\Models\data;
 use App\Models\profit;
@@ -34,6 +35,12 @@ class BillController
         }
         $apikey = $request->header('apikey');
         $user = User::where('apikey',$apikey)->first();
+        $serve = server::where('status', '1')->first();
+        if ($serve->name == 'honorworld') {
+            $bt = big::where('id', $request->code)->first();
+        } elseif ($serve->name == 'mcd') {
+            $bt = data::where('id', $request->code)->first();
+        }
         if ($user) {
             $wallet = wallet::where('username', $user->username)->first();
 
@@ -67,7 +74,6 @@ class BillController
                 ], 200);
 
             } else {
-                $bt = data::where("plan_id", $request->code)->first();
                 if (!isset($bt)) {
                     return response()->json([
                         'message' => "invalid code, check and try again later",
@@ -75,7 +81,7 @@ class BillController
                         'success' => 0
                     ], 200);
                 }
-                $gt = $wallet->balance - $request->amount;
+                $gt = $wallet->balance - $bt->ramount;
 
 
                 $wallet->balance = $gt;
