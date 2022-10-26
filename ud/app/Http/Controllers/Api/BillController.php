@@ -41,6 +41,8 @@ class BillController
         } elseif ($serve->name == 'mcd') {
             $bt = data::where('id', $request->code)->first();
         }
+
+        return $bt;
         if ($user) {
             $wallet = wallet::where('username', $user->username)->first();
 
