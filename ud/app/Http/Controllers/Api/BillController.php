@@ -30,7 +30,8 @@ class BillController
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'errors' => $this->error_processor($validator)
+                'errors' => $this->error_processor($validator),
+                'success'=>0,
             ], 403);
         }
         $apikey = $request->header('apikey');
@@ -99,7 +100,7 @@ class BillController
                     $response = $daterserver->honourwordbill($object);
                     $data = json_decode($response, true);
 
-//                    return $response;
+                    return $response;
                     if ($data['code'] == '200') {
                         $success = 1;
                         $ms = $data['message'];
