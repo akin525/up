@@ -27,7 +27,7 @@
     <p>Before you access our API, Kindly note the conditions below:</p>
     <ul class="w3-ul w3-card" style="">
         <li>1. You have successfully requested for Api Key ({{ Auth::user()->apikey}})</li>
-        <li>2. You can access our api documentation via <a href="https://mobile.primedata.com.ng/API/docs/index" target="_blank"><b>primedata.com.ng/API/docs/index</b></a></li>
+        <li>2. You can access our api documentation via <a href="https://documenter.getpostman.com/view/16410443/2s8YCgFtKu" target="_blank"><b>primedata.com.ng/API/docs/index</b></a></li>
         <li>3. API service is available for DATA, AIRTIME VTU and BILLS PAYMENT(Dstv, Gotv, Startimes, Smile Bundle, Smile Recharge, Spectranet, Waec Result Checker)</li>
         <li>4. You can generate a new API key free of charge, note that the formal key will no longer be functional once you generate a new key</li>
         <li>5. Do not disclose your API key to anyone, Primedata staffs will never request for it</li>
@@ -39,7 +39,10 @@
     <div class="w3-container w3-card-4 w3-light-grey">
         <br>
         <p class="w3-hide-small"><b class="w3-xlarge"><span class="w3-round w3-button w3-hover-black w3-border w3-black w3-text-white">Api Key:</span>{{ Auth::user()->apikey}}</b></p><br>
-        <p class="w3-hide-medium w3-hide-large"><b class="w3-large"><span class="w3-round w3-button w3-hover-black w3-border w3-black w3-text-white">Api Key:</span>{{ Auth::user()->apikey}}</b></p><br>
+        <p class="w3-hide-medium w3-hide-large"><b class="w3-large"><span class="w3-round w3-button w3-hover-black w3-border w3-black w3-text-white">Api Key:</span>{{ Auth::user()->apikey}}</b></p>
+        <a href="{{route('reset')}}" class="badge badge-success">Reset Key</a>
+        <br>
+        <br>
 {{--        <div class="w3-container">--}}
 {{--            <div class="w3-half w3-container">--}}
 {{--                <input class="w3-round w3-grey w3-input w3-border" type="text" id="myInput" name="api_key" value="{{ Auth::user()->apikey }}" placeholder="{{ Auth::user()->apikey}}"><p></p>--}}

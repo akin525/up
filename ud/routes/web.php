@@ -76,6 +76,7 @@ Route::get('referal', [AuthController::class, 'refer'])->name('referal');
 Route::post('mp', [ResellerController::class, 'reseller'])->name('mp');
 Route::get('reseller', [ResellerController::class, 'sell'])->name('reseller');
 Route::get('upgrade', [ResellerController::class, 'apiaccess'])->name('upgrade');
+Route::get('reset', [ResellerController::class, 'resetapikey'])->name('reset');
 Route::post('buyairtime', [AirtimeController::class, 'airtime'])->name('buyairtime');
 Route::post('buyairtime1', [AirtimeController::class, 'honor'])->name('buyairtime1');
 //Route::get('airtime1', [AuthController::class, 'airtime'])->name('airtime1');

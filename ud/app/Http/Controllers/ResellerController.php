@@ -92,4 +92,15 @@ class ResellerController
 
         }
     }
+    public  function resetapikey()
+    {
+        $newkey=uniqid('PRIME',true);
+        $saveUser = User::where('email',  Auth::user()->email)->update([
+            'apikey' => $newkey,
+        ]);
+        Alert::toast('New Key Successfully Generated', 'success');
+        return back();
+
+
+    }
 }
