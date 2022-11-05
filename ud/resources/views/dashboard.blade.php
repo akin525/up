@@ -269,14 +269,14 @@
                                         <div class="carousel-inner">
                                             @foreach($pam as $deposit)
                                                 <div class="item carousel-item active">
-                                                    <div class="img-box"><img src="https://renomobilemoney.com/images/bn.jpeg" alt=""></div>
+                                                    <div class="img-box"><img src="https://mobile.primedata.com.ng/images/bn.jpeg" alt=""></div>
                                                     <p class="testimonial">Your Account Was Funded With ₦{{number_format(intval($deposit->amount *1),2)}} On {{$deposit->date}}.</p>
                                                     <p class="overview"><b>Payment Confirmed</b>By Admin</p>
                                                 </div>
                                             @endforeach
                                             @foreach($pam1 as $deposit1)
                                                 <div class="item carousel-item">
-                                                    <div class="img-box"><img src="https://renomobilemoney.com/images/bn.jpeg" alt=""></div>
+                                                    <div class="img-box"><img src="https://mobile.primedata.com.ng/images/bn.jpeg" alt=""></div>
                                                     <p class="testimonial">Your Account Was Funded With ₦{{number_format(intval($deposit1->amount *1),2)}} On {{$deposit1->date}}.</p>
                                                     <p class="overview"><b>Payment Confirmed</b>By Admin</p>
                                                 </div>
