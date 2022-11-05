@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Mail\login;
 use App\Models\airtimecon;
 use App\Models\big;
+use App\Models\bill_payment;
 use App\Models\charp;
 use App\Mail\Emailpass;
+use App\Models\Giveaway;
 use App\Models\Messages;
 use App\Models\refer;
 use App\Models\server;
@@ -132,7 +134,14 @@ $login=$user->name;
                 $bill += $bill1->amount;
 
             }
-            return  view('dashboard', compact('user', 'wallet', 'totaldeposite', 'me',  'bil2', 'bill', 'totalrefer', 'count'));
+
+        $cdeposite=deposit::where('username', Auth::user()->username)->count();
+        $cbill=bo::where('username', Auth::user()->username)->count();
+//        $cgive=Giveaway::where('username', Auth::user()->username)->count();
+        $pam = deposit::where('username', $user->username)->latest()->limit(1)->get();
+        $pam1 = deposit::where('username', $user->username)->latest()->limit(10)->get();
+        $all=$cdeposite+$cbill;
+            return  view('dashboard', compact('user', 'wallet', 'pam', 'pam1', 'cdeposite', 'cbill', 'all', 'totaldeposite', 'me',  'bil2', 'bill', 'totalrefer', 'count'));
 
     }
     public function refer(Request $request)

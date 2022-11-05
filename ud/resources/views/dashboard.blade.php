@@ -252,7 +252,89 @@
         </div>
     </div>
 
-    <div class="content">
+        <div class="row column3">
+            <div class="col-md-6">
+                <div class="dark_bg full margin_bottom_30">
+                    <div class="full graph_head">
+                        <div class="heading1 margin_0">
+                            <h2>Your Last Deposit</h2>
+                        </div>
+                    </div>
+                    <div class="full graph_revenue">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="content testimonial">
+                                    <div id="testimonial_slider" class="carousel slide" data-ride="carousel">
+                                        <!-- Wrapper for carousel items -->
+                                        <div class="carousel-inner">
+                                            @foreach($pam as $deposit)
+                                                <div class="item carousel-item active">
+                                                    <div class="img-box"><img src="https://renomobilemoney.com/images/bn.jpeg" alt=""></div>
+                                                    <p class="testimonial">Your Account Was Funded With ₦{{number_format(intval($deposit->amount *1),2)}} On {{$deposit->date}}.</p>
+                                                    <p class="overview"><b>Payment Confirmed</b>By Admin</p>
+                                                </div>
+                                            @endforeach
+                                            @foreach($pam1 as $deposit1)
+                                                <div class="item carousel-item">
+                                                    <div class="img-box"><img src="https://renomobilemoney.com/images/bn.jpeg" alt=""></div>
+                                                    <p class="testimonial">Your Account Was Funded With ₦{{number_format(intval($deposit1->amount *1),2)}} On {{$deposit1->date}}.</p>
+                                                    <p class="overview"><b>Payment Confirmed</b>By Admin</p>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <!-- Carousel controls -->
+                                        <a class="carousel-control left carousel-control-prev" href="#testimonial_slider" data-slide="prev">
+                                            <i class="fa fa-angle-left"></i>
+                                        </a>
+                                        <a class="carousel-control right carousel-control-next" href="#testimonial_slider" data-slide="next">
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="white_shd full margin_bottom_30">
+                    <div class="full graph_head">
+                        <div class="heading1 margin_0">
+                            <h2>Progress Bar</h2>
+                        </div>
+                    </div>
+                    <div class="full progress_bar_inner">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="progress_bar">
+                                    <!-- Skill Bars -->
+                                    <span class="skill" style="width: 80%;">Total Deposit<span class="info_valume">{{$cdeposite}}</span></span>
+                                    <div class="progress skill-bar ">
+                                        <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="{{$cdeposite}}" aria-valuemin="0" aria-valuemax="1000" style="width: {{$cdeposite}}%;">
+                                        </div>
+                                    </div>
+                                    <span class="skill" style="width:80%;">Total Purchase<span class="info_valume">{{$cbill}}</span></span>
+                                    <div class="progress skill-bar ">
+                                        <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="{{$cbill}}" aria-valuemin="0" aria-valuemax="1000" style="width: {{$cbill}}%;">
+                                        </div>
+                                    </div>
+                                    <span class="skill" style="width:80%;">Total All Transaction<span class="info_valume">{{$all}}</span></span>
+                                    <div class="progress skill-bar ">
+                                        <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="{{$all}}" aria-valuemin="0" aria-valuemax="1000" style="width: {{$all}}%;">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="content">
         <div class="module">
             <div class="module-head">
                 <h3>
