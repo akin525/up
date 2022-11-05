@@ -18,6 +18,7 @@ use App\Http\Controllers\FaceBookController;
 use App\Http\Controllers\GoogleLogin;
 use App\Http\Controllers\listdata;
 use App\Http\Controllers\RefersController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VertualController;
@@ -152,6 +153,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('admin/datebill', [QueryController::class, 'querybilldate'])->name('admin/datebill');
     Route::get('admin/depositquery', [QueryController::class, 'queryindex'])->name('admin/depositquery');
     Route::get('admin/billquery', [QueryController::class, 'billdate'])->name('admin/billquery');
+    Route::any('admin/report_yearly', [ReportController::class, 'yearly'])->name('report_yearly');
+    Route::any('admin/report_monthly', [ReportController::class, 'monthly'])->name('report_monthly');
+    Route::any('admin/report_daily', [ReportController::class, 'daily'])->name('report_daily');
 
 
 });
