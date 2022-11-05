@@ -18,8 +18,8 @@ class ReportController
             $date = Carbon::parse($request->date)->format("Y");
         }
 
-        $data['data'] = bo::where([['plan', 'like', '%plan%'], ['date', 'LIKE', $date . '%']])->count();
-        $data['data_amount'] = bo::where([['plan', 'like', '%plan%'], ['date', 'LIKE', $date . '%']])->sum('amount');
+        $data['data'] = bo::where([['plan', 'like', '%GB%'], ['date', 'LIKE', $date . '%']])->count();
+        $data['data_amount'] = bo::where([['plan', 'like', '%GB%'], ['date', 'LIKE', $date . '%']])->sum('amount');
         $data['airtime'] = bo::where([['plan', 'like', '%airtime%'], ['date', 'LIKE', $date . '%']])->count();
         $data['airtime_amount'] = bo::where([['plan', 'like', '%airtime%'], ['date', 'LIKE', $date . '%']])->sum('amount');
         $data['tv'] = bo::where([['plan', 'like', '%tv%'],  ['date', 'LIKE', $date . '%']])->count();
@@ -42,8 +42,8 @@ class ReportController
             $date = Carbon::parse($request->date)->format("Y-m");
         }
 
-        $data['data'] = bo::where([['plan', 'like', '%plan%'], ['date', 'LIKE', $date . '%']])->count();
-        $data['data_amount'] = bo::where([['plan', 'like', '%plan%'], ['date', 'LIKE', $date . '%']])->sum('amount');
+        $data['data'] = bo::where([['plan', 'like', '%GB%'], ['date', 'LIKE', $date . '%']])->count();
+        $data['data_amount'] = bo::where([['plan', 'like', '%GB%'], ['date', 'LIKE', $date . '%']])->sum('amount');
         $data['airtime'] = bo::where([['plan', 'like', '%airtime%'],  ['date', 'LIKE', $date . '%']])->count();
         $data['airtime_amount'] = bo::where([['plan', 'like', '%airtime%'], ['date', 'LIKE', $date . '%']])->sum('amount');
         $data['tv'] = bo::where([['plan', 'like', '%tv%'], ['date', 'LIKE', $date . '%']])->count();
@@ -67,8 +67,8 @@ class ReportController
             $date = Carbon::parse($request->date)->format("Y-m-d");
         }
 
-        $data['data'] = bo::where([['plan', 'like', '%plan%'], ['date', 'LIKE', $date . '%']])->count();
-        $data['data_amount'] = bo::where([['plan', 'like', '%plan%'], ['date', 'LIKE', $date . '%']])->sum('amount');
+        $data['data'] = bo::where([['plan', 'like', '%GB%'], ['date', 'LIKE', $date . '%']])->count();
+        $data['data_amount'] = bo::where([['plan', 'like', '%GB%'], ['date', 'LIKE', $date . '%']])->sum('amount');
         $data['airtime'] = bo::where([['plan', 'like', '%airtime%'], ['date', 'LIKE', $date . '%']])->count();
         $data['airtime_amount'] = bo::where([['plan', 'like', '%airtime%'],  ['date', 'LIKE', $date . '%']])->sum('amount');
         $data['tv'] = bo::where([['plan', 'like', '%tv%'], ['date', 'LIKE', $date . '%']])->count();
