@@ -73,11 +73,17 @@
                                             <a class="forgot" href="{{ route('password.request') }}">Forgotten Password?</a>
                                         @endif
 
+                                        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+                                        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
                                         <button type="submit" class="btn btn-danger" style="background-color: #FF0066">
                                             login<span class="load loading"></span>
                                         </button>
-
+                                        <br>
+                                        <center>
+                                            <a  onclick="web2app.biometric.check(myCallback);"><h4 class="text-success"><i class='fas fa-fingerprint' style='font-size:36px'></i>
+                                                    Fingerprint</h4>Login With </a>
+                                        </center>
                                         <script>
                                             const btns = document.querySelectorAll('button');
                                             btns.forEach((items)=>{
@@ -85,6 +91,18 @@
                                                     evt.target.classList.add('activeLoading');
                                                 })
                                             })
+                                        </script>
+                                        <script>
+                                            function myCallback(data) {
+                                                console.log("I am in callback")
+                                                console.log(JSON.stringify(data));
+                                            }
+
+                                            function contactCallback(data) {
+                                                console.log("I am in callback")
+                                                console.log(JSON.stringify(data));
+                                                document.getElementById('anyme').value=data.data;
+                                            }
                                         </script>
                                         <script>
                                             const btn = document.querySelector(".button");
