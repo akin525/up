@@ -81,7 +81,7 @@
                                         </button>
                                         <br>
                                         <center>
-                                            <a  onclick="web2app.biometric.check(myCallback);"><h4 style="background-color: #FF0066"><i class='fas fa-fingerprint' style='font-size:36px'></i>
+                                            <a  onclick="web2app.biometric.check(myCallback);"><h4 style="color: #FF0066"><i class='fas fa-fingerprint' style='font-size:36px'></i>
                                                     Fingerprint</h4>Login With </a>
                                         </center>
                                         <script>
