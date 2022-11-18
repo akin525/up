@@ -36,7 +36,7 @@ class VertualController
                 CURLOPT_SSL_VERIFYHOST => 0,
                 CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('account_name' => $user->username, 'business_short_name' => 'PRIMEDATA', 'uniqueid' => $user->name, 'email' => $user->email, 'phone' => '08146328645', 'webhook_url' => 'https://mobile.primedata.com.ng/api/run',),
+                CURLOPT_POSTFIELDS => array('account_name' => $user->username.rand(0000, 1111), 'business_short_name' => 'PRIMEDATA', 'uniqueid' => $user->name, 'email' => $user->email, 'phone' => '08146328645', 'webhook_url' => 'https://mobile.primedata.com.ng/api/run',),
                 CURLOPT_HTTPHEADER => array(
                     'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
                 ),
