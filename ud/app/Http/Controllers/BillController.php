@@ -103,7 +103,7 @@ class BillController extends Controller
 
                         $po = $amount - $product->amount;
                         $update=bo::where('id', $bo->id)->update([
-                            'server_response'=>$response,
+                            'server_res'=>$response,
                             'result'=>1,
                         ]);
 

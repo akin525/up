@@ -215,7 +215,7 @@ Alert::error('Insufficient Balance', $mg);
 //                        return $response;
             if ($data['message']== 'SUCCESSFUL') {
                 $update=bo::where('id', $bo->id)->update([
-                    'server_response'=>$response,
+                    'server_res'=>$response,
                     'result'=>1,
                 ]);
 
