@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminpdfController;
 use App\Http\Controllers\admin\HonorApi;
 use App\Http\Controllers\admin\CandCController;
 use App\Http\Controllers\admin\McdController;
@@ -17,10 +18,12 @@ use App\Http\Controllers\EkectController;
 use App\Http\Controllers\FaceBookController;
 use App\Http\Controllers\GoogleLogin;
 use App\Http\Controllers\listdata;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RefersController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\verify;
 use App\Http\Controllers\VertualController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -95,7 +98,17 @@ Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
     Route::post('update', [UserController::class, 'updateuserdecry'])->name('update');
     Route::get('myaccount', [UserController::class, 'viewuserencry'])->name('myaccount');
     Route::get('deletepic', [UserController::class, 'removephoto'])->name('deletepic');
+
+    Route::get('viewpdf/{id}', [PdfController::class, 'viewpdf'])->name('viewpdf');
+    Route::get('/dopdf/{id}', [PdfController::class, 'dopdf'])->name('dopdf');
+
+    //validate transaction
+    Route::view('verifybill', 'check');
+    Route::view('verifydeposit', 'check1');
+    Route::post('check', [verify::class, 'verifypurchase'])->name('check');
+    Route::post('check1', [verify::class, 'verifydeposit'])->name('check1');
 });
+
 
 
 
@@ -109,6 +122,9 @@ Route::post('cuslog', [LoginController::class, 'login'])->name('cuslog');
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::post('admin/sub', [McdController::class, 'mcd'])->name('admin/sub');
+    Route::post('admin/verify', [McdController::class, 'verify'])->name('admin/verify');
+    Route::get('admin/mcd', [McdController::class, 'index'])->name('admin/mcd');
 
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin/dashboard');
     Route::get('admin/mcdtransaction', [DashboardController::class, 'mcdtran'])->name('admin/mcdtransaction');
@@ -131,7 +147,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/air', [ProductController::class, 'air'])->name('admin/air');
     Route::get('admin/up/{id}', [UsersController::class, 'up'])->name('admin/up');
     Route::get('admin/up1/{id}', [ProductController::class, 'pair'])->name('admin/up1');
-    Route::get('admin/verify', [McdController::class, 'index'])->name('admin/verify');
+//    Route::get('admin/verify', [McdController::class, 'index'])->name('admin/verify');
     Route::get('admin/profile/{username}', [UsersController::class, 'profile'])->name('admin/profile');
     Route::get('admin/charge', [CandCController::class, 'sp'])->name('admin/charge');
     Route::get('admin/product', [productController::class, 'index'])->name('admin/product');
@@ -157,7 +173,8 @@ Route::middleware(['auth'])->group(function () {
     Route::any('admin/report_monthly', [ReportController::class, 'monthly'])->name('report_monthly');
     Route::any('admin/report_daily', [ReportController::class, 'daily'])->name('report_daily');
 
-
+    Route::get('admin/viewpdf/{id}', [AdminpdfController::class, 'viewpdf'])->name('admin/viewpdf');
+    Route::get('admin/dopdf/{id}', [AdminpdfController::class, 'dopdf'])->name('admin/dopdf');
 });
 Route::prefix('google')->name('google.')->group( function(){
     Route::get('login', [GoogleLogin::class, 'loginWithGoogle'])->name('login');

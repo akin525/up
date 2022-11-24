@@ -111,7 +111,7 @@ class AirtimeController
                     Mail::to($admin2)->send(new Emailtrans($bo));
 
                     Alert::success('Success', $am.''.$ph);
-                    return back();
+                    return redirect()->r8oute('viewpdf', $bo->id);
 
                 } elseif ($success == 0) {
                     $zo = $wallet->balance + $request->amount;
@@ -122,8 +122,8 @@ class AirtimeController
                     $am = "NGN $request->amount Was Refunded To Your Wallet";
                     $ph = ", Transaction fail";
 
-                    return view('bill', compact('user', 'name', 'am', 'ph', 'success'));
-
+                    Alert::error('error', $am.' ' .$ph);
+                    return redirect()->route('viewpdf', $bo->id);
                 }
         }
     }
@@ -167,7 +167,16 @@ Alert::error('Insufficient Balance', $mg);
 
             $wallet->balance = $gt;
             $wallet->save();
-
+            $bo = bo::create([
+                'username' => $user->username,
+                'plan' => 'airtime',
+                'amount' => $request->amount,
+                'server_res' => 0,
+                'result' => 0,
+                'phone' => $request->number,
+                'refid' => $request->refid,
+                'discountamoun' => '0',
+            ]);
 
             $curl = curl_init();
 
@@ -205,16 +214,9 @@ Alert::error('Insufficient Balance', $mg);
 
 //                        return $response;
             if ($data['message']== 'SUCCESSFUL') {
-
-                $bo = bo::create([
-                    'username' => $user->username,
-                    'plan' => 'airtime',
-                    'amount' => $request->amount,
-                    'server_res' => $response,
-                    'result' => 1,
-                    'phone' => $request->number,
-                    'refid' => $request->refid,
-                    'discountamoun' => '0',
+                $update=bo::where('id', $bo->id)->update([
+                    'server_response'=>$response,
+                    'result'=>1,
                 ]);
 
                 $success=1;
@@ -231,7 +233,8 @@ Alert::error('Insufficient Balance', $mg);
                 Mail::to($admin2)->send(new Emailtrans($bo));
 
                 Alert::success('Success', $am.' '.$ph);
-                return back();
+                return redirect()->route('viewpdf', $bo->id);
+
 
             } elseif ($data['message']== 'Possible duplicate transaction, Please retry after 2 minutes') {
                 $zo = $user->balance + $request->amount;

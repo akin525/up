@@ -143,6 +143,7 @@
                         <tr>
                             <th>id</th>
                             <th>Username</th>
+                            <th>Receipt</th>
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Number</th>
@@ -158,6 +159,7 @@
                             <tr>
                                 <td>{{$dat->id}}</td>
                                 <td>{{$dat->username}}
+                                <td><a href="{{route('admin/viewpdf', $dat->id)}}" class="badge badge-success"><i class="fa fa-download">Pdf</i></a> </td>
                                 </td>
                                 <td>{{$dat->amount}}</td>
                                 <td class="center">

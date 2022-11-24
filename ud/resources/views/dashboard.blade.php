@@ -30,6 +30,24 @@
             <button type='button' class='close' data-dismiss='alert'>&times;</button>
             <i class='fa fa-ban-circle'></i><h6 class="text-white">Important Notification: </br><b>{{$me->message}}</b></h6>
         </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="alert alert-secondary">
+                    <center>
+                        <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->
+                        <a class="badge badge-info" href="{{route('invoice')}}">Get Invoice</a>
+                        <a class="badge badge-info" href="{{route('airtime')}}">Airtime</a>
+
+                        <a class="badge badge-info" href="{{route('tv')}}">Paytv</a>
+                        <a class="badge badge-info" href="{{url('verifybill')}}">Validate Biils</a>
+                        <a class="badge badge-info" href="{{url('verifydeposit')}}">Validate Deposit</a>
+
+                        <!--                            <a class="w3-btn w3-green w3-border w3-round-large" href="method.php">All Payment Method</a>-->
+                    </center>
+                </div>
+            </div>
+        </div>
         <br>
         <div class="card">
             <div class="card-body">
@@ -355,6 +373,7 @@
                                         <thead>
                                             <th>Date</th>
                                             <th>Username</th>
+                                            <th>Receipt</th>
                                             <th>Plan</th>
                                             <th>Amount</th>
                                             <th>Phone No</th>
@@ -368,6 +387,7 @@
                                             <tr>
                                                 <td>{{$re->date}}</td>
                                                 <td>{{$re->username}}</td>
+                                                <td><a href="{{route('viewpdf', $re->id)}}" class="badge badge-success"><i class="fa fa-download">Pdf</i></a> </td>
                                                 <td>{{$re->plan}}</td>
                                                 <td>{{$re->amount}}</td>
                                                 <td>{{$re->phone}}</td>

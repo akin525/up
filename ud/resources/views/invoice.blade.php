@@ -18,6 +18,7 @@
                                     <tr>
                                         <th>Date</th>
                                         <th>Username</th>
+                                        <th>Receipt</th>
                                         <th>Plan</th>
                                         <th>Amount</th>
                                         <th>Phone No</th>
@@ -31,6 +32,7 @@
                                         <tr>
                                             <td>{{$re->date}}</td>
                                             <td>{{$re->username}}</td>
+                                            <td><a href="{{route('viewpdf', $re->id)}}" class="badge badge-success"><i class="fa fa-download">Pdf</i></a> </td>
                                             <td>{{$re->plan}}</td>
                                             <td>{{$re->amount}}</td>
                                             <td>{{$re->phone}}</td>

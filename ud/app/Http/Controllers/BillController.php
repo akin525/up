@@ -72,7 +72,15 @@ class BillController extends Controller
 
                 $wallet->balance = $gt;
                 $wallet->save();
-
+                $bo = bo::create([
+                    'username' => $user->username,
+                    'plan' => $product->network . '|' . $product->plan,
+                    'amount' => $request->amount,
+                    'server_res' => 0,
+                    'result' => 0,
+                    'phone' => $request->number,
+                    'refid' => $request->id,
+                ]);
                 $object = json_decode($product);
                 $object->number = $request->number;
                 $json = json_encode($object);
@@ -94,16 +102,11 @@ class BillController extends Controller
 //                    echo $success;
 
                         $po = $amount - $product->amount;
-
-                        $bo = bo::create([
-                            'username' => $user->username,
-                            'plan' => $product->network . '|' . $product->plan,
-                            'amount' => $request->amount,
-                            'server_res' => $response,
-                            'result' => $success,
-                            'phone' => $request->number,
-                            'refid' => $request->id,
+                        $update=bo::where('id', $bo->id)->update([
+                            'server_response'=>$response,
+                            'result'=>1,
                         ]);
+
 
                         $profit = profit::create([
                             'username' => $user->username,

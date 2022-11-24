@@ -1,4 +1,4 @@
-@include('layouts.sidebar')
+@include('admin.layouts.sidebar')
 
 <head>
     <style type="text/css">
@@ -134,13 +134,13 @@
                                                 <td align="center" valign="top" style="padding:0;Margin:0;width:560px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0"><!--[if mso]><a href="{{route('dopdf', $tran->id)}}" target="_blank" hidden>
-	<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="{{route('dopdf', $tran->id)}}"
+                                                            <td align="center" style="padding:0;Margin:0"><!--[if mso]><a href="{{route('admin/dopdf', $tran->id)}}" target="_blank" hidden>
+	<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="{{route('admin/dopdf', $tran->id)}}"
                 style="height:36px; v-text-anchor:middle; width:116px" arcsize="50%" stroke="f"  fillcolor="#055160">
 		<w:anchorlock></w:anchorlock>
 		<center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:12px; font-weight:400; line-height:12px;  mso-text-raise:1px'>Save pdf</center>
 	</v:roundrect></a>
-<![endif]--><!--[if !mso]> --><span class="msohide es-button-border" style="border-style:solid;border-color:#FF0066;background:#FF0066;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a href="{{route('dopdf', $tran->id)}}" class="es-button" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:14px;border-style:solid;border-color:#FF0066;border-width:10px 30px 10px 30px;display:inline-block;background:#FF0066;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:17px;width:auto;text-align:center">Save pdf</a></span><!--<![endif]--></td>
+<![endif]--><!--[if !mso]> --><span class="msohide es-button-border" style="border-style:solid;border-color:#FF0066;background:#FF0066;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a href="{{route('adnib/dopdf', $tran->id)}}" class="es-button" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:14px;border-style:solid;border-color:#FF0066;border-width:10px 30px 10px 30px;display:inline-block;background:#FF0066;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:17px;width:auto;text-align:center">Save pdf</a></span><!--<![endif]--></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="center" style="padding:20px;Margin:0;font-size:0">
@@ -151,13 +151,13 @@
                                                                 </table></td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0"><!--[if mso]><a href="{{route('invoice')}}" hidden>
-	<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="{{route('invoice')}}"
+                                                            <td align="center" style="padding:0;Margin:0"><!--[if mso]><a href="{{route('admin/bills')}}" hidden>
+	<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="{{route('admin/bills')}}"
                 style="height:36px; v-text-anchor:middle; width:114px" arcsize="50%" stroke="f"  fillcolor="#FF0066">
 		<w:anchorlock></w:anchorlock>
 		<center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:12px; font-weight:400; line-height:12px;  mso-text-raise:1px'>Go Back</center>
 	</v:roundrect></a>
-<![endif]--><!--[if !mso]> --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#FF0066;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a href="{{route('invoice')}}" class="es-button"  style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:14px;border-style:solid;border-color:#FF0066;border-width:10px 30px 10px 30px;display:inline-block;background:#FF0066;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:17px;width:auto;text-align:center">Go Back</a></span><!--<![endif]--></td>
+<![endif]--><!--[if !mso]> --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#FF0066;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a href="{{route('admin/bills')}}" class="es-button"  style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:14px;border-style:solid;border-color:#FF0066;border-width:10px 30px 10px 30px;display:inline-block;background:#FF0066;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:17px;width:auto;text-align:center">Go Back</a></span><!--<![endif]--></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="center" style="padding:0;Margin:0"><h2 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:Oswald, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#363E44"><br></h2></td>
@@ -194,4 +194,3 @@
 </div>
 </body>
 
-<?php

@@ -125,7 +125,6 @@
             visibility: hidden
         }
     </style>
-
 </head>
 
 <body class="dashboard dashboard_1">
@@ -179,56 +178,70 @@
                     <li class="active">
                         <a href="{{ route('dashboard') }}"  ><i class="fa fa-dashboard white_color"></i> <span>Dashboard</span></a>
                     </li>
-                    @if(Auth::user()->apikey ==NULL)
                         <li>
-                            <a href="{{route('reseller')}}"><i class="fa fa-shopping-cart "></i> <span>Become Reseller</span></a>
+                            <a href="{{route('invoice')}}"><i class="fa fa-sticky-note orange_color"></i> <span>Bills Invoice</span></a>
                         </li>
-                    @else
-                        <li>
-                            <a href="{{route('upgrade')}}"><i class="fa fa-book "></i> <span>Api</span></a>
-                        </li>
-                    @endif
-                        <li>
-                            <a href="{{route('myaccount')}}"><i class="fa fa-user"></i> <span>My Account</span></a>
-                        </li>
-
                     <li><a href="{{ route('fund') }}"><i class="fa fa-credit-card orange_color"></i> <span>Fund Wallet</span></a></li>
-                    @if(Auth::user()->apikey ==NULL)
-                    <li>
-                        <a href="{{route('select')}}"><i class="fa fa-laptop "></i> <span>Buy Data</span></a>
-                    </li>
-                    @else
                         <li>
-                            <a href="{{route('select1')}}"><i class="fa fa-laptop "></i> <span>Reseller Data</span></a>
+                            <a href="#app4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-bullhorn"></i> <span>Recharge</span></a>
+                            <ul class="collapse list-unstyled" id="app4">
+                                @if(Auth::user()->apikey ==NULL)
+                                    <li>
+                                        <a href="{{route('select')}}"><i class="fa fa-laptop "></i> <span>Buy Data</span></a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{route('select1')}}"><i class="fa fa-laptop "></i> <span>Reseller Data</span></a>
+                                    </li>
+                                @endif
+
+                                <li>
+                                    <a href="{{route('airtime')}}"><i class="fa fa-phone "></i> <span>Buy Airtime</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{url('tv')}}"><i class="fa fa-tv"></i> <span>Pay Tv</span></a>
+                                </li>
+
+
+                                <li>
+                                    <a href="{{route('elect')}}"><i class="fa fa-power-off"></i> <span>Pay Electricity</span></a>
+                                </li>
+                            </ul>
                         </li>
-                    @endif
+                        <li>
+                            <a href="#app7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users"></i> <span>Self Service</span></a>
+                            <ul class="collapse list-unstyled" id="app7">
+                                <li><a href="{{ url('verifybill') }}"><i class="fa fa-bookmark"></i> <span>Verify Airtime/Data</span></a></li>
+                                <li><a href="{{ url('verifydeposit') }}"><i class="fa fa-newspaper-o"></i> <span>Verify Deposit</span></a></li>
 
-                    <li>
-                        <a href="{{route('airtime')}}"><i class="fa fa-phone "></i> <span>Buy Airtime</span></a>
-                    </li>
-
+                            </ul>
+                        </li>
                     <li>
                         <a href="{{route('referal')}}"><i class="fa fa-laptop "></i> <span>Referal System</span></a>
                     </li>
-                    <li class="active">
-                        <a href="{{ route('profile.show') }}"  ><i class="fa fa-gear white_color"></i> <span>Settings</span></a>
-                    </li>
+                        <li>
+                            <a href="#app3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> <span>Profile</span></a>
+                            <ul class="collapse list-unstyled" id="app3">
+                                @if(Auth::user()->apikey ==NULL)
+                                    <li>
+                                        <a href="{{route('reseller')}}"><i class="fa fa-shopping-cart yellow_color"></i> <span>Become Reseller</span></a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{route('upgrade')}}"><i class="fa fa-book "></i> <span>Api</span></a>
+                                    </li>
+                                @endif
+                                <li>
+                                    <a href="{{route('myaccount')}}"><i class="fa fa-user "></i> <span>My Profile</span></a>
+                                </li>
+                                <li class="active">
+                                    <a href="{{ route('profile.show') }}"  ><i class="fa fa-user white_color"></i> <span>Account Setting</span></a>
+                                </li>
 
-
+                            </ul>
+                        </li>
                     <li>
-                        <a href="{{route('tv')}}"><i class="fa fa-tv"></i> <span>Pay Tv</span></a>
-                    </li>
-
-
-                    <li>
-                        <a href="{{route('elect')}}"><i class="fa fa-power-off"></i> <span>Pay Electricity</span></a>
-                    </li>
-
-                    <li>
-                        <a href="{{route('invoice')}}"><i class="fa fa-sticky-note yellow_color"></i> <span>Bills Invoice</span></a>
-                    </li>
-                    <li>
-                        <a href="{{route('charges')}}"><i class="fa fa-sticky-note"></i> <span>Charges</span></a>
+                        <a href="{{route('charges')}}"><i class="fa fa-sticky-note orange_color"></i> <span>Charges</span></a>
                     </li>
                 </ul>
             </div>
