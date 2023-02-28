@@ -91,6 +91,31 @@ public function dashboard(Request $request)
         $tran = $data["data"]["wallet"];
         $pa = $data["data"]["commission"];
 
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.honourworld.com.ng/api/v1/fetch/balance',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer sk_live_9a55cd84-8ad7-46d9-9136-c5962858f753'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+//                                                        return $response;
+        $data1 = json_decode($response, true);
+        $honor=$data1['data']['balance'];
+
         $today = Carbon::now()->format('Y-m-d');
 
 
@@ -101,7 +126,7 @@ public function dashboard(Request $request)
         $data['sum_deposits'] = deposit::where([['date', 'LIKE', '%' . $today . '%']])->sum('amount');
         $data['sum_bill'] = bo::where([['date', 'LIKE', '%' . $today . '%']])->sum('amount');
 
-        return view('admin/dashboard', compact('user', 'wallet', 'data', 'lock', 'totalcharge',  'tran', 'alluser', 'totaldeposite', 'totalwallet', 'deposite', 'me', 'bil2', 'bill', 'totalrefer', 'totalprofit',  'count'));
+        return view('admin/dashboard', compact('user', 'wallet', 'honor', 'data', 'lock', 'totalcharge',  'tran', 'alluser', 'totaldeposite', 'totalwallet', 'deposite', 'me', 'bil2', 'bill', 'totalrefer', 'totalprofit',  'count'));
 
     }
     return redirect("admin/login")->with('status', 'You are not allowed to access');

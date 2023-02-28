@@ -8,22 +8,19 @@
                 </div>
             </div>
         </div>
-        <div class='alert alert-info'>
-            <button type='button' class='close' data-dismiss='alert'>&times;</button>
-            <i class='fa fa-ban-circle'></i><strong>Notification: </br></strong>Welcome Back {{"$user->username"}}
-        </div>
+
         <div class="card">
             <div class="card-body">
-                <div class="w3-panel w3-yellow w3-round-xlarge">
-                    <div class="card-body">
-                        <center>
+                <div class="alert alert-info">
+                    <div >
+                        <center >
                             <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Credit User</a>
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="#">Withdraw MCD Wallet</a>
+                            <a class="badge badge-danger" href="{{route('admin/credit')}}">Credit User</a>
+                            <a class="badge badge-danger" href="{{route('admin/mcd')}}">Withdraw MCD Wallet</a>
 
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Refund User</a>
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/charge')}}">Charge User</a>
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="#">Withdraw MCD Commission</a>
+                            <a class="badge badge-danger" href="{{route('admin/credit')}}">Refund User</a>
+                            <a class="badge badge-danger" href="{{route('admin/charge')}}">Charge User</a>
+                            <a class="badge badge-danger" href="#">Withdraw MCD Commission</a>
 
                             <!--                            <a class="w3-btn w3-green w3-border w3-round-large" href="method.php">All Payment Method</a>-->
                         </center>
@@ -221,8 +218,8 @@
                         <div class="counter_no">
                             <div>
 
-                                <h5 class="total_no text-center">₦{{ number_format(intval($lock *1),2)}}</h5>
-                                <h6 class="head_couter">Airtime Discounts</h6>
+                                <h5 class="total_no text-center">₦{{ number_format(intval($honor *1),2)}}</h5>
+                                <h6 class="head_couter">Honorworld Balance</h6>
                             </div>
                         </div>
                     </div>

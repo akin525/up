@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input name="username" type="text" class="form-control" value="{{\App\Console\encription::decryptdata(Auth::user()->username)}}" readonly
+                                                <input name="username" type="text" class="form-control" value="{{Auth::user()->username}}" readonly
                                                        required>
                                             </div>
                                         </div>
