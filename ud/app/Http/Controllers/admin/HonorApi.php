@@ -10,7 +10,7 @@ public function api()
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.honourworld.com.ng/api/v1/generate/api/key',
+        CURLOPT_URL => 'https://api.honourworld.com/api/v1/generate/api/key',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,

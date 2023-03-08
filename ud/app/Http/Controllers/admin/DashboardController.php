@@ -94,7 +94,7 @@ public function dashboard(Request $request)
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.honourworld.com.ng/api/v1/fetch/balance',
+            CURLOPT_URL => 'https://api.honourworld.com/api/v1/fetch/balance',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
