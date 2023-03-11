@@ -93,7 +93,7 @@ class BillController extends Controller
 
                     $data = json_decode($response, true);
 
-                    return $response;
+//                    return $response;
                     $success = "";
                     if ($data['code'] == '200') {
                         $success = 1;
