@@ -132,9 +132,9 @@ class BillController extends Controller
 
                     } elseif ($data['code'] == '300') {
                         $success = 0;
-                        $zo = $wallet->balance + $request->amount;
-                        $wallet->balance = $zo;
-                        $wallet->save();
+//                        $zo = $wallet->balance + $request->amount;
+//                        $wallet->balance = $zo;
+//                        $wallet->save();
 
                         $name = $product->plan;
                         $am = "NGN $request->amount Was Refunded To Your Wallet";
@@ -190,9 +190,9 @@ class BillController extends Controller
 
                     }elseif (!isset($data['success'])) {
                         $success = 0;
-                        $zo = $wallet->balance + $request->amount;
-                        $wallet->balance = $zo;
-                        $wallet->save();
+//                        $zo = $wallet->balance + $request->amount;
+//                        $wallet->balance = $zo;
+//                        $wallet->save();
 
                         $name = $product->plan;
                         $am = "NGN $request->amount Was Refunded To Your Wallet";

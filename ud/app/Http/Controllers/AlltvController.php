@@ -227,9 +227,9 @@ $tv=data::where('network', $request->id)->get();
 
 
                     }elseif ($success==0){
-                        $zo=$user->balance+$tv->tamount;
-                        $user->balance = $zo;
-                        $user->save();
+//                        $zo=$user->balance+$tv->tamount;
+//                        $user->balance = $zo;
+//                        $user->save();
 
                         $name= $tv->network;
                         $am= "NGN $request->amount Was Refunded To Your Wallet";
