@@ -184,7 +184,7 @@
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-secondary">
                     <div class="card-header border-0">
-                        <h4 class="heading mb-0 text-white">Purchase & Safelock 😎</h4>
+                        <h4 class="heading mb-0 text-white">Purchase & Referral😎</h4>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
