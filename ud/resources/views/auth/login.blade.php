@@ -28,7 +28,7 @@
 
 {{--                            <div class="btn-group">--}}
                             <a href="{{ route('google.login') }}" class="btn btn-secondary btn-user" >
-                                <i class="fa fa-google "></i>login With Google
+                                <i class="fa fa-google-plus-circle"></i>login With Google
                             </a>
 {{--                                .OR.--}}
 {{--                            <a href="{{ route('facebook.login') }}" class="btn btn-secondary " >--}}
@@ -80,10 +80,6 @@
                                             login<span class="load loading"></span>
                                         </button>
                                         <br>
-                                        <center>
-                                            <a  onclick="web2app.biometric.check(myCallback);"><h4 style="color: #FF0066"><i class='fas fa-fingerprint' style='font-size:36px'></i>
-                                                    Fingerprint</h4>Login With </a>
-                                        </center>
                                         <script>
                                             const btns = document.querySelectorAll('button');
                                             btns.forEach((items)=>{

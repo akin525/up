@@ -180,9 +180,7 @@ $login=$user->name;
          }
     public function buydata(Request  $request)
     {
-        $request->validate([
-            'id' => 'required',
-        ]);
+
         $serve = server::where('status', '1')->first();
 
         if ($serve->name == 'mcd') {
@@ -190,35 +188,36 @@ $login=$user->name;
             $data = data::where(['status' => 1])->where('network', $request->id)->get();
 
 
-            return view('buydata', compact('user', 'data'));
+            return response()->json($data);
+
         } elseif ($serve->name == 'honorworld') {
             $user = User::find($request->user()->id);
             $data= big::where('status', '1')->where('network', $request->id)->get();
 //return $data;
-            return view('buydata', compact('user', 'data'));
+            return response()->json($data);
+
 
         }
        }
-    public function redata(Request  $request)
+    public function redata(Request  $request, $selectedValue)
     {
 
-        $request->validate([
-            'id' => 'required',
-        ]);
         $daterserver = new DataserverController();
         $serve = server::where('status', '1')->first();
 //return $request->id;
         if ($serve->name == 'mcd') {
             $user = User::find($request->user()->id);
-            $data = data::where(['status' => 1])->where('network', $request->id)->get();
+            $data = data::where(['status' => 1])->where('network', $selectedValue)->get();
 
 //return $data;
-            return view('redata', compact('user', 'data'));
+            return response()->json($data);
+
         } elseif ($serve->name == 'honorworld') {
             $user = User::find($request->user()->id);
-            $data= big::where('status', '1')->where('network', $request->id)->get();
+            $data= big::where('status', '1')->where('network',$selectedValue)->get();
 //return $data;
-            return view('redata', compact('user', 'data'));
+            return response()->json($data);
+
 
         }
        }
@@ -242,16 +241,13 @@ $login=$user->name;
     {
         $con=DB::table('airtimecons')->where('status', '=', '1')->first();
         $se=$con->server;
-        if ($se == 'MCD') {
+
             $user = User::find($request->user()->id);
             $data = data::where('plan_id', "airtime")->get();
             $wallet = wallet::where('username', $user->username)->first();
 
-            return view('airtime', compact('user', 'data', 'wallet'));
-        } elseif ($se == 'Honor'){
-            return view('airtime1');
+            return view('airtime1', compact('user', 'data', 'wallet'));
 
-        }
     }
 
     public function invoice(Request  $request)

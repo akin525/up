@@ -11,6 +11,7 @@ use App\Models\server;
 use App\Models\setting;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 use Session;
@@ -43,23 +44,20 @@ class BillController extends Controller
 
             if ($wallet->balance < $amount) {
                 $mg = "You Cant Make Purchase Above" . "NGN" . $amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-                Alert::error('Insufficient Balance', $mg);
-
-                return redirect(route('dashboard'));
+              return response()->json($mg, Response::HTTP_BAD_REQUEST);
 
             }
             if ($request->amount < 0) {
 
                 $mg = "error transaction";
-                Alert::error('Error', $mg);
-                return redirect(route('dashboard'));
+                return response()->json($mg, Response::HTTP_BAD_REQUEST);
+
 
             }
-            $bo = bo::where('refid', $request->id)->first();
+            $bo = bo::where('refid', $request->refid)->first();
             if (isset($bo)) {
                 $mg = "duplicate transaction";
-                Alert::error('Error', $mg);
-                return redirect(route('dashboard'));
+                return response()->json($mg, Response::HTTP_CONFLICT);
 
             } else {
                 $user = User::find($request->user()->id);
@@ -67,7 +65,7 @@ class BillController extends Controller
                 $wallet = wallet::where('username', $user->username)->first();
 
 
-                $gt = $wallet->balance - $request->amount;
+                $gt = $wallet->balance - $amount;
 
 
                 $wallet->balance = $gt;
@@ -75,11 +73,11 @@ class BillController extends Controller
                 $bo = bo::create([
                     'username' => $user->username,
                     'plan' => $product->network . '|' . $product->plan,
-                    'amount' => $request->amount,
+                    'amount' => $amount,
                     'server_res' => 0,
                     'result' => 0,
                     'phone' => $request->number,
-                    'refid' => $request->id,
+                    'refid' => $request->refid,
                 ]);
                 $object = json_decode($product);
                 $object->number = $request->number;
@@ -92,9 +90,7 @@ class BillController extends Controller
                     $response = $daterserver->honourwordbill($object);
 
                     $data = json_decode($response, true);
-
-//                    return $response;
-                    $success = "";
+                    return response()->json($data, Response::HTTP_BAD_REQUEST);
                     if ($data['code'] == '200') {
                         $success = 1;
                         $ms = $data['message'];
@@ -106,7 +102,6 @@ class BillController extends Controller
                             'server_res'=>$response,
                             'result'=>1,
                         ]);
-
 
                         $profit = profit::create([
                             'username' => $user->username,

@@ -8,6 +8,7 @@ use App\Models\data;
 use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -139,22 +140,22 @@ class AirtimeController
 
         if ($wallet->balance < $request->amount) {
             $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-Alert::error('Insufficient Balance', $mg);
-            return back();
+
+            return response()->json($mg, Response:: HTTP_BAD_REQUEST);
 
         }
         if ($request->amount < 0) {
 
             $mg = "error transaction";
-            Alert::warning('Warning', $mg);
-            return back();
+            return response()->json($mg, Response:: HTTP_BAD_REQUEST);
+
 
         }
         $bo = bo::where('refid', $request->refid)->first();
         if (isset($bo)) {
             $mg = "duplicate transaction";
-            Alert::error('Error', $mg);
-            return back();
+            return response()->json($mg, Response:: HTTP_CONFLICT );
+
 
         } else {
             $user = User::find($request->user()->id);
@@ -232,10 +233,11 @@ Alert::error('Insufficient Balance', $mg);
                 Mail::to($admin)->send(new Emailtrans($bo));
                 Mail::to($admin2)->send(new Emailtrans($bo));
 
-                Alert::success('Success', $am.' '.$ph);
-                return redirect()->route('viewpdf', $bo->id);
-
-
+                return response()->json([
+                    'status' => 'success',
+                    'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                ]);
             } elseif ($data['message']== 'Possible duplicate transaction, Please retry after 2 minutes') {
                 $zo = $user->balance + $request->amount;
                 $user->balance = $zo;
@@ -245,8 +247,12 @@ $success=0;
                 $am = "NGN $request->amount Was Refunded To Your Wallet";
                 $ph = ", Possible duplicate transaction, Please retry after 2 minutesl";
 
-                Alert::error('Error', $am.' '.$ph);
-                return back();
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => $response,
+//                            'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                ]);
 
             } elseif ($data['message']== 'Failed') {
 //                $zo = $user->balance + $request->amount;
@@ -256,8 +262,12 @@ $success=0;
                 $name = 'Airtime';
                 $am = "NGN $request->amount Was Refunded To Your Wallet";
                 $ph = ", Transaction fail";
-                Alert::error('Error', $am.' '.$ph);
-                return back();
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => $response,
+//                            'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                ]);
 
             }
         }
