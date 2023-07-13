@@ -62,13 +62,17 @@ Route::post('passw', [AuthController::class, 'pass'])->name('passw');
 //    return view('dashboard');
 //})->name('dashboard');
 Route::middleware(['auth'])->group(function () {
-Route::get('tv', [AlltvController::class, 'tv'])->name('tv');
 Route::get('select', [AuthController::class, 'select'])->name('select');
 Route::get('select1', [AuthController::class, 'select1'])->name('select1');
-Route::post('tvp', [AlltvController::class, 'paytv'])->name('tvp');
-Route::get('paytv', [AlltvController::class, 'paytv'])->name('paytv');
-Route::post('verifytv', [AlltvController::class, 'verifytv'])->name('verifytv');
-Route::get('listtv', [AlltvController::class, 'listtv'])->name('listv');
+//    tv route
+    Route::get('listtv', [AlltvController::class, 'listtv'])->name('listtv');
+    Route::view('tv', 'tv');
+    Route::get('picktv/{selectedValue}', [AlltvController::class, 'tv'])->name('picktv');
+    Route::get('verifytv/{value1}/{value2}', [AlltvController::class, 'verifytv'])->name('verifytv');
+    Route::post('buytv', [AlltvController::class, 'paytv'])->name('buytv');
+
+    Route::get('getOptions/{selectedValue}', [AuthController::class, 'netwplanrequest'])->name('getOptions');
+
 Route::get('listelect', [EkectController::class, 'listelect'])->name('listelect');
 Route::get('elect', [EkectController::class, 'electric'])->name('elect');
 Route::post('velect', [EkectController::class, 'verifyelect'])->name('velect');

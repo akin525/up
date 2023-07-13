@@ -8,6 +8,7 @@ use App\Models\big;
 use App\Models\bill_payment;
 use App\Models\charp;
 use App\Mail\Emailpass;
+use App\Models\easy;
 use App\Models\Giveaway;
 use App\Models\Messages;
 use App\Models\refer;
@@ -161,6 +162,12 @@ $login=$user->name;
             return  view('dashboard', compact('user', 'wallet', 'serve', 'wallet1',  'greet',  'pam', 'pam1', 'cdeposite', 'cbill', 'all', 'totaldeposite', 'me',  'bil2', 'bill', 'totalrefer', 'count'));
 
     }
+    function netwplanrequest(Request $request, $selectedValue)
+    {
+            $options = data::where('network', $selectedValue)->get();
+            return response()->json($options);
+
+    }
     public function refer(Request $request)
     {
 
@@ -195,21 +202,21 @@ $login=$user->name;
 
             return view('select1', compact('user', 'serve'));
          }
-    public function buydata(Request  $request)
+    public function buydata(Request  $request, $selectedValue)
     {
 
         $serve = server::where('status', '1')->first();
 
         if ($serve->name == 'mcd') {
             $user = User::find($request->user()->id);
-            $data = data::where(['status' => 1])->where('network', $request->id)->get();
+            $data = data::where(['status' => 1])->where('network', $selectedValue)->get();
 
 
             return response()->json($data);
 
         } elseif ($serve->name == 'honorworld') {
             $user = User::find($request->user()->id);
-            $data= big::where('status', '1')->where('network', $request->id)->get();
+            $data= big::where('status', '1')->where('network', $selectedValue)->get();
 //return $data;
             return response()->json($data);
 
