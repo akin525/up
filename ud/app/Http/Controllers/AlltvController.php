@@ -10,6 +10,7 @@ use App\Models\refer;
 use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -62,17 +63,8 @@ foreach ($plan as $pla) {
 }
     }
 
-    public function verifytv(Request $request)
+    public function verifytv($value1, $value2)
     {
-//        return $request;
-        $request->validate([
-            'id'=>'required',
-            'number'=>'required',
-        ]);
-//        return $request;
-
-//return $ve;
-$tv=data::where('network', $request->id)->get();
 
         $resellerURL='https://app2.mcd.5starcompany.com.ng/api/reseller/';
 
@@ -92,7 +84,7 @@ $tv=data::where('network', $request->id)->get();
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('service' => 'tv', 'coded' =>$request->id, 'phone' => $request->number),
+            CURLOPT_POSTFIELDS => array('service' => 'tv', 'coded' =>$value2, 'phone' => $value1),
             CURLOPT_HTTPHEADER => array(
                 'Authorization: MCDKEY_903sfjfi0ad833mk8537dhc03kbs120r0h9a'
             )
@@ -111,31 +103,19 @@ $tv=data::where('network', $request->id)->get();
         }else{
             $log= "Unable to Identify IUC Number";
         }
-        return view('tvp', compact('log', 'request', 'name', 'tv'));
+
+        return response()->json($log);
 
 
     }
-//    public function process(Request $request)
-//    {
-//        if (Auth::check()) {
-//            $user = User::find($request->user()->id);
-//            $tv = data::where('id', $request->id)->first();
-//
-//            return  view('tvp', compact('user', 'request'));
-//
-//        }
-//        return redirect("login")->withSuccess('You are not allowed to access');
-//
-//    }
-    public function tv(Request $request)
+
+    public function tv(Request $request, $selectedValue)
     {
 
             $user = User::find($request->user()->id);
-            $tv = data::where('network', 'tv')->get();
+            $tv = data::where('network', $selectedValue)->get();
+            return response()->json($tv);
 
-            return  view('tv', compact('user', 'tv'));
-
-        return redirect("login")->withSuccess('You are not allowed to access');
 
     }
 
@@ -150,20 +130,20 @@ $tv=data::where('network', $request->id)->get();
 
                 if ($wallet->balance < $tv->tamount) {
                     $mg = "You Cant Make Purchase Above" . "NGN" . $tv->tamount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-                    Alert::error('Error', $mg);
-                    return redirect('tv');
+                    return response()->json( $mg, Response::HTTP_BAD_REQUEST);
+
                 }
                 if ($tv->tamount < 0) {
 
                     $mg = "error transaction";
-                    Alert::error('Error', $mg);
-                    return redirect('tv');
+                    return response()->json( $mg, Response::HTTP_BAD_REQUEST);
+
                 }
                 $bo = bo::where('refid', $request->refid)->first();
                 if (isset($bo)) {
                     $mg = "duplicate transaction";
-                    Alert::info('Info', $mg);
-                    return redirect('tv');
+                    return response()->json( $mg, Response::HTTP_CONFLICT);
+
                 } else {
                     $gt = $wallet->balance - $tv->tamount;
 

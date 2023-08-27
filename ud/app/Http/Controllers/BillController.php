@@ -90,7 +90,6 @@ class BillController extends Controller
                     $response = $daterserver->honourwordbill($object);
 
                     $data = json_decode($response, true);
-                    return response()->json($data, Response::HTTP_BAD_REQUEST);
                     if ($data['code'] == '200') {
                         $success = 1;
                         $ms = $data['message'];
@@ -122,9 +121,11 @@ class BillController extends Controller
                         Mail::to($admin)->send(new Emailtrans($bo));
                         Mail::to($admin2)->send(new Emailtrans($bo));
 
-                        Alert::success('Success', $am.' '.$ph);
-                        return redirect(route('dashboard'));
-
+                        return response()->json([
+                            'status' => 'success',
+                            'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                        ]);
                     } elseif ($data['code'] == '300') {
                         $success = 0;
 //                        $zo = $wallet->balance + $request->amount;
@@ -135,9 +136,12 @@ class BillController extends Controller
                         $am = "NGN $request->amount Was Refunded To Your Wallet";
                         $ph = ", Transaction fail";
                         Alert::error('Error', $am.' '.$ph);
+                        return response()->json($data, Response::HTTP_BAD_REQUEST);
 
+                    }
+                    if (!isset($data['code'])){
+                        return response()->json($data, Response::HTTP_BAD_REQUEST);
 
-                        return redirect(route('dashboard'));
                     }
                 } else if ($mcd->name == "mcd") {
                     $response = $daterserver->mcdbill($object);

@@ -8,6 +8,7 @@ use App\Models\big;
 use App\Models\bill_payment;
 use App\Models\charp;
 use App\Mail\Emailpass;
+use App\Models\easy;
 use App\Models\Giveaway;
 use App\Models\Messages;
 use App\Models\refer;
@@ -110,6 +111,7 @@ $login=$user->name;
     }
     public function dashboard(Request $request)
     {
+        $serve = server::where('status', '1')->first();
 
             $user = User::find($request->user()->id);
             $me = Messages::where('status', 1)->first();
@@ -122,6 +124,7 @@ $login=$user->name;
             $count = refer::where('username',$request->user()->username)->count();
 
             $wallet = wallet::where('username', $user->username)->get();
+            $wallet1 = wallet::where('username', $user->username)->first();
             $deposite = deposit::where('username', $request->user()->username)->get();
             $totaldeposite = 0;
             foreach ($deposite as $depo){
@@ -141,7 +144,28 @@ $login=$user->name;
         $pam = deposit::where('username', $user->username)->latest()->limit(1)->get();
         $pam1 = deposit::where('username', $user->username)->latest()->limit(10)->get();
         $all=$cdeposite+$cbill;
-            return  view('dashboard', compact('user', 'wallet', 'pam', 'pam1', 'cdeposite', 'cbill', 'all', 'totaldeposite', 'me',  'bil2', 'bill', 'totalrefer', 'count'));
+
+        $time = date("H");
+        $timezone = date("e");
+        if ($time < "12") {
+            $greet="Good morning ☀️";
+        } else
+            if ($time >= "12" && $time < "17") {
+                $greet="Good afternoon 🌞";
+            } else
+                if ($time >= "17" && $time < "19") {
+                    $greet="Good evening 🌙";
+                } else
+                    if ($time >= "19") {
+                        $greet="Good night 🌚";
+                    }
+            return  view('dashboard', compact('user', 'wallet', 'serve', 'wallet1',  'greet',  'pam', 'pam1', 'cdeposite', 'cbill', 'all', 'totaldeposite', 'me',  'bil2', 'bill', 'totalrefer', 'count'));
+
+    }
+    function netwplanrequest(Request $request, $selectedValue)
+    {
+            $options = data::where('network', $selectedValue)->get();
+            return response()->json($options);
 
     }
     public function refer(Request $request)
@@ -178,21 +202,21 @@ $login=$user->name;
 
             return view('select1', compact('user', 'serve'));
          }
-    public function buydata(Request  $request)
+    public function buydata(Request  $request, $selectedValue)
     {
 
         $serve = server::where('status', '1')->first();
 
         if ($serve->name == 'mcd') {
             $user = User::find($request->user()->id);
-            $data = data::where(['status' => 1])->where('network', $request->id)->get();
+            $data = data::where(['status' => 1])->where('network', $selectedValue)->get();
 
 
             return response()->json($data);
 
         } elseif ($serve->name == 'honorworld') {
             $user = User::find($request->user()->id);
-            $data= big::where('status', '1')->where('network', $request->id)->get();
+            $data= big::where('status', '1')->where('network', $selectedValue)->get();
 //return $data;
             return response()->json($data);
 
