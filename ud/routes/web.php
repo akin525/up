@@ -61,57 +61,57 @@ Route::post('passw', [AuthController::class, 'pass'])->name('passw');
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //    return view('dashboard');
 //})->name('dashboard');
-//Route::middleware(['auth'])->group(function () {
-//Route::get('select', [AuthController::class, 'select'])->name('select');
-//Route::get('select1', [AuthController::class, 'select1'])->name('select1');
-////    tv route
-//    Route::get('listtv', [AlltvController::class, 'listtv'])->name('listtv');
-//    Route::view('tv', 'tv');
-//    Route::get('picktv/{selectedValue}', [AlltvController::class, 'tv'])->name('picktv');
-//    Route::get('verifytv/{value1}/{value2}', [AlltvController::class, 'verifytv'])->name('verifytv');
-//    Route::post('buytv', [AlltvController::class, 'paytv'])->name('buytv');
-//
-//    Route::get('getOptions/{selectedValue}', [AuthController::class, 'netwplanrequest'])->name('getOptions');
-//
-//Route::get('listelect', [EkectController::class, 'listelect'])->name('listelect');
-//Route::get('elect', [EkectController::class, 'electric'])->name('elect');
-//Route::post('velect', [EkectController::class, 'verifyelect'])->name('velect');
-//Route::post('payelect', [EkectController::class, 'payelect'])->name('payelect');
-//Route::get('invoice', [AuthController::class, 'invoice'])->name('invoice');
-//Route::get('charges', [AuthController::class, 'charges'])->name('charges');
-//Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-//Route::get('referal', [AuthController::class, 'refer'])->name('referal');
-//Route::post('mp', [ResellerController::class, 'reseller'])->name('mp');
-//Route::get('reseller', [ResellerController::class, 'sell'])->name('reseller');
-//Route::get('upgrade', [ResellerController::class, 'apiaccess'])->name('upgrade');
-//Route::get('reset', [ResellerController::class, 'resetapikey'])->name('reset');
-//Route::post('buyairtime', [AirtimeController::class, 'airtime'])->name('buyairtime');
-//Route::post('buyairtime1', [AirtimeController::class, 'honor'])->name('buyairtime1');
-////Route::get('airtime1', [AuthController::class, 'airtime'])->name('airtime1');
-//Route::get('airtime', [AuthController::class, 'airtime'])->name('airtime');
-//Route::get('buydata/{selectedValue}', [AuthController::class, 'buydata'])->name('buydata');
-//Route::get('redata/{selectedValue}', [AuthController::class, 'redata'])->name('redata');
-//Route::post('pre', [AuthController::class, 'pre'])->name('pre');
-//Route::post('bill', [BillController::class, 'bill'])->name('bill');
-//Route::get('referwith', [RefersController::class, 'index'])->name('referwith');
-//Route::post('referwith1', [RefersController::class, 'with'])->name('referwith1');
-//Route::get('fund', [FundController::class, 'fund'])->name('fund');
-//Route::get('tran/{reference}', [FundController::class, 'tran'])->name('tran');
-//Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
-//    Route::post('pic', [UserController::class, 'updateprofilephoto'])->name('pic');
-//    Route::post('update', [UserController::class, 'updateuserdecry'])->name('update');
-//    Route::get('myaccount', [UserController::class, 'viewuserencry'])->name('myaccount');
-//    Route::get('deletepic', [UserController::class, 'removephoto'])->name('deletepic');
-//
-//    Route::get('viewpdf/{id}', [PdfController::class, 'viewpdf'])->name('viewpdf');
-//    Route::get('/dopdf/{id}', [PdfController::class, 'dopdf'])->name('dopdf');
-//
-//    //validate transaction
-//    Route::view('verifybill', 'check');
-//    Route::view('verifydeposit', 'check1');
-//    Route::post('check', [verify::class, 'verifypurchase'])->name('check');
-//    Route::post('check1', [verify::class, 'verifydeposit'])->name('check1');
-//});
+Route::middleware(['auth'])->group(function () {
+Route::get('select', [AuthController::class, 'select'])->name('select');
+Route::get('select1', [AuthController::class, 'select1'])->name('select1');
+//    tv route
+    Route::get('listtv', [AlltvController::class, 'listtv'])->name('listtv');
+    Route::view('tv', 'tv');
+    Route::get('picktv/{selectedValue}', [AlltvController::class, 'tv'])->name('picktv');
+    Route::get('verifytv/{value1}/{value2}', [AlltvController::class, 'verifytv'])->name('verifytv');
+    Route::post('buytv', [AlltvController::class, 'paytv'])->name('buytv');
+
+    Route::get('getOptions/{selectedValue}', [AuthController::class, 'netwplanrequest'])->name('getOptions');
+
+Route::get('listelect', [EkectController::class, 'listelect'])->name('listelect');
+Route::get('elect', [EkectController::class, 'electric'])->name('elect');
+Route::post('velect', [EkectController::class, 'verifyelect'])->name('velect');
+Route::post('payelect', [EkectController::class, 'payelect'])->name('payelect');
+Route::get('invoice', [AuthController::class, 'invoice'])->name('invoice');
+Route::get('charges', [AuthController::class, 'charges'])->name('charges');
+Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+Route::get('referal', [AuthController::class, 'refer'])->name('referal');
+Route::post('mp', [ResellerController::class, 'reseller'])->name('mp');
+Route::get('reseller', [ResellerController::class, 'sell'])->name('reseller');
+Route::get('upgrade', [ResellerController::class, 'apiaccess'])->name('upgrade');
+Route::get('reset', [ResellerController::class, 'resetapikey'])->name('reset');
+Route::post('buyairtime', [AirtimeController::class, 'airtime'])->name('buyairtime');
+Route::post('buyairtime1', [AirtimeController::class, 'honor'])->name('buyairtime1');
+//Route::get('airtime1', [AuthController::class, 'airtime'])->name('airtime1');
+Route::get('airtime', [AuthController::class, 'airtime'])->name('airtime');
+Route::get('buydata/{selectedValue}', [AuthController::class, 'buydata'])->name('buydata');
+Route::get('redata/{selectedValue}', [AuthController::class, 'redata'])->name('redata');
+Route::post('pre', [AuthController::class, 'pre'])->name('pre');
+Route::post('bill', [BillController::class, 'bill'])->name('bill');
+Route::get('referwith', [RefersController::class, 'index'])->name('referwith');
+Route::post('referwith1', [RefersController::class, 'with'])->name('referwith1');
+Route::get('fund', [FundController::class, 'fund'])->name('fund');
+Route::get('tran/{reference}', [FundController::class, 'tran'])->name('tran');
+Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
+    Route::post('pic', [UserController::class, 'updateprofilephoto'])->name('pic');
+    Route::post('update', [UserController::class, 'updateuserdecry'])->name('update');
+    Route::get('myaccount', [UserController::class, 'viewuserencry'])->name('myaccount');
+    Route::get('deletepic', [UserController::class, 'removephoto'])->name('deletepic');
+
+    Route::get('viewpdf/{id}', [PdfController::class, 'viewpdf'])->name('viewpdf');
+    Route::get('/dopdf/{id}', [PdfController::class, 'dopdf'])->name('dopdf');
+
+    //validate transaction
+    Route::view('verifybill', 'check');
+    Route::view('verifydeposit', 'check1');
+    Route::post('check', [verify::class, 'verifypurchase'])->name('check');
+    Route::post('check1', [verify::class, 'verifydeposit'])->name('check1');
+});
 
 
 
