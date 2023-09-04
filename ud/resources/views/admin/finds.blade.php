@@ -103,7 +103,7 @@
                                     <tr>
                                         <td>
                                             @if($user->profile_photo_path)
-                                                <img width="50" src="{{url('/', $user->profile_photo_path)}}" alt="" class="rounded-circle thumb-sm mr-1"> {{\App\Console\encription::decryptdata($user->username)}}
+                                                <img width="50" src="{{url('/', $user->profile_photo_path)}}" alt="" class="rounded-circle thumb-sm mr-1"> {{$user->username}}
                                             @else
                                                 <img width="50" src="{{asset("images/bn.jpeg")}}" alt="" class="rounded-circle thumb-sm mr-1"> {{$user->username}}
                                             @endif
