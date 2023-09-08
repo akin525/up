@@ -70,36 +70,39 @@ public function edit(Request $request)
 {
     $request->validate([
         'id' => 'required',
-        'amount' => 'required',
         'tamount' => 'required',
         'ramount' => 'required',
         'name' => 'required',
     ]);
     $pro=data::where('id', $request->id)->first();
     $pro->plan=$request->name;
-    $pro->amount=$request->amount;
     $pro->tamount=$request->tamount;
     $pro->ramount=$request->ramount;
     $pro->save();
-    return redirect('admin/product')->with('success', 'Product update successfully');
+    return response()->json([
+        'status'=>'success',
+        'message'=>'Product update successfully',
+    ]);
+
 
 }
     public function edit1(Request $request)
     {
         $request->validate([
             'id' => 'required',
-            'amount' => 'required',
             'tamount' => 'required',
             'ramount' => 'required',
             'name' => 'required',
         ]);
         $pro=big::where('id', $request->id)->first();
         $pro->plan=$request->name;
-        $pro->amount=$request->amount;
         $pro->tamount=$request->tamount;
         $pro->ramount=$request->ramount;
         $pro->save();
-        return redirect('admin/product1')->with('success', 'Product update successfully');
+        return response()->json([
+            'status'=>'success',
+            'message'=>'Product update successfully',
+        ]);
 
     }
 

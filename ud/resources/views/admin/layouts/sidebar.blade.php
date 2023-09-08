@@ -42,7 +42,42 @@
 
     <link rel="stylesheet" href="{{asset('hp/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('hp/main.css')}}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.css">
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
 </head>
+<style>
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
 
 <body class="dashboard dashboard_1">
 <div id="loading-wrapper">
