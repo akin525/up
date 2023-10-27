@@ -90,14 +90,13 @@
     <div class="w3-panel w3-yellow w3-round-xlarge">
         <div class="card-body">
             <center>
-                <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->
-                <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Credit User</a>
+                <a class="btn btn-success" href="{{route('admin/credit')}}">Credit User</a>
 
-                <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Refund User</a>
-                <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/charge')}}">Charge User</a>
-
-                <!--                            <a class="w3-btn w3-green w3-border w3-round-large" href="method.php">All Payment Method</a>-->
-            </center>
+                <a class="btn btn-success" href="{{route('admin/credit')}}">Refund User</a>
+                <a class="btn btn-success" href="{{route('admin/charge')}}">Charge User</a>
+                <a class="btn btn-success" href="{{route('admin/regen', $user->username)}}">Update Virtual Account</a>
+                <a class="btn btn-success" href="{{route('admin/gen', $user->username)}}">Generate Account</a>
+                 </center>
         </div>
         </b></h4>  	</div>
 </div>

@@ -6,7 +6,7 @@
     <br>
     <div id="loading-wrapper">
         <div class="spinner-border" style="color: #FF0066"></div>
-        PRIMEDATA......
+       Loading..
     </div>
     <div class="full_container">
         <div class="container">
@@ -70,6 +70,21 @@
                                     <div class="field">
                                         <label class="label_field">Email</label>
                                         <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                                    </div>
+                                    <div class="field">
+                                        <label class="label_field">Address</label>
+                                        <x-jet-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
+                                    </div>
+                                    <div class="field">
+                                        <label class="label_field">Date of Birth</label>
+                                        <x-jet-input id="dob" class="block mt-1 w-full" type="date" name="dob" :value="old('dob')" required />
+                                    </div>
+                                    <div class="field">
+                                        <label class="label_field">Gender</label>
+                                        <select id="dob" class="block mt-1 w-full" name="gender" >
+                                            <option value="Male">MALE</option>
+                                            <option value="Female">FEMALE</option>
+                                        </select>
                                     </div>
 
                                     <div class="field">

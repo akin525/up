@@ -93,7 +93,7 @@ public function pass(Request $request)
         }
 
         Auth::login($user);
-        $admin= 'admin@primedata.com.ng';
+        $admin= 'info@primedata.com.ng';
         $admin1= 'primedata18@gmail.com';
 
         $user=User::where('email', $request->email)->first();

@@ -32,6 +32,9 @@ class CreateNewUser implements CreatesNewUsers
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'phone' => ['required', 'Numeric'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'address' => ['required', 'string',  'min:11'],
+            'gender' => ['required', 'string'],
+            'dob' => ['required', 'string'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
@@ -43,15 +46,61 @@ class CreateNewUser implements CreatesNewUsers
 //                'newuserid' => $input['username'],
 //                'amount' =>100 ,
 //            ]);
+            $curl = curl_init();
 
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://app.paylony.com/api/v1/create_account',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS =>'{
+    "firstname": "'.$input['name'].'",
+        "lastname": "'.$input['username'].'",
+        "address": "'.$input['address'].'",
+        "gender": "'.$input['gender'].'",
+        "email": "'.$input['email'].'",
+        "phone": "'.$input['phone'].'",
+        "dob": "'.$input['dob'].'",
+        "provider": "providus"
+}',
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/json',
+                    'Authorization: Bearer '.env('PAYLONY')
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+            $data = json_decode($response, true);
+            if ($data['success']=="true"){
+                $account = $data["data"]["account_name"];
+                $number = $data["data"]["account_number"];
+                $bank = $data["data"]["provider"];
+                $ref= $data['data']['reference'];
+
+            }else{
+                $account = "1";
+                $number = "1";
+                $bank=null;
+                $ref=null;
+
+            }
             $wallet= wallet::create([
                 'username' => $input['username'],
                 'balance' => 0,
+                'account_number'=>$number,
+                'account_name'=>$account,
+                'bank'=>$bank,
             ]);
             $receiver=$input ['email'];
-            $admin= 'admin@primedata.com.ng';
-//            Mail::to($receiver)->send(new Emailotp($input));
-//            Mail::to($admin)->send(new Emailotp($input));
+            $admin= 'info@primedata.com.ng';
+            Mail::to($receiver)->send(new Emailotp($input));
+            Mail::to($admin)->send(new Emailotp($input));
 
 
 
@@ -62,6 +111,10 @@ class CreateNewUser implements CreatesNewUsers
                 'phone_no' => $input['phone'],
                 'email' => $input['email'],
                 'password' => $input['password'],
+                'address'=>$input['address'],
+                'dob'=>$input['dob'],
+                'gender'=>$input['gender'],
+                'ref'=>$ref,
             ]),
 
 

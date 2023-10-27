@@ -145,6 +145,78 @@ class VertualController
 
         }
     }
+    public function run2(Request $request)
+    {
+
+        if ($json = json_decode(file_get_contents("php://input"), true)) {
+            print_r($json['reference']);
+            $data = $json;
+
+        }
+//        return $data;
+
+        $refid=$data["reference"];
+        $amount=$data["amount"];
+        $account=$data['receiving_account'];
+        $narration=$data["sender_narration"];
+
+        $wallet = wallet::where('account_number', $account)->first();
+        $pt=$wallet['balance'];
+
+        if ($account== $wallet->account_number ) {
+            $depo = deposit::where('payment_ref', $refid)->first();
+            $user = user::where('username', $wallet->username)->first();
+            if (isset($depo)) {
+                echo "payment refid the same";
+            }else {
+
+                $char = setting::first();
+                $amount1 = $amount - $char->charges;
+
+
+                $gt = $amount1 + $pt;
+                $reference=$refid;
+
+                $deposit['narration']=$narration;
+                $deposit = deposit::create([
+                    'username' => $wallet->username,
+                    'payment_ref' =>$refid,
+                    'amount' => $amount,
+                    'iwallet' => $pt,
+                    'fwallet' => $gt,
+                ]);
+                $charp = charp::create([
+                    'username' => $wallet->username,
+                    'payment_ref' => $reference,
+                    'amount' => $char->charges,
+                    'iwallet' => $pt,
+                    'fwallet' => $gt,
+                ]);
+                $wallet->balance = $gt;
+                $wallet->save();
+                $user = user::where('username', $wallet->username)->first();
+
+
+                $admin= 'info@primedata.com.ng';
+
+                $receiver= $user->email;
+                Mail::to($receiver)->send(new Emailfund($deposit));
+                Mail::to($admin)->send(new Emailfund($deposit));
+
+                Mail::to($receiver)->send(new Emailcharges($charp ));
+                Mail::to($admin)->send(new Emailcharges($charp ));
+
+//                $web = paylony::create([
+//                    'webbook' => $json,
+//                ]);
+                return;
+
+
+            }
+
+
+        }
+    }
 
     public function honor(Request $request)
     {
@@ -173,4 +245,6 @@ class VertualController
             'message'=>$message,
         ]);
     }
+
+
 }

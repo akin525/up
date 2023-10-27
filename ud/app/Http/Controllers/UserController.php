@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Console\encription;
 use App\Models\User;
+use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,8 +14,10 @@ class UserController
 {
     function viewuserencry()
     {
+        $wallet=wallet::where('username', Auth::user()->username)->first();
         $all=User::where('username', Auth::user()->username)->first();
-        return view('myaccount', compact( 'all'));
+        $user=User::where('username', Auth::user()->username)->first();
+        return view('myaccount', compact( 'all', 'user',  'wallet'));
     }
     function updateuserdecry(Request $requset)
     {

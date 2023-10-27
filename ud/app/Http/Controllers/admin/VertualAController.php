@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class VertualAController
 {
@@ -86,4 +87,125 @@ public function apikey(Request $request)
     return redirect(url('admin/profile/'.$request->username))
         ->with('status', $users->username.' New Api was Generated Successfully');
 }
+    public function regenerateaccount($request)
+    {
+        $user=User::where('username', $request)->first();
+        $input=wallet::where('username', $user->username)->first();
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://app.paylony.com/api/v1/create_account',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>'{
+   "firstname": "'.$user['name'].'",
+        "lastname": "'.$user['username'].'",
+        "address": "'.$user['address'].'",
+        "gender": "'.$user['gender'].'",
+        "email": "'.$user['email'].'",
+        "phone": "'.$user['phone'].'",
+        "dob": "'.$user['dob'].'",
+        "provider": "gtb"
+}',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Authorization: Bearer '.env('PAYLONY')
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $data = json_decode($response, true);
+
+        if ($data['success']=="true"){
+            $account = $data["data"]["account_name"];
+            $number = $data["data"]["account_number"];
+            $bank = $data["data"]["provider"];
+            $ref= $data['data']['reference'];
+
+            $input->account_number = $number;
+            $input->account_name = $account;
+            $input->bank = $bank;
+            $input->save();
+
+            $user->ref=$ref;
+            $user->save();
+            Alert::success('Succeaa', 'Virtual Account Successful Created');
+            return back();
+        }else{
+
+            Alert::error('Error', $response);
+            return back();
+        }
+
+    }
+
+    public function generateaccount($request)
+    {
+        $user=User::where('username', $request)->first();
+        $input=wallet::where('username', $user->username)->first();
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://app.paylony.com/api/v1/create_account',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>'{
+     "firstname": "'.$user['name'].'",
+        "lastname": "'.$user['username'].'",
+        "address": "'.$user['address'].'",
+        "gender": "'.$user['gender'].'",
+        "email": "'.$user['email'].'",
+        "phone": "'.$user['phone'].'",
+        "dob": "'.$user['dob'].'",
+        "provider": "providus"
+}',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Authorization: Bearer '.env('PAYLONY')
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $data = json_decode($response, true);
+
+        if ($data['success']=="true"){
+            $account = $data["data"]["account_name"];
+            $number = $data["data"]["account_number"];
+            $bank = $data["data"]["provider"];
+            $ref= $data['data']['reference'];
+
+            $input->account_number = $number;
+            $input->account_name = $account;
+            $input->bank = $bank;
+            $input->save();
+
+            $user->ref=$ref;
+            $user->save();
+            Alert::success('Succeaa', 'Virtual Account Successful Created');
+            return back();
+
+
+        }else{
+
+            Alert::error('Error', $response);
+            return back();
+        }
+
+    }
 }

@@ -23,40 +23,51 @@ class VertualController
             $user = User::find($request->user()->id);
             $wallet = wallet::where('username', $user->username)->first();
 
+            $input=$user;
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://app2.mcd.5starcompany.com.ng/api/reseller/virtual-account',
+                CURLOPT_URL => 'https://app.paylony.com/api/v1/create_account',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_SSL_VERIFYHOST => 0,
-                CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('account_name' => $user->username.rand(0000, 1111), 'business_short_name' => 'PRIMEDATA', 'uniqueid' => $user->name, 'email' => $user->email, 'phone' => '08146328645', 'webhook_url' => 'https://mobile.primedata.com.ng/api/run',),
+                CURLOPT_POSTFIELDS =>'{
+    "firstname": "'.$input['name'].'",
+        "lastname": "'.$input['username'].'",
+        "address": "'.$input['address'].'",
+        "gender": "'.$input['gender'].'",
+        "email": "'.$input['email'].'",
+        "phone": "'.$input['phone'].'",
+        "dob": "'.$input['dob'].'",
+        "provider": "providus"
+}',
                 CURLOPT_HTTPHEADER => array(
-                    'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
+                    'Content-Type: application/json',
+                    'Authorization: Bearer '.env('PAYLONY')
                 ),
             ));
 
             $response = curl_exec($curl);
 
             curl_close($curl);
-//            echo $response;
-//return $response;
-//var_dump(array('account_name' => $name,'business_short_name' => 'RENO','uniqueid' => $username,'email' => $email,'phone' => '08146328645', 'webhook_url'=>'https://renomobilemoney.com/go/run.php'));
             $data = json_decode($response, true);
-            if ($data['success']==1) {
+            if ($data['success']=="true") {
                 $account = $data["data"]["account_name"];
                 $number = $data["data"]["account_number"];
-                $bank = $data["data"]["bank_name"];
+                $bank = $data["data"]["provider"];
+                $ref= $data['data']['reference'];
 
                 $wallet->account_number = $number;
                 $wallet->account_name = $account;
+                $wallet->bank=$bank;
                 $wallet->save();
+
+                $user->ref=$ref;
+                $user->save();
 
                 return redirect("dashboard")->withSuccess('You are not allowed to access');
             }elseif ($data['success']==0){

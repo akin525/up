@@ -179,6 +179,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('admin/viewpdf/{id}', [AdminpdfController::class, 'viewpdf'])->name('admin/viewpdf');
     Route::get('admin/dopdf/{id}', [AdminpdfController::class, 'dopdf'])->name('admin/dopdf');
+
+
+    Route::get('admin/regen/{username}', [VertualAController::class, 'regenerateaccount'])->name('admin/regen');
+    Route::get('admin/gen/{username}', [VertualAController::class, 'generateaccount'])->name('admin/gen');
+
 });
 Route::prefix('google')->name('google.')->group( function(){
     Route::get('login', [GoogleLogin::class, 'loginWithGoogle'])->name('login');
