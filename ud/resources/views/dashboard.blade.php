@@ -497,7 +497,11 @@
                                             <br>
                                             <li class='text-white'><h5 class="text-white"><b>{{$wallet1->account_name}}</b></h5></li>
                                             <li class='text-white'><h5 class="text-white"><b>Account No:{{$wallet1->account_number}}</b></h5></li>
-                                            <li class='text-white'><h5 class="text-white"><b>WEMA-BANK</b></h5></li>
+                                            @if($wallet1->bank == null)
+                                            <li class='text-white'><h5 class="text-white"><b>Bank: WEMA-BANK</b></h5></li>
+                                            @else
+                                            <li class='text-white'><h5 class="text-white"><b>Bank:{{$wallet1->bank}}</b></h5></li>
+                                            @endif
                                             <br>
                                             <li class='text-white'><h5 class="text-white"><b>Note: All vertual funding are being set automatically</b></h5></li>
                                         </ul>

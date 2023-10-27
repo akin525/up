@@ -24,12 +24,18 @@ class UserController
         $requset->validate([
             'email'=>'required',
             'name'=>'required',
+            'address'=>'required',
+            'gender'=>'required',
+            'dob'=>'required',
             'number'=>'required',
         ]);
         $user=User::where('username', Auth::user()->username)->first();
         $user->name=$requset->name;
         $user->phone_no=$requset->number;
         $user->email=$requset->email;
+        $user->address=$requset->address;
+        $user->dob=$requset->dob;
+        $user->gender=$requset->gender;
         $user->save();
         $msg="Profile Update Successfully";
         Alert::success('Success', $msg);

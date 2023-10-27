@@ -70,7 +70,11 @@
                                             <br>
                                             <li class='text-white'><h5 class="text-white"><b>{{$wallet->account_name}}</b></h5></li>
                                             <li class='text-white'><h5 class="text-white"><b>Account No:{{$wallet->account_number}}</b></h5></li>
-                                            <li class='text-white'><h5 class="text-white"><b>{{$wallet->bank}}</b></h5></li>
+                                            @if($wallet->bank == null)
+                                            <li class='text-white'><h5 class="text-white"><b>Bank: Wema</b></h5></li>
+                                            @else
+                                            <li class='text-white'><h5 class="text-white"><b>Bank: {{$wallet->bank}}</b></h5></li>
+                                            @endif
                                             <br>
                                             <li class='text-white'><h5 class="text-white"><b>Note: All virtual funding are being set automatically</b></h5></li>
                                         </ul>
@@ -79,6 +83,8 @@
                                 @if($wallet->account_number=="1")
                                     <a href="{{route('vertual')}}" class="btn btn-danger text-center">Generate Account 2</a>
                                 @endif
+{{--                                <a href="{{route('vertual')}}" class="btn btn-danger text-center">Generate Account 2</a>--}}
+
                                 <div class="card-footer text-center">
 
                                     <div class="input-group">
@@ -113,7 +119,6 @@
                                         <div class="col-sm-6 m-b30">
                                             <label class="form-label">Gender</label>
                                             <select class="default-select form-control" id="validationCustom05" name="gender" required>
-                                                <option  data-display="Select">Please select</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                             </select>

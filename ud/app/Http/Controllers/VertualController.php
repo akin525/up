@@ -23,6 +23,11 @@ class VertualController
             $user = User::find($request->user()->id);
             $wallet = wallet::where('username', $user->username)->first();
 
+            if ($user->address == null || $user->dob == null || $user->gender == null){
+                $msg="Kindly update your address, gender, date of birth before clicking generate virtual account";
+                Alert::warning('Ooops..', $msg);
+                return back();
+            }
             $input=$user;
             $curl = curl_init();
 
