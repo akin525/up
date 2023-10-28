@@ -23,7 +23,7 @@ class AirtimeController
 
             $user = User::find($request->user()->id);
             $wallet = wallet::where('username', $user->username)->first();
-            $bt = data::where("id", $request->id)->first();
+//            $bt = data::where("id", $request->id)->first();
 
 
             if ($wallet->balance < $request->amount) {
@@ -76,7 +76,7 @@ class AirtimeController
                     CURLOPT_SSL_VERIFYHOST => 0,
                     CURLOPT_SSL_VERIFYPEER => 0,
                     CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => array('service' => 'airtime', 'coded' => $bt->cat_id, 'phone' => $request->number, 'amount' => $request->amount, 'reseller_price' => $request->amount),
+                    CURLOPT_POSTFIELDS => array('service' => 'airtime', 'coded' => $request->id, 'phone' => $request->number, 'amount' => $request->amount, 'reseller_price' => $request->amount),
 
                     CURLOPT_HTTPHEADER => array(
                         'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
