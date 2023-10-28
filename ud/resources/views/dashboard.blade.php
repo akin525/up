@@ -632,7 +632,7 @@
                             $('#loadingSpinner').show();
 
                             $.ajax({
-                                url: "{{ route('buyairtime1') }}",
+                                url: "{{ route('buyairtime') }}",
                                 type: 'POST',
                                 data: formData,
                                 success: function(response) {
