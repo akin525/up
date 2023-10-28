@@ -96,7 +96,7 @@ class AirtimeController
 
                     $bo = bo::create([
                         'username' => $user->username,
-                        'plan' => $bt->plan,
+                        'plan' => "Airtime",
                         'amount' => $request->amount,
                         'server_res' => $response,
                         'result' => $success,
