@@ -106,7 +106,7 @@ class AirtimeController
                     ]);
 
 
-                    $name = $bt->plan;
+                    $name = "Airtime";
                     $am = "NGN $request->amount  Airtime Purchase Was Successful To";
                     $ph = $request->number;
 
@@ -127,7 +127,7 @@ class AirtimeController
                     $wallet->balance = $zo;
                     $wallet->save();
 
-                    $name = $bt->plan;
+                    $name = "airtime";
                     $am = "NGN $request->amount Was Refunded To Your Wallet";
                     $ph = ", Transaction fail";
 
