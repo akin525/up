@@ -46,7 +46,7 @@ class VertualController
         "address": "'.$input['address'].'",
         "gender": "'.$input['gender'].'",
         "email": "'.$input['email'].'",
-        "phone": "'.$input['phone'].'",
+        "phone": "'.$input['phone_no'].'",
         "dob": "'.$input['dob'].'",
         "provider": "providus"
 }',
