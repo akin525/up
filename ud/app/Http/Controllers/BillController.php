@@ -154,15 +154,13 @@ class BillController extends Controller
                         $success = "1";
                         $po = $amount - $product->amount;
 
-                        $bo = bo::create([
-                            'username' => $user->username,
-                            'plan' => $product->network . '|' . $product->plan,
-                            'amount' => $request->amount,
-                            'server_res' => $response,
-                            'result' => $success,
-                            'phone' => $request->number,
-                            'refid' => $request->id,
+                        $po = $amount - $product->amount;
+                        $update=bo::where('id', $bo->id)->update([
+                            'server_res'=>$response,
+                            'result'=>1,
                         ]);
+
+
 
                         $profit = profit::create([
                             'username' => $user->username,
@@ -176,16 +174,18 @@ class BillController extends Controller
 
 
                         $receiver = $user->email;
-                        $admin = 'admin@primedata.com.ng';
+//                        $admin = 'info@primedata.com.ng';
                         $admin2 = 'primedata18@gmail.com';
 
                         Mail::to($receiver)->send(new Emailtrans($bo));
-                        Mail::to($admin)->send(new Emailtrans($bo));
+//                        Mail::to($admin)->send(new Emailtrans($bo));
                         Mail::to($admin2)->send(new Emailtrans($bo));
 
-                        Alert::success('Success', $am.' '.$ph);
-
-                        return redirect(route('dashboard'));
+                        return response()->json([
+                            'status' => 'success',
+                            'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                        ]);
 
                     }elseif (!isset($data['success'])) {
                         $success = 0;
@@ -196,8 +196,8 @@ class BillController extends Controller
                         $name = $product->plan;
                         $am = "NGN $request->amount Was Refunded To Your Wallet";
                         $ph = ", Transaction fail";
-                        Alert::error('Error', $am.' '.$ph);
-                        return redirect(route('dashboard'));
+                        return response()->json($data, Response::HTTP_BAD_REQUEST);
+
                     }
 
                 }

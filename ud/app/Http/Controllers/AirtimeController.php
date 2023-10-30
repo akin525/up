@@ -23,27 +23,34 @@ class AirtimeController
 
             $user = User::find($request->user()->id);
             $wallet = wallet::where('username', $user->username)->first();
-            $bt = data::where("id", $request->id)->first();
+//            $bt = data::where("id", $request->id)->first();
 
 
             if ($wallet->balance < $request->amount) {
                 $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-                Alert::error('Insufficient Fund', $mg);
-                return back();
+                return response()->json($mg, Response:: HTTP_BAD_REQUEST);
+
 
             }
             if ($request->amount < 0) {
 
                 $mg = "error transaction";
-                Alert::warning('Warning', $mg);
-                return back();
+                return response()->json($mg, Response:: HTTP_BAD_REQUEST);
+
+
+            }
+            if ($request->amount < 100) {
+
+                $mg = "amount must be more than 50";
+                return response()->json($mg, Response:: HTTP_BAD_REQUEST);
+
 
             }
             $bo = bo::where('refid', $request->refid)->first();
             if (isset($bo)) {
                 $mg = "duplicate transaction";
-                Alert::error($mg);
-                return back();
+                return response()->json($mg, Response:: HTTP_CONFLICT);
+
 
             } else {
 
@@ -69,7 +76,7 @@ class AirtimeController
                     CURLOPT_SSL_VERIFYHOST => 0,
                     CURLOPT_SSL_VERIFYPEER => 0,
                     CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => array('service' => 'airtime', 'coded' => $bt->cat_id, 'phone' => $request->number, 'amount' => $request->amount, 'reseller_price' => $request->amount),
+                    CURLOPT_POSTFIELDS => array('service' => 'airtime', 'coded' => $request->id, 'phone' => $request->number, 'amount' => $request->amount, 'reseller_price' => $request->amount),
 
                     CURLOPT_HTTPHEADER => array(
                         'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
@@ -89,7 +96,7 @@ class AirtimeController
 
                     $bo = bo::create([
                         'username' => $user->username,
-                        'plan' => $bt->plan,
+                        'plan' => "Airtime",
                         'amount' => $request->amount,
                         'server_res' => $response,
                         'result' => $success,
@@ -111,9 +118,10 @@ class AirtimeController
 //                    Mail::to($admin)->send(new Emailtrans($bo));
                     Mail::to($admin2)->send(new Emailtrans($bo));
 
-                    Alert::success('Success', $am.''.$ph);
-                    return redirect()->r8oute('viewpdf', $bo->id);
-
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => $am.' ' .$ph,
+                    ]);
                 } elseif ($success == 0) {
                     $zo = $wallet->balance + $request->amount;
                     $wallet->balance = $zo;
@@ -123,8 +131,12 @@ class AirtimeController
                     $am = "NGN $request->amount Was Refunded To Your Wallet";
                     $ph = ", Transaction fail";
 
-                    Alert::error('error', $am.' ' .$ph);
-                    return redirect()->route('viewpdf', $bo->id);
+                    return response()->json([
+                        'status' => 'fail',
+                        'message' => $response,
+//                            'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                    ]);
                 }
         }
     }
