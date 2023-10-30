@@ -22,6 +22,8 @@ class wallet extends Authenticatable
         'balance',
         'account_number',
         'account_name',
+        'bank',
+
     ];
 
     /**
