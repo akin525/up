@@ -15,6 +15,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class AirtimeController
 {
+
     public function airtime(Request $request)
     {
         $request->validate([
@@ -140,6 +141,7 @@ class AirtimeController
                 }
         }
     }
+
     public function honor(Request $request)
     {
         $request->validate([
